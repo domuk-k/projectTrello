@@ -143,9 +143,3 @@ document.body.onclick = ({ target }) => {
   target.parentNode.classList.toggle('active')
 }
 
-// async function removeTodo() {
-//   const res = await axios.delete('/boards/2');
-//   const _boards = await res.data;
-//   boards = _boards
-//   console.log(boards)
-// }
