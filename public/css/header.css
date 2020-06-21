@@ -1,0 +1,106 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;border: 0;
+  overflow: hidden;
+}
+.board-bg {
+  background-color: transparent;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -2;
+  animation: fadeIn 400ms ease-in-out forward;
+}
+.main-header{
+  display: flex;
+  justify-content: space-between
+}
+.card-search{
+  display: inline;
+  position: relative;
+}
+.card-search input{
+  position: absolute;
+  left: 0;
+  top: 30px;
+  opacity: 0.2;
+}
+.card-search button{
+}
+/* logo */
+.header-logo{
+  width: 90px;
+  background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-2x.01ef898811a879595cea.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+}
+.header-left{
+  
+}
+
+.header-right{
+  display: inline-block;
+}
+.my-cards{
+  position: absolute;
+  right: 5px;
+}
+
+.sub-header{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+}
+.sub-header-right {
+  transform: translate3d(340px,0,0);
+}
+.active{
+  transform: translate3d(0,0,0);
+}
+  /* 사이드메뉴 */
+.side-menu{
+  width: 340px;
+  background-color: beige;
+  /* float: right; */
+  height: 100vh;
+
+}
+
+
+
+/* 메인 */
+main{
+  border: rgba(70, 131, 180, 0.212) 2px solid;
+  white-space: nowrap;
+  user-select: none;
+  overflow-y: hidden;
+  overflow-x: auto;
+  position: absolute;
+  height: 90%;
+  width: 100vw;
+}
+
+.list-wrapper{
+  display: inline-block;
+  height: 100%;
+  width: 270px;
+  border: 1px rgba(0, 255, 128, 0.363) solid;
+}
+.list{
+  background-color: rgb(235, 235, 235);
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.list *{
+  border: 1px rgba(250, 128, 114, 0.041) solid;
+}
