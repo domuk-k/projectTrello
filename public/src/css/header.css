@@ -1,21 +1,25 @@
 *{
   box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  outline: none;
 }
 body{
   margin: 0;border: 0;
   overflow: hidden;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
 }
 
 button{
-  color: white;
-  background-color: rgba(0, 0, 0, 0.158);
+  background-color: rgba(255, 255, 255, 0.294);
   border: none;
-  border-radius: 15%;
-  font-weight: 500;
   height: 30px;
-  
+  padding: 0 10px;
+  border-radius: 3px;
+  color: white;
 }
+
 .board-bg {
   background-color: transparent;
   background-size: cover;
@@ -27,14 +31,14 @@ button{
   right: 0;
   bottom: 0;
   z-index: -2;
-  animation: fadeIn 400ms ease-in-out forward;
 }
 
 .main-header{
-  height: 40px;
+  height: 38px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.301);
 }
 .card-search{
   display: inline;
@@ -48,6 +52,10 @@ button{
 }
 .card-search button{
 }
+.btn-board-selection {
+  font-weight: 700;
+}
+
 /* logo */
 .header-logo{
   width: 90px;
@@ -60,7 +68,6 @@ button{
 .header-left{
   
 }
-
 .header-right{
   display: inline-block;
 }
@@ -73,8 +80,55 @@ button{
   position: relative;
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  align-items: center;
+  height: 42px;
 }
+.sub-header-left,
+.sub-header-right{
+  display: flex;
+  align-items: center;
+}
+.sub-header-right button{
+  margin: 0 2px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+}
+.board-name{
+  text-align: center;
+  min-width: 160px;
+  height: 25px;
+  font-size: 20px;
+
+  padding: 4px;
+  display: inline-block;
+}
+.board-name-input{
+  width: 160px;
+  height: 30px;
+  font-size: 20px;
+
+  padding: 0;
+  margin: 0;
+  resize: none;
+  overflow-y: hidden;
+  overflow-wrap: break-word; 
+  scroll-snap-type: none;
+  text-align: center;
+  display: none;
+}
+
+.favorite {
+  margin: 0 3px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 30px;
+}
+
 .sub-header-right {
   transform: translate3d(340px,0,0);
   z-index: 10;
@@ -86,9 +140,10 @@ button{
 .side-menu{
   width: 340px;
   background-color: beige;
-  float: right;
   height: 100vh;
-
+}
+.side-menu *{
+  background-color: blue;
 }
 
 
@@ -105,18 +160,3 @@ main{
   width: 100vw;
 }
 
-.list-wrapper{
-  display: inline-block;
-  height: 100%;
-  width: 270px;
-  border: 1px rgba(0, 255, 128, 0.363) solid;
-}
-.list{
-  background-color: rgb(235, 235, 235);
-  min-height: 50px;
-  display: flex;
-  flex-direction: column;
-}
-.list *{
-  border: 1px rgba(250, 128, 114, 0.041) solid;
-}
