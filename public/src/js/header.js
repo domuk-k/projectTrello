@@ -1,4 +1,7 @@
-// import { Board } from "./board.js"
+import { Board } from "./Board.js"
+import { Card } from "./Card.js"
+// import { list } from "./List.js"
+import { User } from "./User.js"
 
 // state
 let board = [];
@@ -6,8 +9,8 @@ let lists = [];
 let cards = [];
 
 // DOM picks
-const $header = document.querySelector('.main-header')
-const $boardBg = document.querySelector('.board-bg')
+const $header = document.querySelector('.main-header');
+const $boardBg = document.querySelector('.board-bg');
 
 const template = {
   background() {
