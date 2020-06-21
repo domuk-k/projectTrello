@@ -1,72 +1,44 @@
 {
-  "users": [
-    {
-      "id": 202001,
-      "username": "DongWook Kim",
-      "password": 123123,
-      "boards": [
-        1
-      ]
-    },
-    {
-      "id": 202002,
-      "username": "JunSeon Bae",
-      "password": 456456,
-      "boards": [
-        1,
-        2,
-        3
-      ]
+  "user": {
+    "id": 202001,
+    "username": "DongWook Kim",
+    "password": 123123
+  },
+  "board": {
+    "id": 1,
+    "board_name": "개발자 동욱",
+    "description": "첫 번째 기본보드",
+    "collaborators": [
+      202001,
+      202002
+    ],
+    "recent_open": "2020-09-09 thr 13:21:12",
+    "is_starred": false,
+    "backgrounds": {
+      "color": "rgb(0, 121, 191)",
+      "image": "https://images.unsplash.com/25/peak.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
     }
-  ],
-  "boards": [
-    {
-      "id": 1,
-      "user_id": 202001,
-      "board_name": "개발자 동욱",
-      "description": "첫 번째 기본보드",
-      "created_dt": "2020-09-09 thr 13:21:12",
-      "collaborators": [
-        202001,
-        202002
-      ],
-      "recent_open": "2020-09-09 thr 13:21:12",
-      "is_starred": false,
-      "backgrounds": {
-        "color": "rgb(0, 121, 191)",
-        "image": "https://images.unsplash.com/25/peak.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-      }
-    }
-  ],
+  },
   "lists": [
     {
-      "board_id": 1,
       "id": 1,
-      "name": "todo"
+      "list_name": "todo"
     },
     {
-      "board_id": 1,
       "id": 2,
-      "name": "doing"
+      "list_name": "doing"
     },
     {
-      "board_id": 1,
       "id": 3,
-      "name": "doing2"
-    },
-    {
-      "board_id": 1,
-      "id": 4,
-      "name": "done"
+      "list_name": "done"
     }
   ],
   "cards": [
     {
       "id": 1,
-      "name": "치과가기",
-      "user_id": 202001,
-      "list_id": 1,
+      "card_name": "치과가기",
       "description": "이것은 기본카드",
+      "list_id": 1,
       "labels": [
         "development"
       ],
@@ -74,7 +46,6 @@
         "dongwook",
         "junseon"
       ],
-      "date_created": "2020.6.18",
       "due_date": "2020.6.18",
       "sticker": [
         {
@@ -84,10 +55,9 @@
     },
     {
       "id": 2,
-      "user_id": 202001,
-      "list_id": 1,
       "description": "이것은 기본카드",
       "card_name": "학원상담",
+      "list_id": 2,
       "labels": [
         "development"
       ],
@@ -95,7 +65,6 @@
         "dongwook",
         "junseon"
       ],
-      "date_created": "2020.6.18",
       "due_date": "2020.6.18",
       "sticker": [
         {
@@ -105,10 +74,9 @@
     },
     {
       "id": 3,
-      "user_id": 202001,
-      "list_id": 2,
       "description": "이것은 기본카드",
       "card_name": "큰집 인사",
+      "list_id": 2,
       "labels": [
         "development"
       ],
@@ -116,27 +84,6 @@
         "dongwook",
         "junseon"
       ],
-      "date_created": "2020.6.18",
-      "due_date": "2020.6.18",
-      "sticker": [
-        {
-          "name": "star"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "user_id": 202001,
-      "list_id": 4,
-      "description": "이것은 기본카드",
-      "name": "큰집 인사222",
-      "labels": [
-        "development"
-      ],
-      "members": [
-        "dongwook"
-      ],
-      "date_created": "2020.6.18",
       "due_date": "2020.6.18",
       "sticker": [
         {

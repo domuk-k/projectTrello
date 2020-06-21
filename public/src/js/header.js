@@ -64,7 +64,7 @@ const template = {
       html += `
     <div class="list-wrapper">
       <div class="list">
-        <div class="list-name">${list.name}</div>
+        <div class="list-name">${list.list_name}</div>
         <ul class="list-container list-${list.id}">
         </ul>
         <div class="list-name-input">
@@ -77,6 +77,7 @@ const template = {
     document.querySelector('main').innerHTML = html
   },
   cards() {
+    console.log(cards[0])
     cards.forEach(card => {
       document.querySelector(`.list-${card.list_id}`).innerHTML +=
         `
@@ -118,21 +119,21 @@ const render = () => {
 
 
 async function getBoard() {
-  const res = await axios.get('/boards/');
+  const res = await axios.get('/board/');
   const _boards = await res.data;
-  board = _boards[0]
+  board = _boards
   await getLists();
   await getCards();
   render();
 }
 
 async function getLists() {
-  const res = await axios.get('/lists?boardId=1');
-  lists = await res.data;
+  const res = await axios.get('/lists');
+  lists = res.data;
 }
 async function getCards() {
-  const res = await axios.get('/cards?boardId=1');
-  cards = await res.data;
+  const res = await axios.get('/cards');
+  cards = res.data;
 }
 
 window.onload = getBoard;

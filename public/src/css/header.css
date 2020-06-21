@@ -70,7 +70,7 @@ body{
 .side-menu{
   width: 340px;
   background-color: beige;
-  /* float: right; */
+  float: right;
   height: 100vh;
 
 }
