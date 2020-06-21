@@ -1,7 +1,7 @@
-import { Board } from "./Board.js"
-import { Card } from "./Card.js"
+import { Board } from "./board.js"
+import { Card } from "./card.js"
 // import { list } from "./List.js"
-import { User } from "./User.js"
+import { User } from "./user.js"
 
 // state
 let board = [];
@@ -27,7 +27,7 @@ const template = {
           <button class="btn-board-selection">Boards</button>
 
           <div class="card-search">
-            <button>돋보기</button>
+            <button class="fas fa-search"></button>
             <input type="text" value="카드검색">
           </div>
         </div>
@@ -49,7 +49,8 @@ const template = {
   subHeader() {
     document.querySelector('.sub-header').innerHTML =
       ` <div class="sub-header-left">    
-          <input type="text" value="${board.board_name}">
+          <span class="board_name">${board.board_name}</span>
+          <input class="board_name_input" type="text" value="${board.board_name}">
           <div class="favorite far fa-star"></div>
           <button class="invite">Invite</button>
         </div>

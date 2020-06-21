@@ -4,6 +4,17 @@
 body{
   margin: 0;border: 0;
   overflow: hidden;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+button{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.158);
+  border: none;
+  border-radius: 15%;
+  font-weight: 500;
+  height: 30px;
+  
 }
 .board-bg {
   background-color: transparent;
@@ -18,9 +29,12 @@ body{
   z-index: -2;
   animation: fadeIn 400ms ease-in-out forward;
 }
+
 .main-header{
+  height: 40px;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
+  align-items: center;
 }
 .card-search{
   display: inline;
@@ -37,6 +51,7 @@ body{
 /* logo */
 .header-logo{
   width: 90px;
+  height: 35px;
   background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-2x.01ef898811a879595cea.png);
   background-size: contain;
   background-repeat: no-repeat;
@@ -62,6 +77,7 @@ body{
 }
 .sub-header-right {
   transform: translate3d(340px,0,0);
+  z-index: 10;
 }
 .active{
   transform: translate3d(0,0,0);
