@@ -10,6 +10,7 @@
   <script type="module" src="src/js/header.js"></script>
   <!-- <script type="module" src="src/js/main.js"></script> -->
   <link rel="stylesheet" href="src/css/header.css">
+  <link rel="stylesheet" href="src/css/list.css">
 </head>
 
 <body>
@@ -20,7 +21,9 @@
 
 
 
-  <main></main>
+  <main>
+    <div class="js-add-list list-wrapper mod-add is-idle"><form><a class="open-add-list js-open-add-list" href="#"><span class="placeholder"><span class="icon-sm icon-add"></span>Add another list</span></a><input class="list-name-input" type="text" name="name" placeholder="Enter list title..." autocomplete="off" dir="auto" maxlength="512"><div class="list-add-controls u-clearfix"><input class="primary mod-list-add-button js-save-edit" type="submit" value="Add List"><a class="icon-lg icon-close dark-hover js-cancel-edit" href="#"></a></div></form></div>
+  </main>
 </body>
 
 </html>

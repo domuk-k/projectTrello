@@ -4,6 +4,9 @@
 body{
   margin: 0;border: 0;
   overflow: hidden;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
 }
 .board-bg {
   background-color: transparent;
@@ -89,18 +92,3 @@ main{
   width: 100vw;
 }
 
-.list-wrapper{
-  display: inline-block;
-  height: 100%;
-  width: 270px;
-  border: 1px rgba(0, 255, 128, 0.363) solid;
-}
-.list{
-  background-color: rgb(235, 235, 235);
-  min-height: 50px;
-  display: flex;
-  flex-direction: column;
-}
-.list *{
-  border: 1px rgba(250, 128, 114, 0.041) solid;
-}
