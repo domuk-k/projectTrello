@@ -12,7 +12,7 @@ body{
 }
 
 button{
-  background-color: rgba(255, 255, 255, 0.294);
+  background-color: rgba(255, 255, 255, 0.3);
   border: none;
   height: 30px;
   padding: 0 10px;
@@ -88,6 +88,9 @@ button{
   display: flex;
   align-items: center;
 }
+.sub-header-right{
+  position: relative;
+}
 .sub-header-right button{
   margin: 0 2px;
   background-color: rgba(255, 255, 255, 0.15);
@@ -119,7 +122,7 @@ button{
 
 .favorite {
   margin: 0 3px;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.3);
   color: rgba(255, 255, 255, 0.7);
   border: none;
   height: 30px;
@@ -140,10 +143,13 @@ button{
 .side-menu{
   width: 340px;
   background-color: beige;
-  height: 100vh;
+  /* position: absolute;
+  top:0;
+  right: 0; */
+  transition: ease-in-out all 600ms;
 }
 .side-menu *{
-  background-color: blue;
+  background-color: rgba(234, 0, 255, 0.027);
 }
 
 
@@ -160,3 +166,8 @@ main{
   width: 100vw;
 }
 
+
+
+[class^='btn']:hover{
+  background-color: rgba(255, 255, 255, 0.144);
+}

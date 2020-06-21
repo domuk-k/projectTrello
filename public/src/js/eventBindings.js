@@ -1,8 +1,5 @@
 export const eventBindings = () => {
-  document.body.onclick = ({
-    target
-  }) => {
-    if (!target.matches('.menu')) return;
+  document.querySelector('.btn-menu').onclick = ({ target }) => {
     target.parentNode.classList.toggle('active')
   }
   document.querySelector('.board-name').onclick = ({ target }) => {
