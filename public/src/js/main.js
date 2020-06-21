@@ -5,3 +5,8 @@ import { list } from "./List.js"
 import { User } from "./User.js"
 
 const $main = document.querySelector('main');
+
+$main.onclick =  => {
+    if (!eve)
+}
+

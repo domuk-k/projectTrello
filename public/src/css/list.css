@@ -39,3 +39,28 @@
     text-indent: 0px;
     text-shadow: none;
 }
+.list-add-box {
+  font-size: 1.5em;
+  line-height: 26px;
+  height: 40px;
+  width: 270px;
+  min-height: 32px;
+  background-color: rgba(0,0,0,.08);
+  cursor: pointer;
+  border-radius: 3px;
+  margin-right: 8px;
+  position: relative;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+.add-mod {
+  width: 270px;
+  background-color: #ebecf0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80px;
+}
+.list-add-btn {
+
+}

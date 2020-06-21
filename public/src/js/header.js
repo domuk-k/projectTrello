@@ -67,38 +67,6 @@ const template = {
         </div >
       `
   },
-  lists() {
-    let html = ''
-    lists.forEach(list => {
-      html += `
-    <div class="list-wrapper">
-      <div class="list">
-      <div class="list-header js-list-header u-clearfix is-menu-shown">
-      <div class="list-header-target js-editing-target"></div>
-      <h2 class="list-header-name-assist js-list-name-assist" dir="auto">To Do</h2>
-      <textarea class="list-header-name mod-list-name js-list-name-input" aria-label="To Do" spellcheck="false" dir="auto" maxlength="512" style="overflow: hidden; overflow-wrap: break-word; height: 28px;">To Do</textarea>
-      <div class="list-header-extras">
-      <span class="list-header-extras-subscribe js-list-subscribed hide">
-      <span class="icon-sm icon-subscribe mod-quiet"></span>
-      </span>
-      <span class="list-header-extras-limit-badge js-list-limit-badge hide"></span>
-      <a class="list-header-extras-menu dark-hover js-open-list-menu icon-sm icon-overflow-menu-horizontal" href="#">
-      <div>
-      </div>
-      </a>
-      </div>
-      <p class="list-header-num-cards hide js-num-cards">6 cards</p></div>
-        <ul class="list-container list-${list.id}">
-        </ul>
-        <div class="list-name-input">
-          <input type="text" placeholder="insert todos">
-        </div>
-      </div>
-    </div>
-    `
-    })
-    document.querySelector('main').innerHTML = html
-  },
   cards() {
     console.log(cards[0])
     cards.forEach(card => {
@@ -135,7 +103,7 @@ const render = () => {
   template.background()
   template.header()
   template.subHeader()
-  template.lists()
+  // template.lists()
   template.cards()
   template.sideMenu()
 }
