@@ -1,16 +1,27 @@
 // eslint-disable-next-line import/prefer-default-export
+import { List } from "./List.js"
+
+// let lists = [];
+
+
 export const eventBindings = () => {
   // 메뉴 버튼
-  document.querySelector('.btn-menu').onclick = ({ target }) => {
+  document.querySelector('.btn-menu').onclick = ({
+    target
+  }) => {
     target.parentNode.classList.add('active')
     target.style.display = "none"
   }
-  document.querySelector('.btn-menu-close').onclick = ({ target }) => {
+  document.querySelector('.btn-menu-close').onclick = ({
+    target
+  }) => {
     target.parentNode.parentNode.classList.remove('active')
     document.querySelector('.btn-menu').style.display = "inline-block";
   }
   // 보드 이름 수정
-  document.querySelector('.board-name').onclick = ({ target }) => {
+  document.querySelector('.board-name').onclick = ({
+    target
+  }) => {
     target.style.display = "none"
     const input = target.nextElementSibling
     input.style.display = "inline-block"
@@ -26,3 +37,4 @@ export const eventBindings = () => {
   }
   // document.querySelector('board_name_input')
 };
+
