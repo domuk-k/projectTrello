@@ -11,5 +11,6 @@ export class Card {
     this.date_created = new Date().toUTCString();
     this.due_date = '';
     this.sticker = [];
+    this.locY = 0;
   }
 }
