@@ -1,7 +1,7 @@
 *{
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
-  outline: none;
+  /* outline: none; */
 }
 body{
   margin: 0;border: 0;
@@ -18,6 +18,10 @@ button{
   padding: 0 10px;
   border-radius: 3px;
   color: white;
+}
+
+[class^='btn']:hover{
+  background-color: rgba(255, 255, 255, 0.144);
 }
 
 .board-bg {
@@ -71,6 +75,16 @@ button{
 .header-right{
   display: inline-block;
 }
+
+.btn-my-profile-icon{
+  border-radius: 50%;
+  width: 30px;
+  padding: 0;
+  background-color: rgb(243, 243, 243);
+  color: rgb(63, 63, 63);
+  margin: 0 2px;
+}
+
 .my-cards{
   position: absolute;
   right: 5px;
@@ -83,14 +97,11 @@ button{
   align-items: center;
   height: 42px;
 }
-.sub-header-left,
-.sub-header-right{
+.sub-header-left{
   display: flex;
   align-items: center;
 }
-.sub-header-right{
-  position: relative;
-}
+
 .sub-header-right button{
   margin: 0 2px;
   background-color: rgba(255, 255, 255, 0.15);
@@ -132,27 +143,60 @@ button{
   line-height: 30px;
 }
 
-.sub-header-right {
-  transform: translate3d(340px,0,0);
-  z-index: 10;
+.sub-header-right{
+  transform: translate3d(340px,0px,0);
+  z-index: 2;
+  transition: transform ease-in-out  80ms;
+
+  display: flex;
+  align-items: flex-start;
+  position: absolute;
+  top:0;
+  right:0;
 }
+.sub-header-right button{
+  margin: 6px 0;
+}
+
 .active{
   transform: translate3d(0,0,0);
 }
+
   /* 사이드메뉴 */
 .side-menu{
   width: 340px;
-  background-color: beige;
-  /* position: absolute;
-  top:0;
-  right: 0; */
-  transition: ease-in-out all 600ms;
+  height: 100vh;
+  background-color: rgb(248, 248, 248);
+  margin-left: 3px;
 }
 .side-menu *{
   background-color: rgba(234, 0, 255, 0.027);
 }
+.menu-header{
+  display: inline-block;
 
-
+}
+.btn-menu-close{
+  color: rgba(0, 0, 0, 0.849)!important;
+  font-size: 9px;
+}
+.menu-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu-list li{
+  margin: 10px 0;
+  padding: 2px;
+}
+.menu-list li:hover{
+  background-color: rgba(0, 0, 0, 0.205);
+}
+.board-name::after{
+  content: "Add a description to your board";
+  color: lightgray;
+  display: inline-block;
+}
 
 /* 메인 */
 main{
@@ -167,7 +211,3 @@ main{
 }
 
 
-
-[class^='btn']:hover{
-  background-color: rgba(255, 255, 255, 0.144);
-}

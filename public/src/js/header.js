@@ -34,7 +34,7 @@ const template = {
         </div>
         <div class="header-logo"></div>
         <div class="header-right">
-          <button class="btn-create-board">+</button>
+          <button class="btn-create-board fas fa-plus"></button>
           <section class="my-profile" style="display:inline">
             <button class="btn-my-profile-icon">DW</button>
               <div class="my-cards">
@@ -56,8 +56,6 @@ const template = {
           <button class="btn-invite">Invite</button>
         </div>
         <div class="sub-header-right">
-          <button class="btn-star">✨</button>
-          <button class="btn-invite">invite</button>
           <button class="btn-menu">Show Menu</button>
           <nav class="side-menu"></nav>
         </div >
@@ -109,7 +107,8 @@ const template = {
   sideMenu() {
     document.querySelector('.side-menu').innerHTML =
       `    <div class="menu-header">Menu</div>
-        <ul>
+      <button class="btn-menu-close">X</button>
+        <ul class="menu-list">
           <li>about this board</li>
           <li>change Background</li>
           <li>Search Cards</li>
