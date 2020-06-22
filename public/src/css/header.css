@@ -203,13 +203,41 @@ button{
   margin-left: 3px;
 
   padding: 0 10px 0;
+
+  overflow-y: scroll;
 }
 .menu-header{
   text-align: center;
   line-height: 40px;
+  position: fixed;
   height: 40px;
-
+  width: 100%;
 }
+.menu-wrapper{
+  height: 40px;
+  background-color: rgb(243, 243, 243);
+}
+.menu-header,
+.menu-header-bg-change{
+}
+
+.btn-previous{
+  color:black !important;
+  display: block;
+  width: 10px;
+  height: 10px;
+  font-size: 15px;
+  position: absolute;
+  top:0;
+  left: 10px;
+  padding: 12px;
+}
+
+.menu-header-bg-change{
+  text-align: center;
+}
+
+
 .btn-menu-close{
   color:black !important;
   display: block;
@@ -248,6 +276,17 @@ button{
   margin:  0 10px 0 0;
 }
 
+
+/* bg-chang */
+
+.bg-photos-list-items{
+  display: inline-block;
+  width: 140px;
+  height: 90px;
+  margin: 5px;
+
+  background-size: cover;
+}
 /* activity */
 .list-icon{
   margin: 0 12px;

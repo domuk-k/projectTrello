@@ -26,6 +26,24 @@
       "name": "ㄹㅇㄴㅁㅇ",
       "board_id": 1,
       "user_id": 1
+    },
+    {
+      "id": "list-2",
+      "name": "ㅁㅇ이ㅑㄴㅅ",
+      "board_id": 1,
+      "user_id": 1
+    },
+    {
+      "id": "list-3",
+      "name": "new board",
+      "board_id": 1,
+      "user_id": 1
+    },
+    {
+      "id": "list-4",
+      "name": "another list",
+      "board_id": 1,
+      "user_id": 1
     }
   ],
   "cards": [

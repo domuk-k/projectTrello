@@ -7,7 +7,7 @@ let cards = [];
 const $header = document.querySelector('.main-header');
 const $boardBg = document.querySelector('.board-bg');
 
-const template = {
+export const template = {
   background() {
     if (board.backgrounds.color) {
       $boardBg.style.backgroundColor = board.backgrounds.color
@@ -55,7 +55,6 @@ const template = {
         </div >
       `
   }
-
 }
 
 const render = () => {

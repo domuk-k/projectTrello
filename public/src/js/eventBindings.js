@@ -1,8 +1,13 @@
+import { template } from "./sideMenu.js"
+import * as headerTemplate from "./header.js"
+
 export const bindEvents = () => {
   // 메뉴 버튼
   document.querySelector('.btn-menu').onclick = eventHandlers.showSideMenu
-
+  // 사이드 메뉴 중 끄는 버튼
   document.querySelector('.btn-menu-close').onclick = eventHandlers.closeSideMenu
+  // 사이드 메뉴 중 배경화면 버튼
+  document.querySelector('.btn-bg-change').onclick = eventHandlers.bgChanger
   // 보드 이름 수정
   document.querySelector('.board-name').onclick = eventHandlers.showInputofBoardname
   document.querySelector('.board-name-input').onkeydown = eventHandlers.renameBoard
@@ -17,7 +22,7 @@ const eventHandlers = {
     target.style.display = "none"
   },
   closeSideMenu({ target }) {
-    target.parentNode.parentNode.parentNode.classList.remove('active')
+    target.parentNode.parentNode.parentNode.parentNode.classList.remove('active')
     document.querySelector('.btn-menu').style.display = "inline-block";
   },
   showInputofBoardname({ target }) {
@@ -41,6 +46,15 @@ const eventHandlers = {
     e.target.style.width = '190px'
     e.target.style.color = 'black'
     e.target.firstElementChild.style.width = '170px'
+  },
+  bgChanger() {
+    template.bgChanger()
+
+    document.querySelector('.side-menu').onclick = (e) => {
+      if (e.target.matches('.btn-previous')) template.sideMenu();
+      if (e.target.matches('.btn-menu-close')) eventHandlers.closeSideMenu(e);
+      if (e.target.matches('.btn-bg-change')) eventHandlers.bgChanger();
+    }
   }
 }
 
