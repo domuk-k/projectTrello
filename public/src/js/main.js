@@ -78,7 +78,18 @@ const renderList = () => {
         </div>
       </div>`
 }
-
+const getMainData = async () => {
+  const responseLists = await ajax.get('/lists');
+  const listData = await responseLists.json();
+  const responseCards = await ajax.get('/cards');
+  const cardData = await responseCards.json();
+  lists = listData;
+  // cards = cardData;
+}
+export const initMain = async () => {
+  await getMainData();
+  renderList();
+};
 // 이벤트 핸들러
 const closeAddMod = target => {
   target.parentNode.parentNode.style.display = 'none';
@@ -105,14 +116,14 @@ const addList = Name => {
 const closeList = id => {
   ajax.delete(`/lists/${id}`)
     .then(lists = lists.filter(list => list.id !== id))
-    .then(renderOnload)
+    .then(renderList)
     .catch(err => console.error(err));
-  if (cards.length) {
-    cards.filter(card => card.list_id === id).forEach(card => {
-      ajax.delete(`/cards/${card.id}`);
-    });
-    cards = cards.filter(card => card.list_id !== id);
-  };
+  // if (cards.length) {
+  //   cards.filter(card => card.list_id === id).forEach(card => {
+  //     ajax.delete(`/cards/${card.id}`);
+  //   });
+  //   cards = cards.filter(card => card.list_id !== id);
+  // };
 };
 
 

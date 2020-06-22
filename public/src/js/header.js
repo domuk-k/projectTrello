@@ -64,50 +64,6 @@ const template = {
         </div >
       `
   },
-  lists() {
-  
-    let html = '';
-    lists.forEach(list => {
-      html +=
-        ` <div class="list-wrapper">
-        <div class="list">
-          <div class="list-header">
-            <textarea class="list-header-name">${list.name}</textarea>
-            <button class="close-list-btn">x</button>
-          </div>
-          <ul class="list-container">
-          </ul>
-          <div class="list-name-input">
-            <input type="text" placeholder="insert todos">
-          </div>
-        </div>
-      </div>`;
-    });
-    $main.innerHTML = html;
-    html = '';
-  
-    // cards.forEach(card => {
-    //   const targetList = document.querySelector(`#${card.list_id}`)
-    //   targetList.firstElementChild.innerHTML += `
-    //   <li id = "${card.id}" class="card-box">
-    //     <a class="card" href="/c/jUKFKu6Q/5-df">카드</a>
-    //     <button class="card-close-btn">x</button>
-    //   </li>`;
-    // });
-    $main.innerHTML += 
-    `   <div class="list-wrapper">
-          <div class="list-add-box">
-            <a class="open-add-mod-btn"><span>+</span>Add another list</a>
-              <div class="add-mod" style="display: none;">  
-                <input class="list-name-box" type=" text" placeholder="enter list title...">
-                <div class="add-mod-btn">
-                  <button class="list-add-btn">Add List</button>
-                  <a class="add-mod-close-btn">x</a>
-                </div>
-              </div>
-          </div>
-        </div>`
-  },
   // cards() {
   //   console.log(cards[0])
   //   cards.forEach(card => {
