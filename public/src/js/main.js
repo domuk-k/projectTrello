@@ -81,8 +81,8 @@ const renderList = () => {
 const getMainData = async () => {
   const responseLists = await ajax.get('/lists');
   const listData = await responseLists.json();
-  const responseCards = await ajax.get('/cards');
-  const cardData = await responseCards.json();
+  // const responseCards = await ajax.get('/cards');
+  // const cardData = await responseCards.json();
   lists = listData;
   // cards = cardData;
 }

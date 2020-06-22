@@ -21,6 +21,24 @@
     "activity": []
   },
   "lists": [
+    {
+      "id": "list-1",
+      "name": "ㄴㅇㅍ",
+      "board_id": 1,
+      "user_id": 1
+    },
+    {
+      "id": "list-2",
+      "name": "",
+      "board_id": 1,
+      "user_id": 1
+    },
+    {
+      "id": "list-3",
+      "name": "ㄴㄹㄷ",
+      "board_id": 1,
+      "user_id": 1
+    }
   ],
   "cards": [
     {
