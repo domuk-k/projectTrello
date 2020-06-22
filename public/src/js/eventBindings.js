@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const eventBindings = () => {
   // 메뉴 버튼
   document.querySelector('.btn-menu').onclick = ({ target }) => {
@@ -24,4 +25,4 @@ export const eventBindings = () => {
     e.target.style.display = "none"
   }
   // document.querySelector('board_name_input')
-}
+};

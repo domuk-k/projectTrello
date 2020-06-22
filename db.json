@@ -21,18 +21,6 @@
     "activity": []
   },
   "lists": [
-    {
-      "id": 1,
-      "list_name": "todo"
-    },
-    {
-      "id": 2,
-      "list_name": "doing"
-    },
-    {
-      "id": 3,
-      "list_name": "done"
-    }
   ],
   "cards": [
     {
