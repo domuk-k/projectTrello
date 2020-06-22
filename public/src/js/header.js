@@ -10,8 +10,8 @@ const $boardBg = document.querySelector('.board-bg');
 
 export const template = {
   background() {
-    if (!$boardBg.style.backgroundImage) $boardBg.style.backgroundColor = board.backgrounds.color;
-    $boardBg.style.backgroundImage = `url(${board.backgrounds.image})`
+    if (!board.background_image) $boardBg.style.backgroundColor = board.background_color;
+    $boardBg.style.backgroundImage = `url(${board.background_image})`
   },
   header() {
     $header.innerHTML =

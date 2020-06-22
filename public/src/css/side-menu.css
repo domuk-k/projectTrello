@@ -70,9 +70,12 @@ font-weight: 500;
 .menu-list li i{
 margin:  0 10px 0 0;
 }
+
+
 .bg-squre{
-  width: 10px;
-  height: 10px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -94,13 +97,16 @@ margin:  0 10px 0 0;
   background-size: contain;
   background-image: url(https://cdn.icon-icons.com/icons2/494/PNG/512/chevron-left_icon-icons.com_48335.png);
 }
-
+.bg-photos-list{
+  line-height: 0px;
+}
 .bg-photos-list-items{
   display: inline-block;
   width: 140px;
   height: 90px;
-  margin: 5px;
+  margin: 2px;
 
+  border-radius: 8px;
   background-size: cover;
 }
 
@@ -110,6 +116,7 @@ margin:  0 10px 0 0;
   align-items: center;
   height: 50px;
   font-size: 18px;
+  margin-bottom: 4px;
 }
 .bg-menu-header div{
   transform: translate3d(0,3px,0);

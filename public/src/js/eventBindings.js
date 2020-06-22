@@ -1,5 +1,6 @@
 import { template } from "./sideMenu.js"
-import * as headerTemplate from "./header.js"
+import * as header from "./header.js"
+import { fetchRequest } from "./fetchRequest.js"
 
 let isSlideOn = false;
 let slideMode = 'main'
@@ -10,7 +11,7 @@ export const bindEvents = () => {
   // 사이드 메뉴 중 끄는 버튼
   document.querySelector('.btn-menu-close').onclick = eventHandlers.closeSideMenu
   // 사이드 메뉴 중 배경화면 선택화면으로 버튼
-  document.querySelector('.btn-bg-change').onclick = eventHandlers.bgChanger
+  document.querySelector('.btn-bg-change').onclick = eventHandlers.showBgChanger
   // 보드 이름 수정
   document.querySelector('.board-name').onclick = eventHandlers.showInputofBoardname;
   document.querySelector('.board-name-input').onkeydown = eventHandlers.renameBoard;
@@ -20,6 +21,9 @@ export const bindEvents = () => {
   document.querySelector('.card-search-input').onblur = eventHandlers.getback;
 
   // 사이드 메뉴 중 배경화면 선택화면 나가기 버튼
+
+  // 배경화면 교체하기
+  document.querySelector('.side-menu').onclick = eventHandlers.chanegBackground;
 };
 
 const eventHandlers = {
@@ -50,7 +54,7 @@ const eventHandlers = {
     e.target.style.display = "none"
   },
   getback(e) {
-    headerTemplate.template.header()
+    hearder.template.header()
     document.querySelector('.card-search-input').onclick = eventHandlers.drawSearchInput;
     document.querySelector('.card-search-input').onkeydown = eventHandlers.drawSearchInput;
     document.querySelector('.card-search-input').onblur = eventHandlers.asdf;
@@ -62,10 +66,21 @@ const eventHandlers = {
     e.target.style.color = 'black'
     e.target.firstElementChild.style.width = '170px'
   },
-  bgChanger() {
+  showBgChanger() {
     slideMode = 'bgChange'
-    template.bgChanger()
+    template.changeToBgMenu()
+    // 기존 요소 감추고 보이게 하기.
+    if (document.querySelector('.bg-menu-wrapper')) {
+      document.querySelector('.bg-menu-wrapper').style.display = 'block'
 
+    }
+    document.querySelector('.main-menu-wrapper').style.display = 'none'
+  },
+  chanegBackground({ target }) {
+    if (!target.matches('.bg-photos-list-items')) return;
+    axios.patch('/board', { background_image: target.dataset.src })
+    header.board.background_image = target.dataset.src
+    header.template.background()
+    document.querySelector('.bg-squre').style.backgroundImage = `url(${target.dataset.src})`
   }
 }
-

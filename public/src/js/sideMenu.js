@@ -30,7 +30,7 @@ export const template = {
       </div>
         `
   },
-  async bgChanger() {
+  async changeToBgMenu() {
     if (!document.querySelector('.bg-menu-wrapper')) {
       await getPhotos();
       // 요소 만들어서 넣기
@@ -55,16 +55,6 @@ export const template = {
       `
       document.querySelector('.side-menu').appendChild(bgChangerPage);
     }
-    // 기존 요소 감추고 보이게 하기.
-    document.querySelector('.bg-menu-wrapper').style.display = 'block'
-    document.querySelector('.main-menu-wrapper').style.display = 'none'
-
-    document.querySelector('.side-menu').onclick = ({ target }) => {
-      if (!target.matches('.bg-photos-list-items')) return;
-      header.board.backgrounds.image = target.dataset.src
-      header.template.background()
-      document.querySelector('.bg-squre').style.backgroundImage = `url(${target.dataset.src})`
-    }
 
     document.querySelector('.btn-previous').onclick = (e) => {
       if (!e.target.matches('.btn-previous')) return;
@@ -79,7 +69,7 @@ const API_KEY2 = 'LMXx8kbllH0CjiUu1DD2X4kcrT_FnR_9yTjacwXC8zY'
 const API_KEY1 = 'nLiOUFEzySn2iky1ZHM9NiDoC99dDysByJVxIZ8r6YE'
 
 const getPhotos = async () => {
-  const res = await axios(`https://api.unsplash.com/photos/random/?count=30&orientation=landscape&query=night&w=2048&client_id=${API_KEY2}`)
+  const res = await axios(`https://api.unsplash.com/photos/random/?count=30&orientation=landscape&query=night&w=2048&client_id=${API_KEY1}`)
   urls = await res.data.map(photo => photo.urls)
 }
 
