@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const eventBindings = () => {
   document.querySelector('.btn-menu').onclick = ({ target }) => {
     target.parentNode.classList.toggle('active')
@@ -18,4 +19,4 @@ export const eventBindings = () => {
     e.target.style.display = "none"
   }
   // document.querySelector('board_name_input')
-}
+};
