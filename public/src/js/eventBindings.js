@@ -43,3 +43,4 @@ const eventHandlers = {
     e.target.firstElementChild.style.width = '170px'
   }
 }
+

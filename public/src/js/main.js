@@ -8,17 +8,15 @@ import { fetchRequest } from "./fetchRequest.js"
 
 const $main = document.querySelector('main');
 const $listNameBox = document.querySelector('.list-name-box');
-
+const $mainWrapper = document.querySelector('.main-wrapper');
 let lists = [];
 
-
-//render
 const renderList = () => {
 
   let html = '';
   lists.forEach(list => {
     html +=
-      `<div class="list-wrapper">
+      `<div id = "${list.id}" class="list-wrapper">
       <div class="list">
         <div class="list-header">
           <textarea class="list-header-name">${list.name}</textarea>
@@ -26,13 +24,22 @@ const renderList = () => {
         </div>
         <ul class="list-container">
         </ul>
-        <div class="list-name-input">
-          <input type="text" placeholder="insert todos">
+
+        <div class="card-add-box">
+        <a class="open-add-mod-btn"><span>+</span>Add another card</a>
+        <div class="card-add-mod" style="display: none;">
+          <input class="card-name-box" type=" text" placeholder="enter a title for this card...">
+          <div class="card-add-mod-btn">
+            <button class="card-add-btn">Add Card</button>
+            <a class="card-add-mod-close-btn">x</a>
+          </div>
         </div>
+
+      </div>
       </div>
     </div>`;
   });
-  $main.innerHTML = html;
+  $mainWrapper.innerHTML = html;
   html = '';
 
   // cards.forEach(card => {
@@ -43,89 +50,88 @@ const renderList = () => {
   //     <button class="card-close-btn">x</button>
   //   </li>`;
   // });
-  $main.innerHTML +=
-    `   <div class="list-wrapper">
-        <div class="list-add-box">
-          <a class="open-add-mod-btn"><span>+</span>Add another list</a>
-            <div class="add-mod" style="display: none;">  
-              <input class="list-name-box" type=" text" placeholder="enter list title...">
-              <div class="add-mod-btn">
-                <button class="list-add-btn">Add List</button>
-                <a class="add-mod-close-btn">x</a>
-              </div>
-            </div>
-        </div>
-      </div>`
-}
+};
+
 const getMainData = async () => {
   const responseLists = await fetchRequest.get('/lists');
   const listData = await responseLists.json();
-  const responseCards = await fetchRequest.get('/cards');
-  const cardData = await responseCards.json();
   lists = listData;
   // cards = cardData;
-}
+};
+
+// 이벤트 핸들러
+const mainEventHandlers = {
+  // 메인 이벤트 핸들러
+  closeAddMod(target) {
+    target.parentNode.parentNode.style.display = 'none';
+  },
+  openAddMod(target) {
+    console.log(target.nextElementSibling);
+    target.nextElementSibling.style.display = 'block';
+  },
+  addList(Name) {
+    const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.replace(/[^0-9]/g, ''))) + 1 : 1);
+    const list = new List(generatedListId(), Name);
+    console.log(list);
+
+    fetchRequest.post('/lists', list)
+      .then(response => response.json())
+      .then(_list => {
+        lists = [...lists, _list]
+      })
+      .then(renderList)
+      .catch(err => console.error(err));
+  },
+
+  closeList(id) {
+    console.log(id);
+
+    fetchRequest.delete(`/lists/${id}`)
+      .then(lists = lists.filter(list => list.id !== id))
+      .then(renderList)
+      .catch(err => console.error(err));
+    // if (cards.length) {
+    //   cards.filter(card => card.list_id === id).forEach(card => {
+    //     fetchRequest.delete(`/cards/${card.id}`);
+    //   });
+    //   cards = cards.filter(card => card.list_id !== id);
+    // };
+  }
+};
+
+// 이벤트 바인딩
+const mainEventBindings = () => {
+  document.querySelector('main').onclick = ({ target }) => {
+    console.log(target);
+    if (target.matches('.close-list-btn')) mainEventHandlers.closeList(target.parentNode.parentNode.parentNode.id);
+    if (target.matches('.add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
+    if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);
+    if (target.matches('.open-add-mod-btn')) mainEventHandlers.addCard(target);
+    if (target.matches('.card-add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
+
+
+  };
+
+  document.querySelector('.list-add-btn').onclick = () => {
+    if (!$listNameBox.value) return;
+    mainEventHandlers.addList($listNameBox.value.trim());
+    $listNameBox.value = '';
+  };
+
+  document.querySelector('.list-name-box').onkeyup = e => {
+    console.log(e.target);
+    if (!e.target === $listNameBox) return;
+    const listName = e.target.value.trim();
+    if (e.keyCode !== 13 || listName === '') return;
+    mainEventHandlers.addList(listName);
+    e.target.value = '';
+  };
+};
+
+// 메인엔트리
+// eslint-disable-next-line import/prefer-default-export
 export const initMain = async () => {
   await getMainData();
   renderList();
+  mainEventBindings();
 };
-// 이벤트 핸들러
-const closeAddMod = target => {
-  target.parentNode.parentNode.style.display = 'none';
-}
-const openAddMod = target => {
-  console.log(target.nextElementSibling);
-  target.nextElementSibling.style.display = 'block';
-}
-const addList = Name => {
-
-  console.log(Name);
-
-  const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.replace(/[^0-9]/g, ''))) + 1 : 1);
-  const list = new List(generatedListId(), Name);
-  console.log(list);
-
-  fetchRequest.post('/lists', list)
-    .then(response => response.json())
-    .then(_list => { lists = [...lists, _list] })
-    .then(renderList)
-    .catch(err => console.error(err));
-}
-
-const closeList = id => {
-  fetchRequest.delete(`/lists/${id}`)
-    .then(lists = lists.filter(list => list.id !== id))
-    .then(renderList)
-    .catch(err => console.error(err));
-  // if (cards.length) {
-  //   cards.filter(card => card.list_id === id).forEach(card => {
-  //     fetchRequest.delete(`/cards/${card.id}`);
-  //   });
-  //   cards = cards.filter(card => card.list_id !== id);
-  // };
-};
-
-
-
-// 이벤트 바인딩
-$main.onclick = ({ target }) => {
-  console.log(target);
-  if (target.matches('.list-add-btn')) closeList();
-  if (target.matches('.add-mod-close-btn')) closeAddMod(target);
-  if (target.matches('.open-add-mod-btn')) openAddMod(target);
-  if (target.matches('.list-add-btn')) {
-    if (!$listNameBox) return;
-    addList($listNameBox.value.trim());
-    $listNameBox.value = '';
-  }
-}
-console.log($listNameBox);
-
-$main.onkeyup = e => {
-  if (!e.target === $listNameBox) return;
-  const listName = e.target.value.trim();
-  if (e.keyCode !== 13 || listName === '') return;
-  addList(listName);
-  e.target.value = '';
-};
-
