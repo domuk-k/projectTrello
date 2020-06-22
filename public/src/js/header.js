@@ -53,13 +53,13 @@ const template = {
       ` <div class="sub-header-left">    
           <span class="board-name">${board.board_name}</span>
           <textarea class="board-name-input" maxlength=10>${board.board_name}</textarea>
-          <div class="favorite far fa-star"></div>
-          <button class="invite">Invite</button>
+          <div class="btn-favorite favorite far fa-star"></div>
+          <button class="btn-invite">Invite</button>
         </div>
         <div class="sub-header-right">
           <button class="btn-star">✨</button>
-          <button class="invite">invite</button>
-          <button class="menu">Show Menu</button>
+          <button class="btn-invite">invite</button>
+          <button class="btn-menu">Show Menu</button>
           <nav class="side-menu"></nav>
         </div >
       `
