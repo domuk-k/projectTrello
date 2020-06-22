@@ -3,7 +3,7 @@ import { Card } from "./card.js"
 // import { list } from "./List.js"
 import { User } from "./user.js"
 
-import { eventBindings } from "./eventBindings.js"
+
 // state
 let board = [];
 let lists = [];
@@ -62,17 +62,6 @@ const template = {
         </div >
       `
   },
-  // cards() {
-  //   console.log(cards[0])
-  //   cards.forEach(card => {
-  //     document.querySelector(`.list-${card.list_id}`).innerHTML +=
-  //       `
-  //     <li>
-  //     ${card.card_name}
-  //     </li>
-  //     `
-  //   })
-  // },
   sideMenu() {
     document.querySelector('.side-menu').innerHTML =
       `    <div class="menu-header">Menu</div>
@@ -99,8 +88,6 @@ const render = () => {
   template.background()
   template.header()
   template.subHeader()
-  template.lists()
-  // template.cards()
   template.sideMenu()
 
 }
@@ -110,23 +97,20 @@ async function getBoard() {
   const res = await axios.get('/board/');
   const _boards = await res.data;
   board = _boards
-  await getLists();
-  await getCards();
   render();
 }
 
-async function getLists() {
-  const res = await axios.get('/lists');
-  lists = res.data;
-}
-async function getCards() {
-  const res = await axios.get('/cards');
-  cards = res.data;
-}
+// async function getLists() {
+//   const res = await axios.get('/lists');
+//   lists = res.data;
+// }
+// async function getCards() {
+//   const res = await axios.get('/cards');
+//   cards = res.data;
+// }
 
-window.onload = async () => {
+export const initHeader = async () => {
   await getBoard();
-  eventBindings();
 }
 
 
