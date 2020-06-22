@@ -43,6 +43,15 @@
     text-indent: 0px;
     text-shadow: none;
 }
+.list-container {
+  padding: 0;
+}
+.remove-list-btn {
+  color: black;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 /* 리스트 추가 박스 */
 /* 카드추가 박스랑 중복 통일 하기 */

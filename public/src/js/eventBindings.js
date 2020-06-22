@@ -1,14 +1,15 @@
+// eslint-disable-next-line import/prefer-default-export
 export const bindEvents = () => {
   // 메뉴 버튼
-  document.querySelector('.btn-menu').onclick = eventHandlers.showSideMenu
+  document.querySelector('.btn-menu').onclick = eventHandlers.showSideMenu;
 
-  document.querySelector('.btn-menu-close').onclick = eventHandlers.closeSideMenu
+  document.querySelector('.btn-menu-close').onclick = eventHandlers.closeSideMenu;
   // 보드 이름 수정
-  document.querySelector('.board-name').onclick = eventHandlers.showInputofBoardname
-  document.querySelector('.board-name-input').onkeydown = eventHandlers.renameBoard
+  document.querySelector('.board-name').onclick = eventHandlers.showInputofBoardname;
+  document.querySelector('.board-name-input').onkeydown = eventHandlers.renameBoard;
 
-  document.querySelector('.card-search-input').onclick = eventHandlers.drawSearchInput
-  document.querySelector('.card-search-input').onkeydown = eventHandlers.drawSearchInput
+  document.querySelector('.card-search-input').onclick = eventHandlers.drawSearchInput;
+  document.querySelector('.card-search-input').onkeydown = eventHandlers.drawSearchInput;
 };
 
 const eventHandlers = {
