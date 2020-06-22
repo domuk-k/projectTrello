@@ -1,9 +1,9 @@
-// eslint-disable-next-line import/prefer-default-export
+
 import { List } from "./List.js"
 
 // let lists = [];
 
-
+// eslint-disable-next-line import/prefer-default-export
 export const eventBindings = () => {
   // 메뉴 버튼
   document.querySelector('.btn-menu').onclick = ({

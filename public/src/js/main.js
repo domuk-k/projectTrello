@@ -105,13 +105,12 @@ const mainEventHandlers = {
     target.parentNode.parentNode.style.display = 'none';
   },
   openAddMod(target) {
-    console.log(target.nextElementSibling);
     target.nextElementSibling.style.display = 'block';
   },
+
   addList(Name) {
     const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.replace(/[^0-9]/g, ''))) + 1 : 1);
     const list = new List(generatedListId(), Name);
-    console.log(list);
 
     ajax.post('/lists', list)
       .then(response => response.json())
@@ -121,10 +120,7 @@ const mainEventHandlers = {
       .then(renderList)
       .catch(err => console.error(err));
   },
-
   closeList(id) {
-    console.log(id);
-    
     ajax.delete(`/lists/${id}`)
       .then(lists = lists.filter(list => list.id !== id))
       .then(renderList)
@@ -136,19 +132,22 @@ const mainEventHandlers = {
     //   cards = cards.filter(card => card.list_id !== id);
     // };
   }
+
+  addCard(target) {
+
+  }
 };
 
 // 이벤트 바인딩
 const mainEventBindings = () => {
   document.querySelector('main').onclick = ({target}) => {
     console.log(target);
-    if (target.matches('.close-list-btn')) mainEventHandlers.closeList(target.parentNode.parentNode.parentNode.id);
+ 
     if (target.matches('.add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
-    if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);
-    if (target.matches('.open-add-mod-btn')) mainEventHandlers.addCard(target);
     if (target.matches('.card-add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
-    
-
+    if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);
+    if (target.matches('.card-add-btn')) mainEventHandlers.addCard(target);
+    if (target.matches('.close-list-btn')) mainEventHandlers.closeList(target.parentNode.parentNode.parentNode.id);
   };
 
   document.querySelector('.list-add-btn').onclick = () => {
