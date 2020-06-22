@@ -3,29 +3,8 @@ import { Board } from "./Board.js"
 import { Card } from "./Card.js"
 import { List } from "./List.js"
 import { User } from "./User.js"
+import { fetchRequest } from "./fetchRequest.js"
 
-const ajax = {
-  get(url) {
-    return fetch(url);
-  },
-  post(url, payload) {
-    return fetch(url, {
-      method: 'POST',
-      headers: { 'content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-  },
-  patch(url, payload) {
-    return fetch(url, {
-      method: 'PATCH',
-      headers: { 'content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-  },
-  delete(url) {
-    return fetch(url, { method: 'DELETE' });
-  }
-};
 
 const $main = document.querySelector('main');
 const $listNameBox = document.querySelector('.list-name-box');
@@ -35,7 +14,7 @@ let lists = [];
 
 //render
 const renderList = () => {
-  
+
   let html = '';
   lists.forEach(list => {
     html +=
@@ -64,8 +43,8 @@ const renderList = () => {
   //     <button class="card-close-btn">x</button>
   //   </li>`;
   // });
-  $main.innerHTML += 
-  `   <div class="list-wrapper">
+  $main.innerHTML +=
+    `   <div class="list-wrapper">
         <div class="list-add-box">
           <a class="open-add-mod-btn"><span>+</span>Add another list</a>
             <div class="add-mod" style="display: none;">  
@@ -79,9 +58,9 @@ const renderList = () => {
       </div>`
 }
 const getMainData = async () => {
-  const responseLists = await ajax.get('/lists');
+  const responseLists = await fetchRequest.get('/lists');
   const listData = await responseLists.json();
-  const responseCards = await ajax.get('/cards');
+  const responseCards = await fetchRequest.get('/cards');
   const cardData = await responseCards.json();
   lists = listData;
   // cards = cardData;
@@ -99,28 +78,28 @@ const openAddMod = target => {
   target.nextElementSibling.style.display = 'block';
 }
 const addList = Name => {
-  
+
   console.log(Name);
-  
-  const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.replace(/[^0-9]/g,''))) + 1 : 1);
+
+  const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.replace(/[^0-9]/g, ''))) + 1 : 1);
   const list = new List(generatedListId(), Name);
   console.log(list);
-  
-  ajax.post('/lists', list)
+
+  fetchRequest.post('/lists', list)
     .then(response => response.json())
-    .then(_list => {lists = [...lists, _list]})
+    .then(_list => { lists = [...lists, _list] })
     .then(renderList)
     .catch(err => console.error(err));
 }
 
 const closeList = id => {
-  ajax.delete(`/lists/${id}`)
+  fetchRequest.delete(`/lists/${id}`)
     .then(lists = lists.filter(list => list.id !== id))
     .then(renderList)
     .catch(err => console.error(err));
   // if (cards.length) {
   //   cards.filter(card => card.list_id === id).forEach(card => {
-  //     ajax.delete(`/cards/${card.id}`);
+  //     fetchRequest.delete(`/cards/${card.id}`);
   //   });
   //   cards = cards.filter(card => card.list_id !== id);
   // };
@@ -129,7 +108,7 @@ const closeList = id => {
 
 
 // 이벤트 바인딩
-$main.onclick = ({target}) => {
+$main.onclick = ({ target }) => {
   console.log(target);
   if (target.matches('.list-add-btn')) closeList();
   if (target.matches('.add-mod-close-btn')) closeAddMod(target);
