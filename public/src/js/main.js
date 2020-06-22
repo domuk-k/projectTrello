@@ -163,12 +163,25 @@ const mainEventHandlers = {
     offset.x = e.clientX;
     offset.y = e.clientY;
     realCard = e.target;
+    // getBoundingClientRect().y
     cardShadow = e.target.parentNode;
     cardShadow.removeChild(realCard)
   },
   dragEnterCard(target) {
-    if (target.className === 'list') target.firstElementChild.nextElementSibling.appendChild(cardShadow);
+    console.log(target);
+    
+    // let cardsY = [];
+    if (target.className === 'list') {
+      // cardsY = lists.filter(list => list.id === target.id);
+      // console.log(...cardsY);
+      // console.log(target.getBoundingClientRect);
+      
+      // cards.filter(card => card.list_id === lists.filter(list => list.id === target.id).id).forEach(card => document.querySelector(`#${card.id}`).getBoundingClientRect.y);
+
+      target.appendChild(cardShadow);
+    }
     if (target.className === 'list-container') target.appendChild(cardShadow);
+    if (target.className === 'card-box') target.parentNode.insertBefore(cardShadow, target)
   },
   dropCard() {
     console.log(cardShadow, realCard);
