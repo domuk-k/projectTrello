@@ -1,7 +1,12 @@
 *{
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
-  /* outline: none; */
+  outline: none;
+}
+
+h1,h2,h3{
+  margin: 0;
+  font-weight: 500;
 }
 body{
   margin: 0;border: 0;
@@ -44,21 +49,27 @@ button{
   align-items: center;
   background-color: rgba(0, 0, 0, 0.301);
 }
-.card-search{
-  display: inline;
-  position: relative;
+
+/* header-left */
+.header-left{
+  display: flex;
+  align-items: flex-start;
+  width: 15%;
+
 }
-.card-search input{
-  position: absolute;
-  left: 0;
-  top: 30px;
-  opacity: 0.2;
+.header-left button{
+  margin-right: 3px;
 }
-.card-search button{
+
+.card-search i{
+  height: 30px;
+  margin: 0 10px;
+  color: white;
 }
 .btn-board-selection {
   font-weight: 700;
 }
+
 
 /* logo */
 .header-logo{
@@ -69,11 +80,29 @@ button{
   background-repeat: no-repeat;
   opacity: 0.5;
 }
-.header-left{
-  
-}
+
+
+/* header-right */
 .header-right{
   display: inline-block;
+  width: 15%;
+  text-align: right;
+}
+.card-search{
+  display: inline;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
+  height: 30px;
+
+  white-space: nowrap;
+}
+.card-search-input{
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  width: 120px;
+  margin: 0 10px;
+  transition: width ease-in-out 200ms ;
 }
 
 .btn-my-profile-icon{
@@ -83,13 +112,17 @@ button{
   background-color: rgb(243, 243, 243);
   color: rgb(63, 63, 63);
   margin: 0 2px;
+
 }
 
 .my-cards{
   position: absolute;
   right: 5px;
+  background-color: rgba(0, 255, 128, 0.164);
 }
 
+
+/* 서브헤더 */
 .sub-header{
   position: relative;
   display: flex;
@@ -154,7 +187,7 @@ button{
   top:0;
   right:0;
 }
-.sub-header-right button{
+.sub-header-right .btn-menu{
   margin: 6px 0;
 }
 
@@ -166,37 +199,69 @@ button{
 .side-menu{
   width: 340px;
   height: 100vh;
-  background-color: rgb(248, 248, 248);
+  background-color: rgb(243, 243, 243);
   margin-left: 3px;
-}
-.side-menu *{
-  background-color: rgba(234, 0, 255, 0.027);
+
+  padding: 0 10px 0;
 }
 .menu-header{
-  display: inline-block;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
 
 }
 .btn-menu-close{
-  color: rgba(0, 0, 0, 0.849)!important;
-  font-size: 9px;
+  color:black !important;
+  display: block;
+  width: 10px;
+  height: 10px;
+  font-size: 15px;
+  position: absolute;
+  top:0;
+  right: 10px;
+  padding: 12px;
 }
+
 .menu-list{
   list-style: none;
   margin: 0;
   padding: 0;
+  font-size: 16px;
 }
 .menu-list li{
   margin: 10px 0;
-  padding: 2px;
+  padding: 5px;
 }
 .menu-list li:hover{
   background-color: rgba(0, 0, 0, 0.205);
 }
-.board-name::after{
+.board-info::after{
   content: "Add a description to your board";
   color: lightgray;
-  display: inline-block;
+  display: block;
+  margin-left: 25px;
+  font-weight: 500;
 }
+
+
+.menu-list li i{
+  margin:  0 10px 0 0;
+}
+
+/* activity */
+.list-icon{
+  margin: 0 12px;
+}
+.activity-header{
+  display: inline;
+}
+/* 일단 로그 */
+.activity-logs{
+  background-color: springgreen;
+  height: 200px;
+}
+
+
 
 /* 메인 */
 main{

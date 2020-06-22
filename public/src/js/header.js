@@ -1,9 +1,3 @@
-import { Board } from "./board.js"
-import { Card } from "./card.js"
-// import { list } from "./List.js"
-import { User } from "./user.js"
-
-
 // state
 let board = [];
 let lists = [];
@@ -12,7 +6,6 @@ let cards = [];
 // DOM picks
 const $header = document.querySelector('.main-header');
 const $boardBg = document.querySelector('.board-bg');
-const $main = document.querySelector('main');
 
 const template = {
   background() {
@@ -29,8 +22,8 @@ const template = {
           <button class="btn-board-selection">Boards</button>
 
           <div class="card-search">
-            <button class="fas fa-search"></button>
-            <input type="text" value="카드검색">
+           <input class="card-search-input" type="text">
+            <i class="fas fa-search"></i>
           </div>
         </div>
         <div class="header-logo"></div>
@@ -61,25 +54,6 @@ const template = {
           <nav class="side-menu"></nav>
         </div >
       `
-  },
-  sideMenu() {
-    document.querySelector('.side-menu').innerHTML =
-      `    <div class="menu-header">Menu</div>
-      <button class="btn-menu-close">X</button>
-        <ul class="menu-list">
-          <li>about this board</li>
-          <li>change Background</li>
-          <li>Search Cards</li>
-          <li>Stickers</li>
-          <li>More</li>
-        </ul>
-      <div class="activity">
-        <div class="activity-header">
-          Activity
-        </div>
-        <ul class="activity-logs">
-        </ul>
-      </div>`
   }
 
 }
@@ -88,8 +62,6 @@ const render = () => {
   template.background()
   template.header()
   template.subHeader()
-  template.sideMenu()
-
 }
 
 
@@ -97,27 +69,15 @@ async function getBoard() {
   const res = await axios.get('/board/');
   const _boards = await res.data;
   board = _boards
-  render();
 }
-
-// async function getLists() {
-//   const res = await axios.get('/lists');
-//   lists = res.data;
-// }
-// async function getCards() {
-//   const res = await axios.get('/cards');
-//   cards = res.data;
-// }
-
+async function getCards() {
+  const res = await axios.get('/cards/');
+  const _cards = await res.data;
+  cards = _cards
+}
 export const initHeader = async () => {
   await getBoard();
+  render();
+  await getCards();
+  console.log(cards)
 }
-
-
-
-// async function removeTodo() {
-//   const res = await axios.delete('/boards/2');
-//   const _boards = await res.data;
-//   boards = _boards
-//   console.log(boards)
-// }
