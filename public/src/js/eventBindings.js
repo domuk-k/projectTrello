@@ -9,11 +9,11 @@ export const bindEvents = () => {
   // 사이드 메뉴 중 배경화면 버튼
   document.querySelector('.btn-bg-change').onclick = eventHandlers.bgChanger
   // 보드 이름 수정
-  document.querySelector('.board-name').onclick = eventHandlers.showInputofBoardname
-  document.querySelector('.board-name-input').onkeydown = eventHandlers.renameBoard
+  document.querySelector('.board-name').onclick = eventHandlers.showInputofBoardname;
+  document.querySelector('.board-name-input').onkeydown = eventHandlers.renameBoard;
 
-  document.querySelector('.card-search-input').onclick = eventHandlers.drawSearchInput
-  document.querySelector('.card-search-input').onkeydown = eventHandlers.drawSearchInput
+  document.querySelector('.card-search-input').onclick = eventHandlers.drawSearchInput;
+  document.querySelector('.card-search-input').onkeydown = eventHandlers.drawSearchInput;
 };
 
 const eventHandlers = {
