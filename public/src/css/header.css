@@ -208,6 +208,7 @@ main{
   position: absolute;
   height: 90%;
   width: 100vw;
+  display: flex;
 }
 
 
