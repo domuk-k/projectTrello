@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export class Board {
   constructor(id, name, user_id = 2020001) {
     this.id = id
