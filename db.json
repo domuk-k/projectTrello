@@ -20,6 +20,155 @@
     },
     "activity": []
   },
-  "lists": [],
-  "cards": []
+  "lists": [
+    {
+      "id": "list-1",
+      "name": "ㅁㄴㄷㄹ",
+      "board_id": 1,
+      "user_id": 1
+    },
+    {
+      "id": "list-2",
+      "name": "ㄴㅇㄹ",
+      "board_id": 1,
+      "user_id": 1
+    }
+  ],
+  "cards": [
+    {
+      "id": "card-1",
+      "content": "ㅁㄴㄹ",
+      "list_id": "list-1",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 06:35:50 GMT",
+      "due_date": "",
+      "sticker": []
+    },
+    {
+      "id": "card-2",
+      "content": "ㅁㄴㄷㄹ",
+      "list_id": "list-1",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 06:36:05 GMT",
+      "due_date": "",
+      "sticker": []
+    },
+    {
+      "id": "card-3",
+      "content": "ㅁㄴㄹㄷ",
+      "list_id": "list-1",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 06:53:54 GMT",
+      "due_date": "",
+      "sticker": []
+    },
+    {
+      "id": "card-4",
+      "content": "ㅋㅍ",
+      "list_id": "list-1",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 06:53:55 GMT",
+      "due_date": "",
+      "sticker": []
+    },
+    {
+      "id": "card-5",
+      "content": "ㄴㅇㄹ",
+      "list_id": "list-1",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 06:53:57 GMT",
+      "due_date": "",
+      "sticker": []
+    },
+    {
+      "id": "card-6",
+      "content": "ㅁㄴㄹㄷ",
+      "list_id": "list-2",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 07:08:54 GMT",
+      "due_date": "",
+      "sticker": []
+    },
+    {
+      "id": "card-7",
+      "content": "ㅁㄴㅇㄹ",
+      "list_id": "list-2",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 07:08:56 GMT",
+      "due_date": "",
+      "sticker": []
+    },
+    {
+      "id": "card-8",
+      "content": "ㄷㄹㅊㅍㅋ",
+      "list_id": "list-2",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 07:09:03 GMT",
+      "due_date": "",
+      "sticker": []
+    },
+    {
+      "id": "card-9",
+      "content": "ㄴㅁㄷㄹㄴㄷㅁ",
+      "list_id": "list-2",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Mon, 22 Jun 2020 07:10:05 GMT",
+      "due_date": "",
+      "sticker": []
+    }
+  ]
 }
