@@ -61,9 +61,18 @@ const renderList = () => {
         </div>
         <ul class="list-container">
         </ul>
-        <div class="list-name-input">
-          <input type="text" placeholder="insert todos">
+
+        <div class="card-add-box">
+        <a class="open-add-mod-btn"><span>+</span>Add another card</a>
+        <div class="card-add-mod" style="display: none;">
+          <input class="card-name-box" type=" text" placeholder="enter a title for this card...">
+          <div class="card-add-mod-btn">
+            <button class="card-add-btn">Add Card</button>
+            <a class="card-add-mod-close-btn">x</a>
+          </div>
         </div>
+
+      </div>
       </div>
     </div>`;
   });
@@ -78,19 +87,6 @@ const renderList = () => {
   //     <button class="card-close-btn">x</button>
   //   </li>`;
   // });
-  // $mainWrapper.innerHTML +=
-  //   `   <div class="list-wrapper">
-  //       <div class="list-add-box">
-  //         <a class="open-add-mod-btn"><span>+</span>Add another list</a>
-  //           <div class="add-mod" style="display: none;">  
-  //             <input class="list-name-box" type=" text" placeholder="enter list title...">
-  //             <div class="add-mod-btn">
-  //               <button class="list-add-btn">Add List</button>
-  //               <a class="add-mod-close-btn">x</a>
-  //             </div>
-  //           </div>
-  //       </div>
-  //     </div>`
 };
 
 const getMainData = async () => {
@@ -149,12 +145,17 @@ const mainEventBindings = () => {
     if (target.matches('.close-list-btn')) mainEventHandlers.closeList(target.parentNode.parentNode.parentNode.id);
     if (target.matches('.add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
     if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);
-    if (target.matches('.list-add-btn')) {
-      if (!$listNameBox) return;
-      mainEventHandlers.addList($listNameBox.value.trim());
-      $listNameBox.value = '';
-    }
-  }
+    if (target.matches('.open-add-mod-btn')) mainEventHandlers.addCard(target);
+    if (target.matches('.card-add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
+    
+
+  };
+
+  document.querySelector('.list-add-btn').onclick = () => {
+    if (!$listNameBox.value) return;
+    mainEventHandlers.addList($listNameBox.value.trim());
+    $listNameBox.value = '';
+  };
 
   document.querySelector('.list-name-box').onkeyup = e => {
     console.log(e.target);

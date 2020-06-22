@@ -42,6 +42,9 @@
     text-indent: 0px;
     text-shadow: none;
 }
+
+/* 리스트 추가 박스 */
+/* 카드추가 박스랑 중복 통일 하기 */
 .list-add-box {
   font-size: 1.5em;
   line-height: 26px;
@@ -56,6 +59,7 @@
   border-radius: 3px;
   box-sizing: border-box;
 }
+
 .add-mod {
   width: 270px;
   background-color: #ebecf0;
@@ -73,6 +77,43 @@
   height: 25px;
 }
 
-.pop-up {
-  display: none;
+/* 카드 추가 박스 */
+
+.card-add-box {
+  font-size: 1.5em;
+  line-height: 26px;
+  height: 40px;
+  width: 270px;
+  min-height: 32px;
+  /* background-color: rgba(0,0,0,.08); */
+  cursor: pointer;
+  border-radius: 3px;
+  margin-right: 8px;
+  position: relative;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.card-name-box {
+  width: 256px;
+  height: 66px;
+}
+
+.card-add-mod {
+  width: 270px;
+  background-color: #ebecf0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* height: 80px; */
+}
+
+.card-add-btn {
+  background-color: rgb(165, 27, 27);
+  cursor: pointer;
+}
+
+.card-add-mod-close-btn {
+  width: 24px;
+  height: 25px;
 }
