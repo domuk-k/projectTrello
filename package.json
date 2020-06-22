@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server",
+    "start": "webpack -w && nodemon server",
     "build": "webpack -w"
   },
   "keywords": [],

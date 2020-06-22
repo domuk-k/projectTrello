@@ -1,0 +1,136 @@
+/* 사이드메뉴 */
+.side-menu{
+  width: 340px;
+  height: 100vh;
+  background-color: rgb(243, 243, 243);
+
+  margin: 0;
+  padding-left: 18px;
+  overflow-y: scroll;
+  flex-direction: column;
+  justify-content: center;
+}
+.side-menu hr{
+  margin: 0;
+}
+.main-menu-wrapper{
+  height: 50px;
+  /* display: flex; */
+  flex-direction: row;
+}
+.main-menu-header{
+  position: fixed;
+  height: 50px;
+  width: 320px;
+  background-color: rgb(243, 243, 243);
+  text-align: center;
+}
+.main-menu-header h3{
+  line-height: 50px ;
+  text-align: center;
+  font-weight: 700;
+  display: inline-block;
+}
+.btn-menu-close{
+  color:black !important;
+  font-size: 20px;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(https://icons-for-free.com/iconfiles/png/512/x-1321215629555778185.png);
+
+  position: absolute;
+  top: 12px;
+  right: 15px;
+}
+
+.menu-list{
+list-style: none;
+margin: 0;
+padding: 0;
+font-size: 16px;
+}
+.menu-list li{
+margin: 10px 0;
+padding: 5px;
+}
+.menu-list li:hover{
+background-color: rgba(0, 0, 0, 0.205);
+}
+
+.board-info::after{
+content: "Add a description to your board";
+color: lightgray;
+display: block;
+margin-left: 25px;
+font-weight: 500;
+}
+
+.menu-list li i{
+margin:  0 10px 0 0;
+}
+.bg-squre{
+  width: 10px;
+  height: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* bg-chang */
+
+.btn-previous{
+  color:black !important;
+  display: inline-block;
+  width: 20px;
+  height: 50px;
+  margin-right: 10px;
+
+  z-index: 3;
+  transform: translate3d(0,5px,0);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url(https://cdn.icon-icons.com/icons2/494/PNG/512/chevron-left_icon-icons.com_48335.png);
+}
+
+.bg-photos-list-items{
+  display: inline-block;
+  width: 140px;
+  height: 90px;
+  margin: 5px;
+
+  background-size: cover;
+}
+
+
+.bg-menu-header {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  font-size: 18px;
+}
+.bg-menu-header div{
+  transform: translate3d(0,3px,0);
+}
+.bg-menu-header *{
+  display: inline-block;
+}
+/* activity */
+.list-icon{
+margin: 0 12px;
+}
+.activity-header{
+display: inline;
+}
+/* 일단 로그 */
+
+.activity-wrapper{
+  margin-top: 15px;
+}
+
+.activity-logs{
+background-color: springgreen;
+height: 200px;
+}

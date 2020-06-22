@@ -1,8 +1,11 @@
+
 // server.js
+// const cors = require('cors');
 const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults({});
+
 
 // db.json를 조작하기 위해 lowdb를 사용
 const low = require('lowdb');
@@ -12,6 +15,7 @@ const db = low(adapter);
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares);
+// server.use(cors());
 
 server.get('users', (req, res) => {
 

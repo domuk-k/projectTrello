@@ -61,11 +61,7 @@ button{
   margin-right: 3px;
 }
 
-.card-search i{
-  height: 30px;
-  margin: 0 10px;
-  color: white;
-}
+
 .btn-board-selection {
   font-weight: 700;
 }
@@ -104,6 +100,11 @@ button{
   margin: 0 10px;
   transition: width ease-in-out 200ms ;
 }
+.card-search i{
+  height: 30px;
+  margin: 0 10px;
+  color: white;
+}
 
 .btn-my-profile-icon{
   border-radius: 50%;
@@ -120,6 +121,7 @@ button{
   right: 5px;
   background-color: rgba(0, 255, 128, 0.164);
 }
+
 
 
 /* 서브헤더 */
@@ -195,112 +197,6 @@ button{
   transform: translate3d(0,0,0);
 }
 
-  /* 사이드메뉴 */
-.side-menu{
-  width: 340px;
-  height: 100vh;
-  background-color: rgb(243, 243, 243);
-  margin-left: 3px;
-
-  padding: 0 10px 0;
-
-  overflow-y: scroll;
-}
-.menu-header{
-  text-align: center;
-  line-height: 40px;
-  position: fixed;
-  height: 40px;
-  width: 100%;
-}
-.menu-wrapper{
-  height: 40px;
-  background-color: rgb(243, 243, 243);
-}
-.menu-header,
-.menu-header-bg-change{
-}
-
-.btn-previous{
-  color:black !important;
-  display: block;
-  width: 10px;
-  height: 10px;
-  font-size: 15px;
-  position: absolute;
-  top:0;
-  left: 10px;
-  padding: 12px;
-}
-
-.menu-header-bg-change{
-  text-align: center;
-}
-
-
-.btn-menu-close{
-  color:black !important;
-  display: block;
-  width: 10px;
-  height: 10px;
-  font-size: 15px;
-  position: absolute;
-  top:0;
-  right: 10px;
-  padding: 12px;
-}
-
-.menu-list{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-}
-.menu-list li{
-  margin: 10px 0;
-  padding: 5px;
-}
-.menu-list li:hover{
-  background-color: rgba(0, 0, 0, 0.205);
-}
-.board-info::after{
-  content: "Add a description to your board";
-  color: lightgray;
-  display: block;
-  margin-left: 25px;
-  font-weight: 500;
-}
-
-
-.menu-list li i{
-  margin:  0 10px 0 0;
-}
-
-
-/* bg-chang */
-
-.bg-photos-list-items{
-  display: inline-block;
-  width: 140px;
-  height: 90px;
-  margin: 5px;
-
-  background-size: cover;
-}
-/* activity */
-.list-icon{
-  margin: 0 12px;
-}
-.activity-header{
-  display: inline;
-}
-/* 일단 로그 */
-.activity-logs{
-  background-color: springgreen;
-  height: 200px;
-}
-
-
 
 /* 메인 */
 main{
@@ -308,7 +204,8 @@ main{
   white-space: nowrap;
   user-select: none;
   overflow-y: hidden;
-  overflow-x: auto;
+  overflow-x: scroll;
+  scrollbar-width: 200px;
   position: absolute;
   height: 90%;
   width: 100vw;

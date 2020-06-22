@@ -1,8 +1,8 @@
 // import { header } from "./header.js"
-import { Board } from "./Board.js"
-import { Card } from "./Card.js"
-import { List } from "./List.js"
-import { User } from "./User.js"
+import { Board } from "./board.js"
+import { Card } from "./card.js"
+import { List } from "./list.js"
+import { User } from "./user.js"
 import { fetchRequest } from "./fetchRequest.js"
 
 const $listNameBox = document.querySelector('.list-name-box');
@@ -84,7 +84,7 @@ const mainEventHandlers = {
   },
   openAddMod(target) {
     console.log('123');
-    
+
     target.nextElementSibling.style.display = 'block';
   },
 
@@ -116,11 +116,11 @@ const mainEventHandlers = {
   },
 
   addCard(content, target) {
-    const generatedCardId = () => (cards.length ? Math.max(...cards.map(card => card.id.replace(/[^0-9]/g,''))) + 1 : 1);
+    const generatedCardId = () => (cards.length ? Math.max(...cards.map(card => card.id.replace(/[^0-9]/g, ''))) + 1 : 1);
     const card = new Card(generatedCardId(), content, target.id);
     fetchRequest.post('/cards', card)
       .then(response => response.json())
-      .then(_card => {cards = [...cards, _card]})
+      .then(_card => { cards = [...cards, _card] })
       .then(() => renderCard(target))
       .catch(err => console.error(err));
   },
@@ -137,7 +137,7 @@ const mainEventHandlers = {
 const mainEventBindings = () => {
   document.querySelector('main').onclick = ({ target }) => {
     // console.log(target);
- 
+
     if (target.matches('.add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
     if (target.matches('.card-add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
     if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);

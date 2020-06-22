@@ -1,9 +1,7 @@
 import { initMain } from "./main.js"
-import { initHeader } from "./header.js "
+import { initHeader } from "./header.js"
 import { bindEvents } from "./eventBindings.js"
-import { initSideMenu } from './sideMenu.js'
-
-let lists = [];
+import { initSideMenu } from "./sideMenu.js"
 
 window.onload = async () => {
   await initHeader();

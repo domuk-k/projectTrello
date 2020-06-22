@@ -1,58 +1,87 @@
-export let thumbnails = [];
+import * as header from "./header.js"
+export let urls = [];
 
 export const template = {
   sideMenu() {
     document.querySelector('.side-menu').innerHTML =
       `    
-      <div class="menu-wrapper">
-        <div class="menu-header">
+      <div class="main-menu-wrapper">
+      <div class="main-menu-wrapper">
+        <div class="main-menu-header">
           <h3>Menu</h3>
-          <button class="btn-menu-close fas fa-times"></button>
+          <button class="btn-menu-close"></button>
         </div>
       </div>
       <hr>
         <ul class="menu-list">
           <li class="board-info"><i class="fas fa-star"></i>About this board</li>
-          <li class="btn-bg-change"><i class="fas fa-star"></i>change Background</li>
+          <li class="btn-bg-change"><span class="bg-squre"></span>change Background</li>
           <li><i class="fas fa-star"></i>Search Cards</li>
           <li><i class="fas fa-star"></i>Stickers</li>
           <li><i class="fas fa-star"></i>More</li>
         </ul>
       <hr>
-        <i class="list-icon fas fa-list"></i>
-        <h3 class="activity-header">Activity</h3>
-        <ul class="activity-logs">
-        </ul>
-        `
-  },
-  bgChanger() {
-    let html = ''
-    thumbnails.forEach(thumbnail => {
-      html += `<span class="bg-photos-list-items" style="background-image: url(${thumbnail})"></span>`
-    })
-
-    document.querySelector('.side-menu').innerHTML =
-      `
-      <div class="menu-wrapper">
-        <div class="menu-header-bg-change">
-          <button class="btn-previous fas fa-chevron-left"></button>
-          <h3 class="menu-header">Photos by <a href="http://www.unsplash.com" target="_blank">Unsplash</a></h3>
-          <button class="btn-menu-close fas fa-times"></button>
+      <div class="activity-wrapper">
+          <i class="list-icon fas fa-list"></i>
+          <h3 class="activity-header">Activity</h3>
+          <ul class="activity-logs">
+          </ul>
         </div>
       </div>
-    <div class="bg-photos-list">
-      ${html}
-    </div>
-    `
+        `
+  },
+  async bgChanger() {
+    if (!document.querySelector('.bg-menu-wrapper')) {
+      await getPhotos();
+      // 요소 만들어서 넣기
+      let html = ''
+      urls.forEach(url => {
+        html += `<span class="bg-photos-list-items" style="background-image: url(${url.thumb})" data-src="${url.custom}")></span>`
+      })
+
+      const bgChangerPage = document.createElement('div')
+      bgChangerPage.className = 'bg-menu-wrapper'
+      bgChangerPage.innerHTML =
+        `
+        <div class="bg-menu-header-wrapper">
+          <div class="bg-menu-header">
+            <div class="btn-previous"></div>
+            <div>Photos by <a href="http://www.unsplash.com" target="_blank">Unsplash</a></div>
+          </div>
+        </div>
+      <div class="bg-photos-list">
+        ${html}
+      </div>
+      `
+      document.querySelector('.side-menu').appendChild(bgChangerPage);
+    }
+    // 기존 요소 감추고 보이게 하기.
+    document.querySelector('.bg-menu-wrapper').style.display = 'block'
+    document.querySelector('.main-menu-wrapper').style.display = 'none'
+
+    document.querySelector('.side-menu').onclick = ({ target }) => {
+      if (!target.matches('.bg-photos-list-items')) return;
+      header.board.backgrounds.image = target.dataset.src
+      header.template.background()
+      document.querySelector('.bg-squre').style.backgroundImage = `url(${target.dataset.src})`
+    }
+
+    document.querySelector('.btn-previous').onclick = (e) => {
+      if (!e.target.matches('.btn-previous')) return;
+      document.querySelector('.bg-menu-wrapper').style.display = 'none'
+      document.querySelector('.main-menu-wrapper').style.display = 'block'
+      //
+    }
   }
 }
 
-const API_KEY = 'nLiOUFEzySn2iky1ZHM9NiDoC99dDysByJVxIZ8r6YE'
+const API_KEY2 = 'LMXx8kbllH0CjiUu1DD2X4kcrT_FnR_9yTjacwXC8zY'
+const API_KEY1 = 'nLiOUFEzySn2iky1ZHM9NiDoC99dDysByJVxIZ8r6YE'
+
 const getPhotos = async () => {
-  const res = await axios(`https://api.unsplash.com/photos/random/?count=30&query=mountains&w=2048&client_id=${API_KEY}`)
-  thumbnails = await res.data.map(photo => photo.urls.thumb)
+  const res = await axios(`https://api.unsplash.com/photos/random/?count=30&orientation=landscape&query=night&w=2048&client_id=${API_KEY2}`)
+  urls = await res.data.map(photo => photo.urls)
 }
-getPhotos();
 
 export const initSideMenu = () => {
   template.sideMenu()
