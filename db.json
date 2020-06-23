@@ -14,104 +14,23 @@
     ],
     "recent_open": "2020-09-09 thr 13:21:12",
     "is_starred": false,
-    "background_image": "https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+    "background_image": "https://images.unsplash.com/photo-1580734889649-5f7597cc2561?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
     "background_color": ""
   },
   "lists": [
     {
       "id": "list-1",
-      "name": "ㅁㄴㄷㄹ",
+      "name": "fgh",
       "board_id": 1,
       "user_id": 1
     },
     {
       "id": "list-2",
-      "name": "ㅁㄴㄷㄹ",
+      "name": "fgh",
       "board_id": 1,
       "user_id": 1
     }
   ],
-  "cards": [
-    {
-      "id": "card-1",
-      "content": "ㅁㄴㄹ",
-      "list_id": "list-1",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Mon, 22 Jun 2020 11:19:04 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    },
-    {
-      "id": "card-2",
-      "content": "ㄴㅇㅀ",
-      "list_id": "list-1",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Mon, 22 Jun 2020 11:19:05 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    },
-    {
-      "id": "card-3",
-      "content": "ㅁㄴㄷㄹ",
-      "list_id": "list-1",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Mon, 22 Jun 2020 11:19:08 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    },
-    {
-      "id": "card-4",
-      "content": "ㅁㄴㄷㄹ",
-      "list_id": "list-2",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Mon, 22 Jun 2020 11:21:42 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    },
-    {
-      "id": "card-5",
-      "content": "ㄴㄷ",
-      "list_id": "list-2",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Mon, 22 Jun 2020 11:21:43 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    }
-  ],
+  "cards": [],
   "activities": []
 }

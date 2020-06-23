@@ -1,7 +1,9 @@
 import * as header from "./header.js"
-export let urls = [];
+import { lazyLoader } from "./infinite-lazy.js"
 
-export const template = {
+let photoUrls = [];
+let listItemElements = ''
+const template = {
   sideMenu() {
     document.querySelector('.side-menu').innerHTML =
       `    
@@ -15,7 +17,7 @@ export const template = {
       <hr>
         <ul class="menu-list">
           <li class="board-info"><i class="fas fa-star"></i>About this board</li>
-          <li class="btn-bg-change"><span class="bg-squre"></span>change Background</li>
+          <li class="btn-bg-change"><span class="bg-squre" style="background-image: url(${header.board.background_image})"></span>Change Background</li>
           <li><i class="fas fa-star"></i>Search Cards</li>
           <li><i class="fas fa-star"></i>Stickers</li>
           <li><i class="fas fa-star"></i>More</li>
@@ -30,15 +32,23 @@ export const template = {
       </div>
         `
   },
+  async getPhotoListItems() {
+    await getPhotos();
+    photoUrls.forEach((url, i) => {
+      listItemElements += ` 
+                  <li>
+                    <img class="bg-photos-list-items lazy-img"
+                    data-src="${url.thumb}" data-source="${url.custom}")>
+                  </li>`
+    })
+    return listItemElements
+  },
+  // event handler
   async changeToBgMenu() {
     if (!document.querySelector('.bg-menu-wrapper')) {
-      await getPhotos();
+      //get data and load on memory as photoUrls
+      await template.getPhotoListItems();
       // 요소 만들어서 넣기
-      let html = ''
-      urls.forEach(url => {
-        html += `<span class="bg-photos-list-items" style="background-image: url(${url.thumb})" data-src="${url.custom}")></span>`
-      })
-
       const bgChangerPage = document.createElement('div')
       bgChangerPage.className = 'bg-menu-wrapper'
       bgChangerPage.innerHTML =
@@ -49,30 +59,53 @@ export const template = {
             <div>Photos by <a href="http://www.unsplash.com" target="_blank">Unsplash</a></div>
           </div>
         </div>
-      <div class="bg-photos-list">
-        ${html}
-      </div>
+      <ul class="bg-photos-list">
+        ${listItemElements}
+      </ul>
       `
       document.querySelector('.side-menu').appendChild(bgChangerPage);
     }
+
 
     document.querySelector('.btn-previous').onclick = (e) => {
       if (!e.target.matches('.btn-previous')) return;
       document.querySelector('.bg-menu-wrapper').style.display = 'none'
       document.querySelector('.main-menu-wrapper').style.display = 'block'
-      //
     }
+    // pick lazy-loading target elements 
+    const lazyTargets = document.querySelectorAll('.lazy-img')
+    const infiTarget = document.querySelector('.infinite-trigger')
+    lazyTargets.forEach(target => lazyLoader(target));
+  },
+  async inifinitize(e) {
+
+    // if (e.target.scrollTop < e.target.scrollHeight + 30) return;
+    // console.log(e)
+    // const container = document.createElement('div')
+    // container.style.height = "20px"
+    // // const listItems = await template.getPhotoListItems()
+    // // console.log(listItems)
+    // // container.innerHTML = listItems
+    // document.querySelector('.bg-photos-list').appendChild(container)
   }
 }
 
-const API_KEY2 = 'LMXx8kbllH0CjiUu1DD2X4kcrT_FnR_9yTjacwXC8zY'
-const API_KEY1 = 'nLiOUFEzySn2iky1ZHM9NiDoC99dDysByJVxIZ8r6YE'
 
 const getPhotos = async () => {
-  const res = await axios(`https://api.unsplash.com/photos/random/?count=30&orientation=landscape&query=night&w=2048&client_id=${API_KEY1}`)
-  urls = await res.data.map(photo => photo.urls)
+  // const API_KEY2 = 'LMXx8kbllH0CjiUu1DD2X4kcrT_FnR_9yTjacwXC8zY'
+  const API_KEY1 = 'nLiOUFEzySn2iky1ZHM9NiDoC99dDysByJVxIZ8r6YE'
+  const photoCount = 30
+  const queryKeyword = 'wallpaper'
+  const query = `?featured=true&content_filter=high&count=${photoCount}&orientation=landscape&${queryKeyword}=wallpapers&w=1920&client_id=${API_KEY1}`
+  const res = await axios(`https://api.unsplash.com/photos/random/${query}`)
+  photoUrls = await res.data.map(photo => photo.urls)
+  return photoUrls
 }
 
-export const initSideMenu = () => {
+const initSideMenu = () => {
   template.sideMenu()
 }
+
+
+
+export { photoUrls, template, initSideMenu, getPhotos }
