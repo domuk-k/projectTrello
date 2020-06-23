@@ -1,7 +1,9 @@
+import "@babel/polyfill";
 import { initMain } from "./main.js"
 import { initHeader } from "./header.js"
 import { initSideMenu } from "./sideMenu.js"
 import { bindEvents } from "./eventBindings.js"
+
 
 window.onload = async () => {
   await initHeader();
