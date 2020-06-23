@@ -15,101 +15,73 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser)
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(cors());
-// Add custom routes before JSON Server router////
+// Add custom routes before JSON Server router
 
-// get 요청
-server.get('/users', (req, res) => {
-  res.send(db.get('users[0]').value())
-})
-
-server.get('/users/:user_id', (req, res) => {
-  res.send(db.get(`users[${req.params.user_id - 1}]`).value())
-})
-
-server.get('/users/:user_id/boards', (req, res) => {
+// GET
+// get boards
+server.get('/boards', (req, res) => {
   res.send(
-    db.get(`users[${req.params.user_id - 1}].boards`)
+    db.get(`users[0].boards`)
       .value()
   )
 })
-server.get('/users/:user_id/boards/:board_id', (req, res) => {
+// get a board
+server.get('/boards/:board_id', (req, res) => {
   res.send(
-    db.get(`users[${req.params.user_id - 1}].boards[${req.params.board_id - 1}]`)
+    db.get(`users[0].boards[${req.params.board_id - 1}]`)
       .value()
   )
 })
-server.get('/users/:user_id/boards/:board_id/lists', (req, res) => {
+// get lists
+server.get('/boards/:board_id/lists', (req, res) => {
   res.send(
-    db.get(`users[${req.params.user_id - 1}].boards[${req.params.board_id - 1}].lists`)
+    db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
       .value()
   )
 })
-server.get('/users/:user_id/boards/:board_id/lists/:list_id', (req, res) => {
+// get a list
+server.get('/boards/:board_id/lists/:list_id', (req, res) => {
   res.send(
-    db.get(`users[${req.params.user_id - 1}].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`)
-      .value()
-  )
-})
-server.get('/users/:user_id/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
-  res.send(
-    db.get(`users[${req.params.user_id - 1}].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`)
-      .value()
-  )
-})
-server.get('/users/:user_id/boards/:board_id/lists/:list_id', (req, res) => {
-  res.send(
-    db.get(`users[${req.params.board_id - 1}].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards[${req.params.card_id}]`)
+    db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`)
       .value()
   )
 })
 
+//POST
+// push a board
+server.post('/boards/', (req, res) => {
+  db.get(`users[0].boards`)
+    .push(req.body)
+    .write()
+  res.send(
+    // get boards
+    db.get(`users[0].boards`).value()
+  )
+})
+// push a list
+server.post('/boards/:board_id/lists/', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
+    .push(req.body)
+    .write()
+  res.send(
+    req.body
+  )
+})
 
+server.delete('/boards/:board_id/lists/:list_id', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
+    .delete(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`)
+    .write()
+})
 
-// post
-// server.get('/users', (req, res) => {
-//   res.send(db.get('users').value())
+// server.delete('/todos/completed', (req, res) => {
+//   // lowdb를 사용해서 db.json에서 completed: true인 todo를 제거
+//   db.get('todos')
+//     .remove({ completed: true })
+//     .write();
+//   // todos를 응답
+//   res.send(db.get('todos').value());
 // })
-
-// server.get('/users/:user_id', (req, res) => {
-//   res.send(db.get(`users[${req.params.user_id - 1}]`).value())
-// })
-// server.get('/users/:user_id/boards', (req, res) => {
-//   res.send(
-//     db.get(`users[${req.params.user_id - 1}].boards`)
-//       .value()
-//   )
-// })
-// server.get('/users/:user_id/boards/:board_id', (req, res) => {
-//   res.send(
-//     db.get(`users[${req.params.user_id - 1}].boards[${req.params.board_id - 1}]`)
-//       .value()
-//   )
-// })
-// server.get('/users/:user_id/boards/:board_id/lists', (req, res) => {
-//   res.send(
-//     db.get(`users[${req.params.user_id - 1}].boards[${req.params.board_id - 1}].lists`)
-//       .value()
-//   )
-// })
-// server.get('/users/:user_id/boards/:board_id/lists/:list_id', (req, res) => {
-//   res.send(
-//     db.get(`users[${req.params.user_id - 1}].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`)
-//       .value()
-//   )
-// })
-// server.get('/users/:user_id/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
-//   res.send(
-//     db.get(`users[${req.params.user_id - 1}].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`)
-//       .value()
-//   )
-// })
-// server.get('/users/:user_id/boards/:board_id/lists/:list_id', (req, res) => {
-//   res.send(
-//     db.get(`users[${req.params.board_id - 1}].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards[${req.params.card_id}]`)
-//       .value()
-//   )
-// })
-
 
 // Use default router
 server.use(router);

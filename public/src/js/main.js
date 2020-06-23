@@ -56,23 +56,26 @@ const renderList = () => {
         </div>
       </div>
     </div>`;
+    $mainWrapper.innerHTML += html;
+
+    if (list.cards.length) return;
+    list.cards.forEach(card => {
+      const targetList = document.querySelector(`.list #${list.id}`);
+      targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
+      <li id = "${card.id}" class="card-box">
+      <div class="card-shadow">
+        <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
+          <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
+          <button class="card-remove-btn">x</button>
+        </div>
+      </div>
+    </li>`;
+    });
   });
-  $mainWrapper.innerHTML = html;
+  
   html = '';
 
-  if (cards.length) return;
-  cards.forEach(card => {
-    const targetList = document.querySelector(`#${card.list_id}`);
-    targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
-    <li id = "${card.id}" class="card-box">
-    <div class="card-shadow">
-      <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-        <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
-        <button class="card-remove-btn">x</button>
-      </div>
-    </div>
-  </li>`;
-  });
+
 };
 // 카드랜더
 const renderCard = target => {
@@ -96,12 +99,14 @@ const renderCard = target => {
 };
 // 초기데이타 get
 const getMainData = async () => {
-  const responseLists = await axios.get('/lists');
+  const responseLists = await axios.get('/boards/1/lists');
   const listData = await responseLists.data;
-  const responseCards = await axios.get('/cards');
-  const cardData = await responseCards.data;
+  // const responseCards = await axios.get('/boards/);
+  // const cardData = await responseCards.data;
   lists = listData;
-  cards = cardData;
+  console.log(lists);
+  
+  // cards = cardData;
 };
 
 // 이벤트 핸들러
@@ -116,33 +121,33 @@ const mainEventHandlers = {
 
   // 리스트 추가 제거
   async addList(Name) {
-    const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.split('-')[1])) + 1 : 1);
+    const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id)) + 1 : 1);
 
-    const list = new List(generatedListId(), Name);
+    const newlist = new List(generatedListId(), Name);
 
-    const responseList = axios.post('/lists', list)
-    const listData = await responseList.data
+    const responseList = await axios.post('/boards/1/lists', newlist)
+    const listData = responseList.data
     lists = [...lists, listData]
     renderList();
   },
   async removeList(id) {
-    await axios.delete(`/lists/${id}`)
-    lists = lists.filter(list => list.id !== id)
+    await axios.delete(`boards/1/lists/${id}`)
+    lists = lists.filter(list => list.id !== +id)
     renderList();
 
-    if (cards.length) {
-      cards.filter(card => card.list_id === id).forEach(card => {
-        fetchRequest.delete(`/cards/${card.id}`);
-      });
-      cards = cards.filter(card => card.list_id !== id);
-    }
+    // if (cards.length) {
+    //   cards.filter(card => card.list_id === id).forEach(card => {
+    //     await axios.delete(`/cards/${card.id}`);
+    //   });
+    //   cards = cards.filter(card => card.list_id !== id);
+    // }
   },
 
   // 카드 추가 제거
   async addCard(content, target) {
-    const generatedCardId = () => (cards.length ? Math.max(...cards.map(card => card.id.split('-'))) + 1 : 1);
+    const generatedCardId = () => (cards.length ? Math.max(...cards.map(card => card.id)) + 1 : 1);
     const card = new Card(generatedCardId(), content, target.id);
-    const responseCard = await axios.post('/cards', card)
+    const responseCard = await axios.post('/boards/1/lists', card)
     const cardData = await responseCard.data;
     cards = [...cards, cardData];
     renderCard(target);
@@ -186,7 +191,7 @@ const mainEventHandlers = {
   dropCard() {
     if (dragTarget === 'card') cardShadow.appendChild(cardContent);
     if (dragTarget === 'list') {
-      console.log('칠드랜', listShadow.parentNode.parentNode.children); 
+      // console.log('칠드랜', listShadow.parentNode.parentNode.children); 
       listShadow.appendChild(listContent);
       listShadow.style.height = 'auto';
 
