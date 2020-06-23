@@ -42,6 +42,10 @@ button{
   z-index: -2;
 }
 
+.shadow-overlay{
+  background: linear-gradient(#000000a9, transparent 40%);
+}
+
 .main-header{
   height: 38px;
   display: flex;

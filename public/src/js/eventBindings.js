@@ -1,6 +1,5 @@
 import { template } from "./sideMenu.js"
 import * as header from "./header.js"
-import { fetchRequest } from "./fetchRequest.js"
 
 let isSlideOn = false;
 let slideMode = 'main'
@@ -21,9 +20,11 @@ export const bindEvents = () => {
   document.querySelector('.card-search-input').onblur = eventHandlers.getback;
 
   // 사이드 메뉴 중 배경화면 선택화면 나가기 버튼
-
+  //
   // 배경화면 교체하기
   document.querySelector('.side-menu').onclick = eventHandlers.changeBgImage;
+  // 배경화면 선택화면 무한 스크롤
+  document.querySelector('.side-menu').onscroll = template.inifinitize;
 };
 
 const eventHandlers = {
@@ -70,9 +71,9 @@ const eventHandlers = {
     slideMode = 'bgChange'
     template.changeToBgMenu()
     // 기존 요소 감추고 보이게 하기.
-    if (document.querySelector('.bg-menu-wrapper')) {
-      document.querySelector('.bg-menu-wrapper').style.display = 'block'
-
+    const BgMenuElements = document.querySelector('.bg-menu-wrapper')
+    if (BgMenuElements) {
+      BgMenuElements.style.display = 'block'
     }
     document.querySelector('.main-menu-wrapper').style.display = 'none'
   },

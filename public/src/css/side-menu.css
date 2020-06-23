@@ -1,7 +1,7 @@
 /* 사이드메뉴 */
 .side-menu{
   width: 340px;
-  height: 100vh;
+  height: 98vh;
   background-color: rgb(243, 243, 243);
 
   margin: 0;
@@ -102,9 +102,14 @@ margin:  0 10px 0 0;
 }
 .bg-photos-list{
   line-height: 0px;
+  padding: 0;
+  margin: 0;
+  height: 700px;
+}
+.bg-photos-list li{
+  display: inline-block;
 }
 .bg-photos-list-items{
-  display: inline-block;
   width: 140px;
   height: 90px;
   margin: 2px;
@@ -129,11 +134,11 @@ margin:  0 10px 0 0;
 }
 /* lazy loading */
 .lazy-img{
-  background-image: url(https://thumbs.gfycat.com/PotableEmbarrassedFrenchbulldog-size_restricted.gif)
+  background-image: url(https://thumbs.gfycat.com/ArtisticShoddyKudu-small.gif);
+  opacity: 0.2;
 }
 .fade {
-  transform: translateX(0);
-  transition: all 0.5s;
+  transition: opacity 1.2s;
   opacity: 1;
 }
 

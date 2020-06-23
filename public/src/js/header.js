@@ -5,12 +5,16 @@ let cards = [];
 
 // DOM picks
 const $header = document.querySelector('.main-header');
-const $boardBg = document.querySelector('.board-bg');
+const $boardBg = document.querySelector('.board-container');
 
 const template = {
   background() {
-    if (!board.background_image) $boardBg.style.backgroundColor = board.background_color;
-    $boardBg.style.backgroundImage = `url(${board.background_image})`
+    if (!board.background_image) $boardBg.firstElementChild.style.backgroundColor = board.background_color;
+    $boardBg.innerHTML =
+      `
+      <div class="board-bg" style ="background-image : url(${board.background_image})"></div>
+      <div class="board-bg shadow-overlay"></div>
+      `
   },
   header() {
     $header.innerHTML =

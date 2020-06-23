@@ -17,16 +17,16 @@ const db = low(adapter);
 server.use(middlewares);
 // server.use(cors());
 
-server.get('users', (req, res) => {
-
-  res.send(db.get('users[0].boards').value())
+server.get('user/board', (req, res) => {
+  console.log(req)
+  console.log(res)
 })
+
+// .remove({ list_id: req.params.list_id })
+// .write();
 // Add custom routes before JSON Server router
 
 // lowdb를 사용해서 db.json에서 completed: true인 todo를 제거
-
-// .remove({ list_id: req.params.list_num })
-// .write();
 
 // todos를 응답
 

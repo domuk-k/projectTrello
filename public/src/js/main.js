@@ -119,7 +119,7 @@ const mainEventHandlers = {
     fetchRequest.post('/lists', list)
       .then(response => response.json())
       .then(_list => {
-        lists = [...lists, _list]
+        lists = _list
       })
       .then(renderList)
       .catch(err => console.error(err));
@@ -169,13 +169,13 @@ const mainEventHandlers = {
   },
   dragEnterCard(target) {
     console.log(target);
-    
+
     // let cardsY = [];
     if (target.className === 'list') {
       // cardsY = lists.filter(list => list.id === target.id);
       // console.log(...cardsY);
       // console.log(target.getBoundingClientRect);
-      
+
       // cards.filter(card => card.list_id === lists.filter(list => list.id === target.id).id).forEach(card => document.querySelector(`#${card.id}`).getBoundingClientRect.y);
 
       target.appendChild(cardShadow);

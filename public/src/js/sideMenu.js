@@ -1,9 +1,8 @@
 import * as header from "./header.js"
-import * as bgPicks from "./infinite-lazy.js"
+import { lazyLoader } from "./infinite-lazy.js"
 
 let photoUrls = [];
-let lazyTargets = [];
-
+let listItemElements = ''
 const template = {
   sideMenu() {
     document.querySelector('.side-menu').innerHTML =
@@ -33,17 +32,23 @@ const template = {
       </div>
         `
   },
+  async getPhotoListItems() {
+    await getPhotos();
+    photoUrls.forEach((url, i) => {
+      listItemElements += ` 
+                  <li>
+                    <img class="bg-photos-list-items lazy-img"
+                    data-src="${url.thumb}" data-source="${url.custom}")>
+                  </li>`
+    })
+    return listItemElements
+  },
   // event handler
   async changeToBgMenu() {
     if (!document.querySelector('.bg-menu-wrapper')) {
-      await getPhotos();
+      //get data and load on memory as photoUrls
+      await template.getPhotoListItems();
       // 요소 만들어서 넣기
-      let html = ''
-      photoUrls.forEach(url => {
-        html += `<img class="bg-photos-list-items lazy-img"
-                 data-src="${url.thumb}" data-source="${url.custom}")>`
-      })
-
       const bgChangerPage = document.createElement('div')
       bgChangerPage.className = 'bg-menu-wrapper'
       bgChangerPage.innerHTML =
@@ -54,33 +59,47 @@ const template = {
             <div>Photos by <a href="http://www.unsplash.com" target="_blank">Unsplash</a></div>
           </div>
         </div>
-      <div class="bg-photos-list">
-        ${html}
-      </div>
+      <ul class="bg-photos-list">
+        ${listItemElements}
+      </ul>
       `
       document.querySelector('.side-menu').appendChild(bgChangerPage);
-
     }
-    // pick lazy-loading target elements 
-    lazyTargets = document.querySelectorAll('.lazy-img')
-    lazyTargets.forEach(target => bgPicks.lazyLoader(target))
-    infinitation()
+
 
     document.querySelector('.btn-previous').onclick = (e) => {
       if (!e.target.matches('.btn-previous')) return;
       document.querySelector('.bg-menu-wrapper').style.display = 'none'
       document.querySelector('.main-menu-wrapper').style.display = 'block'
-      //
     }
+    // pick lazy-loading target elements 
+    const lazyTargets = document.querySelectorAll('.lazy-img')
+    const infiTarget = document.querySelector('.infinite-trigger')
+    lazyTargets.forEach(target => lazyLoader(target));
+  },
+  async inifinitize(e) {
+
+    // if (e.target.scrollTop < e.target.scrollHeight + 30) return;
+    // console.log(e)
+    // const container = document.createElement('div')
+    // container.style.height = "20px"
+    // // const listItems = await template.getPhotoListItems()
+    // // console.log(listItems)
+    // // container.innerHTML = listItems
+    // document.querySelector('.bg-photos-list').appendChild(container)
   }
 }
 
-const API_KEY2 = 'LMXx8kbllH0CjiUu1DD2X4kcrT_FnR_9yTjacwXC8zY'
-const API_KEY1 = 'nLiOUFEzySn2iky1ZHM9NiDoC99dDysByJVxIZ8r6YE'
 
 const getPhotos = async () => {
-  const res = await axios(`https://api.unsplash.com/photos/random/?count=30&orientation=landscape&query=wallpapers&w=1920&client_id=${API_KEY1}`)
+  // const API_KEY2 = 'LMXx8kbllH0CjiUu1DD2X4kcrT_FnR_9yTjacwXC8zY'
+  const API_KEY1 = 'nLiOUFEzySn2iky1ZHM9NiDoC99dDysByJVxIZ8r6YE'
+  const photoCount = 30
+  const queryKeyword = 'wallpaper'
+  const query = `?featured=true&content_filter=high&count=${photoCount}&orientation=landscape&${queryKeyword}=wallpapers&w=1920&client_id=${API_KEY1}`
+  const res = await axios(`https://api.unsplash.com/photos/random/${query}`)
   photoUrls = await res.data.map(photo => photo.urls)
+  return photoUrls
 }
 
 const initSideMenu = () => {
@@ -89,4 +108,4 @@ const initSideMenu = () => {
 
 
 
-export { photoUrls, template, initSideMenu }
+export { photoUrls, template, initSideMenu, getPhotos }
