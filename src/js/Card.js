@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/prefer-default-export
 export class Card {
   constructor(id, content, list_id) {
-    this.id = `card-${id}`;
+    this.id = id;
     this.content = content;
     this.list_id = list_id;
     this.user_id = 1
