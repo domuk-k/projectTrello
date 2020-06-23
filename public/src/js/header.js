@@ -1,6 +1,5 @@
-
 // state
-export let board = [];
+let board = [];
 let lists = [];
 let cards = [];
 
@@ -8,7 +7,7 @@ let cards = [];
 const $header = document.querySelector('.main-header');
 const $boardBg = document.querySelector('.board-bg');
 
-export const template = {
+const template = {
   background() {
     if (!board.background_image) $boardBg.style.backgroundColor = board.background_color;
     $boardBg.style.backgroundImage = `url(${board.background_image})`
@@ -49,7 +48,7 @@ export const template = {
         </div>
         <div class="sub-header-right">
           <button class="btn-menu">Show Menu</button>
-          <nav class="side-menu"></nav>
+          <nav id="scroll-area" class="side-menu"></nav>
         </div >
       `
   }
@@ -66,12 +65,10 @@ async function getBoard() {
   const _boards = await res.data;
   board = _boards
 }
-// async function getCards() {
-//   const res = await axios.get('/cards/');
-//   const _cards = await res.data;
-//   cards = _cards
-// }
-export const initHeader = async () => {
+
+const initHeader = async () => {
   await getBoard();
   render();
 }
+
+export { board, template, initHeader }

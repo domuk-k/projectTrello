@@ -23,7 +23,7 @@ export const bindEvents = () => {
   // 사이드 메뉴 중 배경화면 선택화면 나가기 버튼
 
   // 배경화면 교체하기
-  document.querySelector('.side-menu').onclick = eventHandlers.chanegBackground;
+  document.querySelector('.side-menu').onclick = eventHandlers.changeBgImage;
 };
 
 const eventHandlers = {
@@ -76,10 +76,10 @@ const eventHandlers = {
     }
     document.querySelector('.main-menu-wrapper').style.display = 'none'
   },
-  chanegBackground({ target }) {
+  changeBgImage({ target }) {
     if (!target.matches('.bg-photos-list-items')) return;
-    axios.patch('/board', { background_image: target.dataset.src })
-    header.board.background_image = target.dataset.src
+    axios.patch('/board', { background_image: target.dataset.source })
+    header.board.background_image = target.dataset.source
     header.template.background()
     document.querySelector('.bg-squre').style.backgroundImage = `url(${target.dataset.src})`
   }

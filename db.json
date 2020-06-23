@@ -14,18 +14,12 @@
     ],
     "recent_open": "2020-09-09 thr 13:21:12",
     "is_starred": false,
-    "background_image": "https://images.unsplash.com/photo-1532771098148-525cefe10c23?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+    "background_image": "https://images.unsplash.com/photo-1502870851703-2e462d3a1ebc?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
     "background_color": ""
   },
   "lists": [
     {
       "id": "list-1",
-      "name": "ㅁㄴㄷㄹ",
-      "board_id": 1,
-      "user_id": 1
-    },
-    {
-      "id": "list-2",
       "name": "ㅁㄴㄷㄹ",
       "board_id": 1,
       "user_id": 1
@@ -76,38 +70,6 @@
       "descpition": "",
       "members": [],
       "date_created": "Mon, 22 Jun 2020 11:19:08 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    },
-    {
-      "id": "card-4",
-      "content": "ㅁㄴㄷㄹ",
-      "list_id": "list-2",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Mon, 22 Jun 2020 11:21:42 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    },
-    {
-      "id": "card-5",
-      "content": "ㄴㄷ",
-      "list_id": "list-2",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Mon, 22 Jun 2020 11:21:43 GMT",
       "due_date": "",
       "sticker": [],
       "locY": 0

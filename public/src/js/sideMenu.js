@@ -1,7 +1,10 @@
 import * as header from "./header.js"
-export let urls = [];
+import * as bgPicks from "./infinite-lazy.js"
 
-export const template = {
+let photoUrls = [];
+let lazyTargets = [];
+
+const template = {
   sideMenu() {
     document.querySelector('.side-menu').innerHTML =
       `    
@@ -15,7 +18,7 @@ export const template = {
       <hr>
         <ul class="menu-list">
           <li class="board-info"><i class="fas fa-star"></i>About this board</li>
-          <li class="btn-bg-change"><span class="bg-squre"></span>change Background</li>
+          <li class="btn-bg-change"><span class="bg-squre" style="background-image: url(${header.board.background_image})"></span>Change Background</li>
           <li><i class="fas fa-star"></i>Search Cards</li>
           <li><i class="fas fa-star"></i>Stickers</li>
           <li><i class="fas fa-star"></i>More</li>
@@ -30,13 +33,15 @@ export const template = {
       </div>
         `
   },
+  // event handler
   async changeToBgMenu() {
     if (!document.querySelector('.bg-menu-wrapper')) {
       await getPhotos();
       // 요소 만들어서 넣기
       let html = ''
-      urls.forEach(url => {
-        html += `<span class="bg-photos-list-items" style="background-image: url(${url.thumb})" data-src="${url.custom}")></span>`
+      photoUrls.forEach(url => {
+        html += `<img class="bg-photos-list-items lazy-img"
+                 data-src="${url.thumb}" data-source="${url.custom}")>`
       })
 
       const bgChangerPage = document.createElement('div')
@@ -54,7 +59,12 @@ export const template = {
       </div>
       `
       document.querySelector('.side-menu').appendChild(bgChangerPage);
+
     }
+    // pick lazy-loading target elements 
+    lazyTargets = document.querySelectorAll('.lazy-img')
+    lazyTargets.forEach(target => bgPicks.lazyLoader(target))
+    infinitation()
 
     document.querySelector('.btn-previous').onclick = (e) => {
       if (!e.target.matches('.btn-previous')) return;
@@ -69,10 +79,14 @@ const API_KEY2 = 'LMXx8kbllH0CjiUu1DD2X4kcrT_FnR_9yTjacwXC8zY'
 const API_KEY1 = 'nLiOUFEzySn2iky1ZHM9NiDoC99dDysByJVxIZ8r6YE'
 
 const getPhotos = async () => {
-  const res = await axios(`https://api.unsplash.com/photos/random/?count=30&orientation=landscape&query=night&w=2048&client_id=${API_KEY1}`)
-  urls = await res.data.map(photo => photo.urls)
+  const res = await axios(`https://api.unsplash.com/photos/random/?count=30&orientation=landscape&query=wallpapers&w=1920&client_id=${API_KEY1}`)
+  photoUrls = await res.data.map(photo => photo.urls)
 }
 
-export const initSideMenu = () => {
+const initSideMenu = () => {
   template.sideMenu()
 }
+
+
+
+export { photoUrls, template, initSideMenu }
