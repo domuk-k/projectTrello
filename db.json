@@ -1,72 +1,49 @@
 {
-  "user": {
-    "id": 202001,
-    "username": "DongWook Kim",
-    "password": 123123
-  },
-  "board": {
-    "id": 1,
-    "board_name": "개발자 동욱",
-    "description": "첫 번째 기본보드",
-    "collaborators": [
-      202001,
-      202002
-    ],
-    "recent_open": "2020-09-09 thr 13:21:12",
-    "is_starred": false,
-    "background_image": "https://images.unsplash.com/photo-1565619866477-23f88e6a5f58?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
-    "background_color": ""
-  },
-  "lists": [],
-  "cards": [
+  "users": [
     {
-      "id": "card-1",
-      "content": "dsf",
-      "list_id": "list-1",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Tue, 23 Jun 2020 06:00:25 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    },
-    {
-      "id": "card-2",
-      "content": "dsv",
-      "list_id": "list-1",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Tue, 23 Jun 2020 06:00:26 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
-    },
-    {
-      "id": "card-3",
-      "content": "v",
-      "list_id": "list-1",
-      "user_id": 1,
-      "labels": [
-        "df",
-        "SD"
-      ],
-      "descpition": "",
-      "members": [],
-      "date_created": "Tue, 23 Jun 2020 06:00:27 GMT",
-      "due_date": "",
-      "sticker": [],
-      "locY": 0
+      "id": 202001,
+      "username": "DongWook Kim",
+      "password": 123123,
+      "boards": [
+        {
+          "id": 1,
+          "board_name": "개발자 동욱",
+          "description": "첫 번째 기본보드",
+          "collaborators": [
+            202001,
+            202002
+          ],
+          "recent_open": "2020-09-09 thr 13:21:12",
+          "is_starred": false,
+          "background_image": "https://images.unsplash.com/photo-1580734889649-5f7597cc2561?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_color": "",
+          "activities": [],
+          "lists": [
+            {
+              "id": "list-2",
+              "name": "sdfdsaㄹㄴㅇㄹ",
+              "board_id": 1,
+              "user_id": 1,
+              "cards": [
+                {
+                  "id": "card-3",
+                  "content": "v",
+                  "list_id": "list-1",
+                  "user_id": 1,
+                  "labels": [
+                    "develop"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
-  ],
-  "activities": []
+  ]
 }

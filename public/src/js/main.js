@@ -11,9 +11,7 @@ import {
 import {
   User
 } from "./User.js"
-import {
-  fetchRequest
-} from "./fetchRequest.js"
+
 
 const $listNameBox = document.querySelector('.list-name-box');
 const $mainWrapper = document.querySelector('.main-wrapper');
@@ -103,10 +101,10 @@ const renderCard = target => {
 };
 // 초기데이타 get
 const getMainData = async () => {
-  const responseLists = await fetchRequest.get('/lists');
-  const listData = await responseLists.json();
-  const responseCards = await fetchRequest.get('/cards');
-  const cardData = await responseCards.json();
+  const responseLists = await axios.get('/lists');
+  const listData = await responseLists.data
+  const responseCards = await axios.get('/cards');
+  const cardData = await responseCards.data
   lists = listData;
   cards = cardData;
 };
@@ -122,24 +120,19 @@ const mainEventHandlers = {
   },
 
   // 리스트 추가 제거
-  addList(Name) {
+  async addList(Name) {
     const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.replace(/[^0-9]/g, ''))) + 1 : 1);
-
     const list = new List(generatedListId(), Name);
-
-    fetchRequest.post('/lists', list)
-      .then(response => response.json())
-      .then(_list => {
-        lists = _list
-      })
-      .then(renderList)
-      .catch(err => console.error(err));
+    const res = await axios.post('/lists', list)
+    const _list = await res.data
+    list = _list
+    renderList()
   },
   removeList(id) {
     fetchRequest.delete(`/lists/${id}`)
       .then(lists = lists.filter(list => list.id !== id))
       .then(renderList)
-      .catch(err => console.error(err));
+
     if (cards.length) {
       cards.filter(card => card.list_id === id).forEach(card => {
         fetchRequest.delete(`/cards/${card.id}`);
@@ -158,14 +151,14 @@ const mainEventHandlers = {
         cards = [...cards, _card]
       })
       .then(() => renderCard(target))
-      .catch(err => console.error(err));
+
   },
   removeCard(id, target) {
     fetchRequest.delete(`/cards/${id}`)
       .then(cards = cards.filter(card => card.id !== id))
       .then(() => renderCard(target))
-      // .then(renderOnload)
-      .catch(err => console.error(err));
+    // .then(renderOnload)
+
   },
 
   // 카드 드래그
