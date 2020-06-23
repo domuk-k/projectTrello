@@ -17,7 +17,20 @@
     "background_image": "https://images.unsplash.com/photo-1565619866477-23f88e6a5f58?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
     "background_color": ""
   },
-  "lists": [],
+  "lists": [
+    {
+      "id": "list-1",
+      "name": "saf",
+      "board_id": 1,
+      "user_id": 1
+    },
+    {
+      "id": "list-2",
+      "name": "sadf",
+      "board_id": 1,
+      "user_id": 1
+    }
+  ],
   "cards": [
     {
       "id": "card-1",
@@ -63,6 +76,22 @@
       "descpition": "",
       "members": [],
       "date_created": "Tue, 23 Jun 2020 06:00:27 GMT",
+      "due_date": "",
+      "sticker": [],
+      "locY": 0
+    },
+    {
+      "id": "card-NaN",
+      "content": "sdf",
+      "list_id": "list-1",
+      "user_id": 1,
+      "labels": [
+        "df",
+        "SD"
+      ],
+      "descpition": "",
+      "members": [],
+      "date_created": "Tue, 23 Jun 2020 07:35:48 GMT",
       "due_date": "",
       "sticker": [],
       "locY": 0

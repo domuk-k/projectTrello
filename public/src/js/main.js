@@ -11,9 +11,6 @@ import {
 import {
   User
 } from "./User.js"
-import {
-  fetchRequest
-} from "./fetchRequest.js"
 
 const $listNameBox = document.querySelector('.list-name-box');
 const $mainWrapper = document.querySelector('.main-wrapper');
@@ -29,10 +26,6 @@ let listShadow = {};
 let listContent = {};
 let dragTarget = '';
 
-const offset = {
-  x: 0,
-  y: 0
-}
 
 // 리스트랜더
 const renderList = () => {
@@ -103,10 +96,10 @@ const renderCard = target => {
 };
 // 초기데이타 get
 const getMainData = async () => {
-  const responseLists = await fetchRequest.get('/lists');
-  const listData = await responseLists.json();
-  const responseCards = await fetchRequest.get('/cards');
-  const cardData = await responseCards.json();
+  const responseLists = await axios.get('/lists');
+  const listData = await responseLists.data;
+  const responseCards = await axios.get('/cards');
+  const cardData = await responseCards.data;
   lists = listData;
   cards = cardData;
 };
@@ -122,24 +115,21 @@ const mainEventHandlers = {
   },
 
   // 리스트 추가 제거
-  addList(Name) {
-    const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.replace(/[^0-9]/g, ''))) + 1 : 1);
+  async addList(Name) {
+    const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id.split('-')[1])) + 1 : 1);
 
     const list = new List(generatedListId(), Name);
 
-    fetchRequest.post('/lists', list)
-      .then(response => response.json())
-      .then(_list => {
-        lists = [...lists, _list]
-      })
-      .then(renderList)
-      .catch(err => console.error(err));
+    const responseList = axios.post('/lists', list)
+    const listData = await responseList.data
+    lists = [...lists, listData]
+    renderList();
   },
-  removeList(id) {
-    fetchRequest.delete(`/lists/${id}`)
-      .then(lists = lists.filter(list => list.id !== id))
-      .then(renderList)
-      .catch(err => console.error(err));
+  async removeList(id) {
+    await axios.delete(`/lists/${id}`)
+    lists = lists.filter(list => list.id !== id)
+    renderList();
+
     if (cards.length) {
       cards.filter(card => card.list_id === id).forEach(card => {
         fetchRequest.delete(`/cards/${card.id}`);
@@ -149,23 +139,18 @@ const mainEventHandlers = {
   },
 
   // 카드 추가 제거
-  addCard(content, target) {
-    const generatedCardId = () => (cards.length ? Math.max(...cards.map(card => card.id.replace(/[^0-9]/g, ''))) + 1 : 1);
+  async addCard(content, target) {
+    const generatedCardId = () => (cards.length ? Math.max(...cards.map(card => card.id.split('-'))) + 1 : 1);
     const card = new Card(generatedCardId(), content, target.id);
-    fetchRequest.post('/cards', card)
-      .then(response => response.json())
-      .then(_card => {
-        cards = [...cards, _card]
-      })
-      .then(() => renderCard(target))
-      .catch(err => console.error(err));
+    const responseCard = await axios.post('/cards', card)
+    const cardData = await responseCard.data;
+    cards = [...cards, cardData];
+    renderCard(target);
   },
-  removeCard(id, target) {
-    fetchRequest.delete(`/cards/${id}`)
-      .then(cards = cards.filter(card => card.id !== id))
-      .then(() => renderCard(target))
-      // .then(renderOnload)
-      .catch(err => console.error(err));
+  async removeCard(id, target) {
+    await axios.delete(`/cards/${id}`);
+    cards = cards.filter(card => card.id !== id);
+    renderCard(target);
   },
 
   // 카드 드래그
@@ -174,7 +159,7 @@ const mainEventHandlers = {
     cardShadow = e.target.parentNode;
     cardContent = e.target;
     cardShadow.removeChild(cardContent)
-    dragTarget = 0;
+    dragTarget = 'card';
   },
   // 리스트 드래그
   dragList(e) {
@@ -183,24 +168,24 @@ const mainEventHandlers = {
     listContent = e.target;
     listShadow.style.height = `${listShadow.getBoundingClientRect().height}px`;
     listShadow.removeChild(listContent);
-    dragTarget = 1;
+    dragTarget = list;
   },
   dragEnterCard(e) {
-    if (dragTarget === 0) {
+    if (dragTarget === 'card') {
       // console.log('카드 드래그엔터', e.target, e.currentTarget);
       if (e.target.className === 'list-header') e.target.nextElementSibling.firstElementChild.appendChild(cardShadow);
       if (e.target.className === 'card-box') e.target.parentNode.insertBefore(cardShadow, e.target);
       if (e.target.className === 'card-add-box') e.target.previousElementSibling.appendChild(cardShadow);
     }
-    if (dragTarget === 1) {
+    if (dragTarget === 'list') {
       // console.log('리스트 드래그엔터', e.target);
       if (e.target.className === 'list') e.target.parentNode.parentNode.insertBefore(listShadow.parentNode, e.target.parentNode)
       if (e.target.className === 'list-wrapper') e.target.parentNode.insertBefore(listShadow.parentNode, e.target);
     }
   },
   dropCard() {
-    if (dragTarget === 0) cardShadow.appendChild(cardContent);
-    if (dragTarget === 1) {
+    if (dragTarget === 'card') cardShadow.appendChild(cardContent);
+    if (dragTarget === 'list') {
       console.log('칠드랜', listShadow.parentNode.parentNode.children); 
       listShadow.appendChild(listContent);
       listShadow.style.height = 'auto';
@@ -220,7 +205,6 @@ const mainEventHandlers = {
       _lists = [];
 
     }
-    cards = cards.filter(card => card.id !== cardContent.id);
   }
 };
 
