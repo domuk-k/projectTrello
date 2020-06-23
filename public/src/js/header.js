@@ -65,7 +65,7 @@ const render = () => {
 }
 
 async function getBoard() {
-  const res = await axios.get('/boards/');
+  const res = await axios.get('/boards');
   const _boards = await res.data;
   board = _boards[0]
 }
