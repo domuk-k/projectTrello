@@ -29,6 +29,7 @@ let dragTarget = '';
 
 // 리스트랜더
 const renderList = () => {
+  console.log(lists);
 
   let html = '';
   lists.forEach(list => {
@@ -56,27 +57,28 @@ const renderList = () => {
         </div>
       </div>
     </div>`;
-    $mainWrapper.innerHTML += html;
+  });
 
-    if (list.cards.length) return;
+  $mainWrapper.innerHTML = html;
+  html = '';
+
+  lists.forEach(list => {
+    if (!list.cards.length) return;
     list.cards.forEach(card => {
       const targetList = document.querySelector(`.list #${list.id}`);
       targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
-      <li id = "${card.id}" class="card-box">
-      <div class="card-shadow">
-        <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-          <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
-          <button class="card-remove-btn">x</button>
-        </div>
-      </div>
-    </li>`;
+      <li id = "${list.card.id}" class="card-box">
+        <div class="card-shadow">
+          <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
+              <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
+              <button class="card-remove-btn">x</button>
+            </div>
+          </div>
+        </li>` 
     });
   });
-  
-  html = '';
-
-
 };
+
 // 카드랜더
 const renderCard = target => {
   let html = '';
@@ -104,8 +106,7 @@ const getMainData = async () => {
   // const responseCards = await axios.get('/boards/);
   // const cardData = await responseCards.data;
   lists = listData;
-  console.log(lists);
-  
+
   // cards = cardData;
 };
 
@@ -147,10 +148,10 @@ const mainEventHandlers = {
   async addCard(content, target) {
     const generatedCardId = () => (cards.length ? Math.max(...cards.map(card => card.id)) + 1 : 1);
     const card = new Card(generatedCardId(), content, target.id);
-    const responseCard = await axios.post('/boards/1/lists', card)
+    const responseCard = await axios.post(`/boards/1/lists/${target.id}/cards`, card)
     const cardData = await responseCard.data;
-    cards = [...cards, cardData];
-    renderCard(target);
+    // ca = [...cards, cardData];
+    renderList(target);
   },
   async removeCard(id, target) {
     await axios.delete(`/cards/${id}`);

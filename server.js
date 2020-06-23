@@ -47,6 +47,13 @@ server.get('/boards/:board_id/lists/:list_id', (req, res) => {
   )
 })
 
+// 카드 get
+server.get('/boards/:board_id/lists/:list_id/cards', (req, res) => {
+  res.send(
+    db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`).value()
+  )
+})
+
 //POST
 // push a board
 server.post('/boards/', (req, res) => {
@@ -59,34 +66,31 @@ server.post('/boards/', (req, res) => {
   )
 })
 // push a list
-server.post('/boards/:board_id/lists/', (req, res) => {
+server.post('/boards/:board_id/lists', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
     .push(req.body)
+    .last()
     .write()
   res.send(req.body)
 })
-// push a board
-server.post('', (req, res) => {
-  //get &
-  res.send(
-    // push a list
 
-  )
+server.post('/boards/:board_id/lists/:list_id/cards', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`)
+    .push(req.body)
+    .write()
+
+  res.send(db.get(req.body).value());
 })
+// push a board
 
-<<<<<<< HEAD
+// remove a list
 server.delete('/boards/:board_id/lists/:list_id', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
-    .delete(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`)
+    .remove(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`).value())
     .write()
+
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
 })
-=======
-//PATCH
-
-
-//DELETE
-
->>>>>>> 624e4e3057796af7e6b1ad7aa19eedffa14df646
 
 // server.delete('/todos/completed', (req, res) => {
 //   // lowdb를 사용해서 db.json에서 completed: true인 todo를 제거
