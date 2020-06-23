@@ -65,10 +65,21 @@ server.post('/boards/:board_id/lists/', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
     .push(req.body)
     .write()
+  res.send(req.body)
+})
+// push a board
+server.post('', (req, res) => {
+  //get &
   res.send(
-    req.body
+    // push a list
+
   )
 })
+
+//PATCH
+
+
+//DELETE
 
 
 // server.delete('/todos/completed', (req, res) => {

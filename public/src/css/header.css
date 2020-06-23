@@ -78,7 +78,7 @@ button{
   background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-2x.01ef898811a879595cea.png);
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 
@@ -211,9 +211,22 @@ main{
   overflow-x: scroll;
   scrollbar-width: 200px;
   position: absolute;
-  height: 90%;
+  height: 91.5vh;
   width: 100vw;
   display: flex;
+  /* for moz */
+  scrollbar-width: thin;
+  scrollbar-color: #e8e8e8 transparent;
 }
 
 
+
+::-webkit-scrollbar {
+  background-color: rgba(0, 0, 255, 0.116);
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(121, 121, 121);
+  border-radius: 2px;
+}
