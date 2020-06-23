@@ -1,11 +1,16 @@
 .card-box {
+    width: 100%;
+    background-color: #ebecf0;    
+    list-style: none;
+}
+.card-shadow {
     width: 254px;
     height: 30px;
     background-color: rgb(49, 41, 41);    
     list-style: none;
     margin: 3px auto;
 }
-.card-shadow {
+.card-content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -14,4 +19,8 @@
 }
 .card-remove-btn {
     color: black;
+}
+.drag-shadow {
+    height: auto;
+    background-color: rgb(209, 177, 177);
 }

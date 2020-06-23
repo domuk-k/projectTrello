@@ -23,8 +23,12 @@ const $main = document.querySelector('main');
 let lists = [];
 let cards = [];
 
-let realCard = {};
 let cardShadow = {};
+let cardContent = {};
+let listShadow = {};
+let listContent = {};
+let dragTarget = '';
+
 const offset = {
   x: 0,
   y: 0
@@ -37,21 +41,23 @@ const renderList = () => {
   lists.forEach(list => {
     html +=
       `<div  class="list-wrapper">
-      <div id = "${list.id}" class="list">
-        <div class="list-header">
-          <textarea class="list-header-name">${list.name}</textarea>
-          <button class="remove-list-btn">x</button>
-        </div>
-        <ul class="list-container">
-        </ul>
+      <div id = "${list.id}" class="list" >
+        <div class='list-content' draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
+          <div class="list-header">
+            <textarea class="list-header-name">${list.name}</textarea>
+            <button class="remove-list-btn">x</button>
+          </div>
+          <ul class="list-container">
+          </ul>
 
-        <div class="card-add-box">
-          <a class="open-add-mod-btn"><span>+</span>Add another card</a>
-          <div class="card-add-mod" style="display: none;">
-            <input class="card-name-box" type=" text" placeholder="enter a title for this card...">
-            <div class="card-add-mod-btn">
-              <button class="card-add-btn">Add Card</button>
-              <a class="card-add-mod-close-btn">x</a>
+          <div class="card-add-box">
+            <a class="open-add-mod-btn"><span>+</span>Add another card</a>
+            <div class="card-add-mod" style="display: none;">
+              <input class="card-name-box" type=" text" placeholder="enter a title for this card...">
+              <div class="card-add-mod-btn">
+                <button class="card-add-btn">Add Card</button>
+                <a class="card-add-mod-close-btn">x</a>
+              </div>
             </div>
           </div>
         </div>
@@ -61,13 +67,16 @@ const renderList = () => {
   $mainWrapper.innerHTML = html;
   html = '';
 
+  if (cards.length) return;
   cards.forEach(card => {
-    const targetList = document.querySelector(`#${card.list_id}`)
-    targetList.firstElementChild.nextElementSibling.innerHTML += `
+    const targetList = document.querySelector(`#${card.list_id}`);
+    targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
     <li id = "${card.id}" class="card-box">
-    <div class="card-shadow" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-      <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
-      <button class="card-remove-btn">x</button>
+    <div class="card-shadow">
+      <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
+        <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
+        <button class="card-remove-btn">x</button>
+      </div>
     </div>
   </li>`;
   });
@@ -81,13 +90,15 @@ const renderCard = target => {
   _cards.forEach(card => {
     html += `
     <li id = "${card.id}" class="card-box">
-      <div class="card-shadow" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-        <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
-        <button class="card-remove-btn">x</button>
-      </div>
-    </li>`;
+    <div class="card-shadow">
+    <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
+      <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
+      <button class="card-remove-btn">x</button>
+    </div>
+    </div>
+  </li>`;
   });
-  targetList.firstElementChild.nextElementSibling.innerHTML = html;
+  targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML = html;
   html = '';
 };
 // 초기데이타 get
@@ -159,33 +170,57 @@ const mainEventHandlers = {
 
   // 카드 드래그
   dragCard(e) {
-
-    offset.x = e.clientX;
-    offset.y = e.clientY;
-    realCard = e.target;
-    // getBoundingClientRect().y
+    // console.log('카드 드래그스타트');
     cardShadow = e.target.parentNode;
-    cardShadow.removeChild(realCard)
+    cardContent = e.target;
+    cardShadow.removeChild(cardContent)
+    dragTarget = 0;
   },
-  dragEnterCard(target) {
-    console.log(target);
-    
-    // let cardsY = [];
-    if (target.className === 'list') {
-      // cardsY = lists.filter(list => list.id === target.id);
-      // console.log(...cardsY);
-      // console.log(target.getBoundingClientRect);
-      
-      // cards.filter(card => card.list_id === lists.filter(list => list.id === target.id).id).forEach(card => document.querySelector(`#${card.id}`).getBoundingClientRect.y);
-
-      target.appendChild(cardShadow);
+  // 리스트 드래그
+  dragList(e) {
+    // console.log('리스트 드래그스타트', e.target);
+    listShadow = e.target.parentNode;
+    listContent = e.target;
+    listShadow.style.height = `${listShadow.getBoundingClientRect().height}px`;
+    listShadow.removeChild(listContent);
+    dragTarget = 1;
+  },
+  dragEnterCard(e) {
+    if (dragTarget === 0) {
+      // console.log('카드 드래그엔터', e.target, e.currentTarget);
+      if (e.target.className === 'list-header') e.target.nextElementSibling.firstElementChild.appendChild(cardShadow);
+      if (e.target.className === 'card-box') e.target.parentNode.insertBefore(cardShadow, e.target);
+      if (e.target.className === 'card-add-box') e.target.previousElementSibling.appendChild(cardShadow);
     }
-    if (target.className === 'list-container') target.appendChild(cardShadow);
-    if (target.className === 'card-box') target.parentNode.insertBefore(cardShadow, target)
+    if (dragTarget === 1) {
+      // console.log('리스트 드래그엔터', e.target);
+      if (e.target.className === 'list') e.target.parentNode.parentNode.insertBefore(listShadow.parentNode, e.target.parentNode)
+      if (e.target.className === 'list-wrapper') e.target.parentNode.insertBefore(listShadow.parentNode, e.target);
+    }
   },
   dropCard() {
-    console.log(cardShadow, realCard);
-    cardShadow.appendChild(realCard);
+    if (dragTarget === 0) cardShadow.appendChild(cardContent);
+    if (dragTarget === 1) {
+      console.log('칠드랜', listShadow.parentNode.parentNode.children); 
+      listShadow.appendChild(listContent);
+      listShadow.style.height = 'auto';
+
+      lists.forEach(list => fetchRequest.delete(`/lists/${list.id}`));
+
+      let _lists = [];
+      [...listShadow.parentNode.parentNode.children].forEach(listNode => {
+        _lists = [..._lists, lists.find(list => list.id === listNode.firstElementChild.id)]
+        console.log(_lists);
+      });
+      lists = _lists;
+      console.log(_lists);
+      console.log(lists);
+      // fetchRequest.post('lists', lists)
+      //   .catch(err => console.error(err));
+      _lists = [];
+
+    }
+    cards = cards.filter(card => card.id !== cardContent.id);
   }
 };
 
@@ -198,13 +233,13 @@ const mainEventBindings = () => {
     if (target.matches('.add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
     if (target.matches('.card-add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
     if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);
-    if (target.matches('.remove-list-btn')) mainEventHandlers.removeList(target.parentNode.parentNode.id);
+    if (target.matches('.remove-list-btn')) mainEventHandlers.removeList(target.parentNode.parentNode.parentNode.id);
     if (target.matches('.card-add-btn')) {
       if (!target.parentNode.previousElementSibling.value) return;
-      mainEventHandlers.addCard(target.parentNode.previousElementSibling.value, target.parentNode.parentNode.parentNode.parentNode);
+      mainEventHandlers.addCard(target.parentNode.previousElementSibling.value, target.parentNode.parentNode.parentNode.parentNode.parentNode);
       target.parentNode.previousElementSibling.value = '';
     }
-    if (target.matches('.card-remove-btn')) mainEventHandlers.removeCard(target.parentNode.parentNode.id, target.parentNode.parentNode.parentNode.parentNode);
+    if (target.matches('.card-remove-btn')) mainEventHandlers.removeCard(target.parentNode.parentNode.parentNode.id, target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode);
   };
 
   // 버튼 클릭시 리스트 생성
@@ -228,23 +263,24 @@ const mainEventBindings = () => {
     if (!e.target.matches('.card-name-box')) return;
     const content = e.target.value.trim();
     if (e.keyCode !== 13 || content === '') return;
-    mainEventHandlers.addCard(content, e.target.parentNode.parentNode.parentNode);
+    mainEventHandlers.addCard(content, e.target.parentNode.parentNode.parentNode.parentNode);
     e.target.value = '';
   };
 
   // 드래그 이벤트
   $main.ondrag = e => {
-    mainEventHandlers.dragCard(e);
+    if (e.target.matches('.card-content')) mainEventHandlers.dragCard(e);
+    if (e.target.matches('.list-content')) mainEventHandlers.dragList(e);
   };
-  $main.ondragenter = ({ target }) => {
-    mainEventHandlers.dragEnterCard(target);
+  $main.ondragenter = e => {
+    mainEventHandlers.dragEnterCard(e);
   };
   $main.ondragover = e => {
     e.preventDefault();
-  }
-  $main.ondrop = ({ target }) => {
-    console.log('드랍');
-    mainEventHandlers.dropCard(target);
+  };
+  $main.ondrop = e => {
+    // console.log('드랍', e.target, e.currentTarget);
+    mainEventHandlers.dropCard();
   };
 
 };
@@ -254,7 +290,7 @@ const mainEventBindings = () => {
 // eslint-disable-next-line import/prefer-default-export
 export const initMain = async () => {
   await getMainData();
-  renderList();
+  await renderList();
   mainEventBindings();
   // dragEvent();
 };
