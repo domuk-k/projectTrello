@@ -76,17 +76,6 @@ const template = {
     const lazyTargets = document.querySelectorAll('.lazy-img')
     const infiTarget = document.querySelector('.infinite-trigger')
     lazyTargets.forEach(target => lazyLoader(target));
-  },
-  async inifinitize(e) {
-
-    // if (e.target.scrollTop < e.target.scrollHeight + 30) return;
-    // console.log(e)
-    // const container = document.createElement('div')
-    // container.style.height = "20px"
-    // // const listItems = await template.getPhotoListItems()
-    // // console.log(listItems)
-    // // container.innerHTML = listItems
-    // document.querySelector('.bg-photos-list').appendChild(container)
   }
 }
 

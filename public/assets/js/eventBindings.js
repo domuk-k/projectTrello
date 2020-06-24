@@ -1,4 +1,4 @@
-import { template } from "./sideMenu.js"
+import { template } from "./board_menu.js"
 import * as header from "./header.js"
 
 let isSlideOn = false;

@@ -18,6 +18,13 @@ server.use(cors());
 // Add custom routes before JSON Server router
 
 // GET
+// get users
+server.get('/users/:user_id', (req, res) => {
+  res.send(
+    db.get(`users[${req.params.user_id - 1}]`)
+      .value()
+  )
+})
 // get boards
 server.get('/boards', (req, res) => {
   res.send(
@@ -53,12 +60,22 @@ server.get('/boards/:board_id/lists/:list_id/cards', (req, res) => {
     db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`).value()
   )
 })
+
 // get a card
 server.get('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
   res.send(
     db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards.[${req.params.card_id - 1}]`).value()
   );
 })
+
+// get activity
+server.get('/boards/:board_id/activities', (req, res) => {
+  res.send(
+    db.get(`users[0].boards[${req.params.board_id - 1}].activities`)
+      .value()
+  )
+})
+
 
 
 //POST
@@ -85,16 +102,22 @@ server.post('/boards/:board_id/lists/:list_id/cards', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`)
     .push(req.body)
     .write()
-  
-    res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
+
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
 })
 // push lists
 server.post('/boards/:board_id/lists', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}]`)
     .push(req.body)
     .write()
-  
-    res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
+
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
+})
+// push a activity
+server.post('/boards/:board_id/activities', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}].activities`)
+    .push(req.body)
+    .write()
 })
 
 //PATCH
@@ -126,7 +149,6 @@ server.patch('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
 server.delete('/boards/:board_id/lists/:list_id', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
     .remove(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`).value())
-    .last()
     .write()
 
   res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());

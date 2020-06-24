@@ -8,26 +8,29 @@
   overflow-y: scroll;
   flex-direction: column;
   justify-content: center;
+
+  transform: translate3d(-340px, 0, 0);
 }
+
 .side-menu hr{
-  margin: 0;
+  margin: 2px;
+  margin-top: 0px;
 }
-.main-menu-wrapper{
-  height: 50px;
-  /* display: flex; */
-  flex-direction: row;
+.side-menu .side-menu-active{
+  transform: translate3d(-340px, 0, 0);
 }
-.main-menu-header{
-  position: fixed;
-  height: 50px;
+
+.main-tab-header{
+  height: 44px;
   width: 320px;
   background-color: rgb(243, 243, 243);
   text-align: center;
 }
-.main-menu-header h3{
-  line-height: 50px ;
-  text-align: center;
+.main-tab-header h3{
+  font-size: 18px;
   font-weight: 700;
+  line-height: 40px ;
+  text-align: center;
   display: inline-block;
 }
 .btn-menu-close{
@@ -71,7 +74,7 @@ margin:  0 10px 0 0;
 }
 
 
-.bg-squre{
+.bg-squre,.sticker{
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -80,6 +83,7 @@ margin:  0 10px 0 0;
 
   border-radius: 5px;
   margin-right: 8px;
+  
 }
 
 /* bg-chang */
@@ -157,4 +161,20 @@ display: inline;
 .activity-logs{
 background-color: springgreen;
 height: 200px;
+}
+
+
+.sticker{
+  background-size: contain;
+  background-image: url(https://image.flaticon.com/icons/png/512/202/202680.png);  
+}
+
+.main-tab-wrapper,
+.bg-tab-wrapper,
+.about-tab-wrapper{
+  display: none;
+}
+
+.tab-wrapper-active{
+  display: block;
 }

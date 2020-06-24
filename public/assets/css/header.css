@@ -100,10 +100,13 @@ button{
   background-color: transparent;
   border: none;
   height: 30px;
-  width: 120px;
+  width: 150px;
   margin: 0 10px;
   transition: width ease-in-out 200ms ;
 }
+/* .card-search-input .search-activ{
+  width: 150px;
+} */
 .card-search i{
   height: 30px;
   margin: 0 10px;
