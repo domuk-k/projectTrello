@@ -84,11 +84,8 @@ server.post('/boards/', (req, res) => {
   db.get(`users[0].boards`)
     .push(req.body)
     .write()
-  res.send(
-    // get boards
-    db.get(`users[0].boards`).value()
-  )
 })
+
 // push a list
 server.post('/boards/:board_id/lists', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
@@ -127,6 +124,18 @@ server.patch('/boards/:board_id', (req, res) => {
     .assign(req.body)
     .write()
   res.send(req.body)
+})
+// update a board description
+server.patch('/boards/:board_id/description', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}]`)
+    .assign(req.body)
+    .write()
+})
+// update a board board_name
+server.patch('/boards/:board_id/board_name', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}]`)
+    .assign(req.body)
+    .write()
 })
 // update a list
 server.patch('/boards/:board_id/lists/:list_id', (req, res) => {

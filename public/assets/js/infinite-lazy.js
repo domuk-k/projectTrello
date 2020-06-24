@@ -1,7 +1,10 @@
+import { attachPhotoUrlsAndLazyLoad } from './event_bindings.js'
+import { getLIelems } from './board_side_menu.js'
+
 let options = {
   root: document.querySelector('#scroll-area'),
-  // rootMargin: '0px', // default 0px
-  threshold: 0.4 // default 1.0
+  rootMargin: '0px',
+  threshold: 0.4
 }
 // lazy loading
 const lazyLoader = (target) => {
@@ -18,4 +21,15 @@ const lazyLoader = (target) => {
   imageObserver.observe(target);
 }
 
-export { lazyLoader }
+const inifiniteObserver = new IntersectionObserver((entry, observer) => {
+  const newLIelems = document.createElement('div')
+  newLIelems.innerHTML = getLIelems()
+  document.querySelector('.bg-photos-list').appendChild(newLIelems)
+  observer.disconnect();
+  document.querySelector('.infinite-trigger').classList.remove('infinite-trigger')
+}, options)
+
+
+
+
+export { lazyLoader, inifiniteObserver }

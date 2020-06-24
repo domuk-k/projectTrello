@@ -1,7 +1,7 @@
 .side-menu{
   width: 340px;
   height: 98vh;
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(231, 231, 231);
 
   margin: 0;
   padding-left: 18px;
@@ -9,21 +9,24 @@
   flex-direction: column;
   justify-content: center;
 
-  transform: translate3d(-340px, 0, 0);
+  overflow: hidden;
 }
 
 .side-menu hr{
   margin: 2px;
   margin-top: 0px;
 }
-.side-menu .side-menu-active{
-  transform: translate3d(-340px, 0, 0);
+.sub-header-right.side-menu-active{
+  transform: none
 }
-
+.sub-header-right.side-menu-active >.btn-menu-show{
+  display: none;
+}
+.btn-menu-show{
+  transform: translate3d(0,6px,0);
+}
 .main-tab-header{
   height: 44px;
-  width: 320px;
-  background-color: rgb(243, 243, 243);
   text-align: center;
 }
 .main-tab-header h3{
@@ -53,20 +56,28 @@ margin: 0;
 padding: 0;
 font-size: 16px;
 }
-.menu-list li{
-margin: 10px 0;
-padding: 5px;
+.menu-list li,
+.activity-item{
+  margin: 10px 0;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+.board-info{
+  display: block !important;
 }
 .menu-list li:hover{
-background-color: rgba(0, 0, 0, 0.205);
+background-color: rgba(0, 0, 0, 0.06);
 }
 
 .board-info::after{
-content: "Add a description to your board";
-color: lightgray;
-display: block;
-margin-left: 25px;
-font-weight: 500;
+  content: "Add a description to your board";
+  color: rgb(167, 167, 167);
+  display: block;
+  margin-left: 32px;
+  margin-top: 5px;
+  font-weight: 500;
 }
 
 .menu-list li i{
@@ -76,8 +87,8 @@ margin:  0 10px 0 0;
 
 .bg-squre,.sticker{
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background-repeat: no-repeat;
   background-size: cover;
 
@@ -87,8 +98,14 @@ margin:  0 10px 0 0;
 }
 
 /* bg-chang */
-
-.btn-previous{
+.bg-tab-header{
+  position: fixed;
+  top:38px;
+  display: flex;
+  background-color: rgb(231, 231, 231);
+  align-items: flex-start;
+}
+.btn-bg-previous{
   color:black !important;
   display: inline-block;
   width: 20px;
@@ -96,18 +113,34 @@ margin:  0 10px 0 0;
   margin-right: 10px;
 
   z-index: 3;
-  transform: translate3d(0,5px,0);
-
+  
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   background-image: url(https://cdn.icon-icons.com/icons2/494/PNG/512/chevron-left_icon-icons.com_48335.png);
 }
+.bg-source{
+  display: inline-block;
+  font-size: 16px;
+  margin: 0;
+  width: 270px;
+  line-height: 50px; 
+}
+
+.bg-source a{
+  text-decoration: none;
+  color: rgb(90, 90, 90);
+}
+
 .bg-photos-list{
   line-height: 0px;
   padding: 0;
   margin: 0;
+  width: 300px;
   height: 700px;
+  padding-top: 60px;
+
+  overflow: scroll;
 }
 .bg-photos-list li{
   display: inline-block;
@@ -141,7 +174,7 @@ margin:  0 10px 0 0;
   opacity: 0.2;
 }
 .fade {
-  transition: opacity 1.2s;
+  transition: opacity .8s;
   opacity: 1;
 }
 
@@ -172,8 +205,9 @@ height: 200px;
 .main-tab-wrapper,
 .bg-tab-wrapper,
 .about-tab-wrapper{
+  user-select: none;
   display: none;
-}
+} 
 
 .tab-wrapper-active{
   display: block;

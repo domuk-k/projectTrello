@@ -1,7 +1,7 @@
 import { initBoard } from "./board.js"
-import { initSideMenu } from "./board_menu.js"
+import { initSideMenu } from "./board_side_menu.js"
 import { initMain } from "./mainCanvas.js"
-import { bindEvents } from "./eventBindings.js"
+import { bindEvents } from "./event_bindings.js"
 
 
 window.onload = async () => {

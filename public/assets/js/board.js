@@ -1,9 +1,10 @@
 // state
-let boards = [];
-let defaultBoardId = 1;
-let currentBoard = {}
-
-
+let state = {
+  user: {},
+  boards: [],
+  defaultBoardId: 1,
+  currentBoard: {}
+}
 
 // DOM picks
 const $header = document.querySelector('header');
@@ -21,10 +22,12 @@ const template = {
   },
   background() {
     const $bgContainer = document.querySelector('.bg-container')
-    if (!currentBoard.background_image) $bgContainer.firstElementChild.style.backgroundColor = currentBoard.background_color;
+    if (!state.currentBoard.background_image) {
+      document.querySelector('.main-header').style.backgroundColor = state.currentBoard.background_color;
+    }
     $bgContainer.innerHTML =
       `
-      <div class="board-bg" style ="background-image : url(${currentBoard.background_image})"></div>
+      <div class="board-bg" style ="background-image : url(${state.currentBoard.background_image})"></div>
       <div class="board-bg shadow-overlay"></div>
       `
   },
@@ -44,7 +47,7 @@ const template = {
       <div class="header-right">
         <button class="btn-create-board fas fa-plus"></button>
         <section class="my-profile" style="display:inline">
-          <button class="btn-my-profile-icon">DW</button>
+          <button class="btn-my-profile-icon">${state.user.last_name.match(/[A-Z]/g).join("")}</button>
           <div class="my-cards">
           </div>
         </section>
@@ -54,15 +57,15 @@ const template = {
   subHeader() {
     document.querySelector('.sub-header').innerHTML =
       ` <div class="sub-header-left">    
-        <span class="board-name">${currentBoard.board_name}</span>
-        <textarea class="board-name-input" maxlength=10>${currentBoard.board_name}</textarea>
+        <span class="board-name">${state.currentBoard.board_name}</span>
+        <textarea class="board-name-input" maxlength=10>${state.currentBoard.board_name}</textarea>
         <div class="btn-favorite favorite far fa-star"></div>
         <button class="btn-invite">Invite</button>
       </div>
       <div class="sub-header-right">
-        <button class="btn-menu">Show Menu</button>
+        <button class="btn-menu-show">Show Menu</button>
         <nav id="scroll-area" class="side-menu"></nav>
-      </div >
+      </div>
     `
   }
 }
@@ -75,13 +78,13 @@ const render = () => {
 const getBoard = async () => {
   const res = await axios.get(`/users/${1}`);
   const _user = await res.data
-  boards = _user.boards
-  currentBoard = boards[defaultBoardId - 1]
+  state.user = _user
+  state.boards = _user.boards
+  state.currentBoard = state.boards[state.defaultBoardId - 1]
 }
 
 const initBoard = async () => {
   await getBoard();
   render();
 }
-
-export { initBoard, currentBoard }
+export { initBoard, state, template }
