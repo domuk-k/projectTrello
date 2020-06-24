@@ -5,7 +5,7 @@ let cards = [];
 
 // DOM picks
 const $header = document.querySelector('.main-header');
-const $boardBg = document.querySelector('.board-container');
+const $boardBg = document.querySelector('.bg-container');
 
 const template = {
   background() {
@@ -71,8 +71,8 @@ async function getBoard() {
 }
 
 const initHeader = async () => {
-  await getBoard();
-  render();
+  // await getBoard();
+  // render();
 }
 
 export { board, template, initHeader }
