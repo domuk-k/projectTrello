@@ -1,16 +1,6 @@
 // import { header } from "./header.js"
-import {
-  Board
-} from "./Board.js"
-import {
-  Card
-} from "./Card.js"
-import {
-  List
-} from "./List.js"
-import {
-  User
-} from "./User.js"
+import { User, Board, Card, List } from "./constructors.js"
+
 
 const $listNameBox = document.querySelector('.list-name-box');
 const $mainWrapper = document.querySelector('.main-wrapper');
@@ -35,7 +25,7 @@ const renderList = () => {
   lists.forEach(list => {
     html +=
       `<div  class="list-wrapper">
-      <div id = "${list.id}" class="list" >
+      <div id="${list.id}" class="list" >
         <div class='list-content' draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
           <div class="list-header">
             <textarea class="list-header-name">${list.name}</textarea>
@@ -65,16 +55,16 @@ const renderList = () => {
   lists.forEach(list => {
     if (!list.cards.length) return;
     list.cards.forEach(card => {
-      const targetList = document.querySelector(`.list #${list.id}`);
+      const targetList = document.querySelector(`.list#${list.id}`);
       targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
-      <li id = "${list.card.id}" class="card-box">
+      <li id ="${card.id}" class="card-box">
         <div class="card-shadow">
           <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
               <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
               <button class="card-remove-btn">x</button>
             </div>
           </div>
-        </li>` 
+        </li>`
     });
   });
 };
@@ -99,12 +89,11 @@ const renderCard = target => {
   targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML = html;
   html = '';
 };
+
 // 초기데이타 get
 const getMainData = async () => {
   const responseLists = await axios.get('/boards/1/lists');
   const listData = await responseLists.data;
-  // const responseCards = await axios.get('/boards/);
-  // const cardData = await responseCards.data;
   lists = listData;
 
   // cards = cardData;

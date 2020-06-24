@@ -47,7 +47,7 @@ server.get('/boards/:board_id/lists/:list_id', (req, res) => {
   )
 })
 
-// 카드 get
+// get cards
 server.get('/boards/:board_id/lists/:list_id/cards', (req, res) => {
   res.send(
     db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`).value()
@@ -73,16 +73,37 @@ server.post('/boards/:board_id/lists', (req, res) => {
     .write()
   res.send(req.body)
 })
-
+// push a card
 server.post('/boards/:board_id/lists/:list_id/cards', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`)
     .push(req.body)
     .write()
-
-  res.send(db.get(req.body).value());
 })
-// push a board
 
+//PATCH
+// update a board
+server.patch('/boards/:board_id', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}]`)
+    .assign(req.body)
+    .write()
+  res.send(req.body)
+})
+// update a list
+server.patch('/boards/:board_id/lists/:list_id', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`)
+    .assign(req.body)
+    .write()
+  res.send(req.body)
+})
+// update a card
+server.patch('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards[${req.params.card_id - 1}]`)
+    .assign(req.body)
+    .write()
+  res.send(req.body)
+})
+
+//DELETE
 // remove a list
 server.delete('/boards/:board_id/lists/:list_id', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists`)

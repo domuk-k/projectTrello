@@ -7,7 +7,7 @@
       "boards": [
         {
           "id": 1,
-          "board_name": "개발자 동욱",
+          "board_name": "개발자 배준선",
           "description": "첫 번째 기본보드",
           "collaborators": [
             202001,
@@ -21,10 +21,25 @@
           "lists": [
             {
               "id": 1,
-              "name": "ㅁㄴㅇㄹ",
+              "list_name": "kim",
               "board_id": 1,
               "user_id": 1,
-              "cards": []
+              "cards": [
+                {
+                  "id": 1,
+                  "card_name": "bae",
+                  "list_id": "list-1",
+                  "user_id": 1,
+                  "labels": [
+                    "develop"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                }
+              ]
             }
           ]
         }

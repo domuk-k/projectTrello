@@ -99,7 +99,6 @@ const getPhotos = async () => {
   const query = `?featured=true&content_filter=high&count=${photoCount}&orientation=landscape&${queryKeyword}=wallpapers&w=1920&client_id=${API_KEY1}`
   const res = await axios(`https://api.unsplash.com/photos/random/${query}`)
   photoUrls = await res.data.map(photo => photo.urls)
-  return photoUrls
 }
 
 const initSideMenu = () => {
@@ -108,4 +107,4 @@ const initSideMenu = () => {
 
 
 
-export { photoUrls, template, initSideMenu, getPhotos }
+export { photoUrls, template, initSideMenu }

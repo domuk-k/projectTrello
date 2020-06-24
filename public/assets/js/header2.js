@@ -1,0 +1,2 @@
+// state
+let board = [];

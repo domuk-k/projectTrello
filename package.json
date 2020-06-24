@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"json-server --watch db.json\" \"nodemon server.js -w\"",
+    "start": "nodemon server.js -w",
     "build": "webpack -w"
   },
   "devDependencies": {
@@ -11,7 +11,6 @@
     "@babel/core": "^7.10.3",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/preset-env": "^7.10.3",
-    "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
     "concurrently": "^5.2.0",
     "css-loader": "^3.6.0",
@@ -21,7 +20,6 @@
     "json-server": "^0.16.1",
     "mini-css-extract-plugin": "^0.9.0",
     "nodemon": "^2.0.4",
-    "path": "^0.12.7",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
@@ -31,5 +29,15 @@
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
     "lowdb": "^1.0.0"
-  }
+  },
+  "description": "7days project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/domuk-k/projectTrello.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/domuk-k/projectTrello/issues"
+  },
+  "homepage": "https://github.com/domuk-k/projectTrello#readme"
 }
