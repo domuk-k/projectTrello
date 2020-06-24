@@ -18,27 +18,7 @@
           "background_image": "https://images.unsplash.com/photo-1580734889649-5f7597cc2561?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
           "background_color": "",
           "activities": [],
-          "lists": [
-            {
-              "id": 1,
-              "list_name": "kim",
-              "cards": [
-                {
-                  "id": 1,
-                  "card_name": "bae",
-                  "list_id": "list-1",
-                  "labels": [
-                    "develop"
-                  ],
-                  "descpition": "",
-                  "members": [],
-                  "due_date": "",
-                  "sticker": [],
-                  "locY": 0
-                }
-              ]
-            }
-          ]
+          "lists": []
         }
       ]
     }
