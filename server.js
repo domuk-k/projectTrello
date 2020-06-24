@@ -60,6 +60,14 @@ server.get('/boards/:board_id/lists/:list_id/cards', (req, res) => {
     db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`).value()
   )
 })
+
+// get a card
+server.get('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
+  res.send(
+    db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards.[${req.params.card_id - 1}]`).value()
+  );
+})
+
 // get activity
 server.get('/boards/:board_id/activities', (req, res) => {
   res.send(
@@ -67,6 +75,8 @@ server.get('/boards/:board_id/activities', (req, res) => {
       .value()
   )
 })
+
+
 
 //POST
 // push a board
@@ -92,6 +102,16 @@ server.post('/boards/:board_id/lists/:list_id/cards', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`)
     .push(req.body)
     .write()
+
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
+})
+// push lists
+server.post('/boards/:board_id/lists', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}]`)
+    .push(req.body)
+    .write()
+
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
 })
 // push a activity
 server.post('/boards/:board_id/activities', (req, res) => {
@@ -123,25 +143,32 @@ server.patch('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
   res.send(req.body)
 })
 
+
 //DELETE
 // remove a list
 server.delete('/boards/:board_id/lists/:list_id', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
     .remove(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`).value())
-    .then(post => res.send(post))
+    .write()
 
   res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
 })
+// remove a card
+server.delete('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards`)
+    .remove(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards[${req.params.card_id - 1}]`).value())
+    .last()
+    .write()
 
-
-// server.delete('/todos/completed', (req, res) => {
-//   // lowdb를 사용해서 db.json에서 completed: true인 todo를 제거
-//   db.get('todos')
-//     .remove({ completed: true })
-//     .write();
-//   // todos를 응답
-//   res.send(db.get('todos').value());
-// })
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
+})
+// remove lists
+server.delete('/boards/:board_id/lists', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}]`)
+    .remove(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value())
+    .last()
+    .write()
+})
 
 // Use default router
 server.use(router);
