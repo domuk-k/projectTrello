@@ -24,6 +24,30 @@
               "name": "ㅁㄴㅇㄹ",
               "board_id": 1,
               "user_id": 1,
+              "cards": [
+                {
+                  "id": 1,
+                  "content": "asd",
+                  "list_id": "1",
+                  "user_id": 1,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "date_created": "Tue, 23 Jun 2020 13:21:48 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "name": "brbdb",
+              "board_id": 1,
+              "user_id": 1,
               "cards": []
             }
           ]

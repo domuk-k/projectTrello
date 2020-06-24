@@ -65,7 +65,7 @@ const renderList = () => {
   lists.forEach(list => {
     if (!list.cards.length) return;
     list.cards.forEach(card => {
-      const targetList = document.querySelector(`.list #${list.id}`);
+      const targetList = document.querySelector(`.list#${list.id}`);
       targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
       <li id = "${list.card.id}" class="card-box">
         <div class="card-shadow">
