@@ -8,7 +8,6 @@ const $main = document.querySelector('main');
 
 
 let lists = [];
-let cards = [];
 
 let cardShadow = {};
 let cardContent = {};
@@ -16,6 +15,15 @@ let listShadow = {};
 let listContent = {};
 let dragTarget = '';
 
+
+// 초기데이타 get
+const getMainData = async () => {
+  const responseLists = await axios.get(`/boards/1/lists`);
+  const listData = await responseLists.data;
+  lists = listData;
+
+  // cards = cardData;
+};
 
 // 리스트랜더
 const renderList = () => {
@@ -25,7 +33,7 @@ const renderList = () => {
   lists.forEach(list => {
     html +=
       `<div  class="list-wrapper">
-      <div id="${list.id}" class="list" >
+      <div id="list-${list.id}" class="list" >
         <div class='list-content' draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
           <div class="list-header">
             <textarea class="list-header-name">${list.name}</textarea>
@@ -55,12 +63,12 @@ const renderList = () => {
   lists.forEach(list => {
     if (!list.cards.length) return;
     list.cards.forEach(card => {
-      const targetList = document.querySelector(`.list#${list.id}`);
+      const targetList = document.querySelector(`#list-${list.id}`);
       targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
-      <li id ="${card.id}" class="card-box">
+      <li id ="card-${card.id}" class="card-box">
         <div class="card-shadow">
           <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-              <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
+              <a class="card" href="/c/jUKFKu6Q/5-df">${card.card_name}</a>
               <button class="card-remove-btn">x</button>
             </div>
           </div>
@@ -80,7 +88,7 @@ const renderCard = target => {
     <li id = "${card.id}" class="card-box">
     <div class="card-shadow">
     <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-      <a class="card" href="/c/jUKFKu6Q/5-df">${card.content}</a>
+      <a class="card" href="/c/jUKFKu6Q/5-df">${card.card_name}</a>
       <button class="card-remove-btn">x</button>
     </div>
     </div>
@@ -90,14 +98,6 @@ const renderCard = target => {
   html = '';
 };
 
-// 초기데이타 get
-const getMainData = async () => {
-  const responseLists = await axios.get(`/boards/1/lists`);
-  const listData = await responseLists.data;
-  lists = listData;
-
-  // cards = cardData;
-};
 
 // 이벤트 핸들러
 const mainEventHandlers = {
@@ -110,42 +110,50 @@ const mainEventHandlers = {
   },
 
   // 리스트 추가 제거
-  async addList(Name) {
+  async addList(listName) {
     const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id)) + 1 : 1);
 
-    const newlist = new List(generatedListId(), Name);
+    const newlist = new List(generatedListId(), listName);
 
-    const responseList = await axios.post('/boards/1/lists', newlist)
-    const listData = responseList.data
+    const response = await axios.post('/boards/1/lists', newlist)
+    const listData = response.data
     lists = [...lists, listData]
     renderList();
   },
-  async removeList(id) {
-    await axios.delete(`boards/1/lists/${id}`)
-    lists = lists.filter(list => list.id !== +id)
+  async removeList(listId) {
+    let id = +listId.split('-')[1];
+    const response = await axios.delete(`boards/1/lists/${id}`)
+    const removedlists = await response.data
+    lists = removedlists;
+    console.log(lists);
     renderList();
-
-    // if (cards.length) {
-    //   cards.filter(card => card.list_id === id).forEach(card => {
-    //     await axios.delete(`/cards/${card.id}`);
-    //   });
-    //   cards = cards.filter(card => card.list_id !== id);
-    // }
   },
 
   // 카드 추가 제거
-  async addCard(content, target) {
-    const generatedCardId = () => (cards.length ? Math.max(...cards.map(card => card.id)) + 1 : 1);
-    const card = new Card(generatedCardId(), content, target.id);
-    const responseCard = await axios.post(`/boards/1/lists/${target.id}/cards`, card)
-    const cardData = await responseCard.data;
-    // ca = [...cards, cardData];
-    renderList(target);
+  async addCard(cardName, _listId) {
+    const listId = +_listId.split('-')[1];
+    const _cards = lists.find(list => list.id === listId).cards;
+    const generatedCardId = () => (_cards.length ? Math.max(..._cards.map(card => card.id)) + 1 : 1);
+
+    const newCard = new Card(generatedCardId(), cardName, _listId);
+
+    const response = await axios.post(`/boards/1/lists/${listId}/cards`, newCard);
+    const _lists = await response.data;
+    console.log(_lists);
+
+    lists = _lists;
+    renderList();
   },
-  async removeCard(id, target) {
-    await axios.delete(`/cards/${id}`);
-    cards = cards.filter(card => card.id !== id);
-    renderCard(target);
+  async removeCard(_cardId, _listId) {
+    let cardId = _cardId.split('-')[1];
+    console.log(cardId);
+    let listId = _listId.split('-')[1];
+    console.log(listId);
+    const response = await axios.delete(`/boards/1/lists/${listId}/cards/${cardId}`);
+    const _lists = response.data;
+    lists = _lists;
+
+    renderList();
   },
 
   // 카드 드래그
@@ -163,7 +171,7 @@ const mainEventHandlers = {
     listContent = e.target;
     listShadow.style.height = `${listShadow.getBoundingClientRect().height}px`;
     listShadow.removeChild(listContent);
-    dragTarget = list;
+    dragTarget = 'list';
   },
   dragEnterCard(e) {
     if (dragTarget === 'card') {
@@ -178,27 +186,22 @@ const mainEventHandlers = {
       if (e.target.className === 'list-wrapper') e.target.parentNode.insertBefore(listShadow.parentNode, e.target);
     }
   },
-  dropCard() {
+  async dropCard() {
     if (dragTarget === 'card') cardShadow.appendChild(cardContent);
     if (dragTarget === 'list') {
       // console.log('칠드랜', listShadow.parentNode.parentNode.children); 
       listShadow.appendChild(listContent);
       listShadow.style.height = 'auto';
 
-      lists.forEach(list => fetchRequest.delete(`/lists/${list.id}`));
+      await lists.forEach( _list => axios.delete(`boards/1/lists/${_list.id}`));
 
-      let _lists = [];
+      let list = [];
+      lists = [];
       [...listShadow.parentNode.parentNode.children].forEach(listNode => {
-        _lists = [..._lists, lists.find(list => list.id === listNode.firstElementChild.id)]
-        console.log(_lists);
+        list = lists.find(_list => _list.id === +listNode.firstElementChild.id.split('-')[1]);
+        lists = [...lists, list];
       });
-      lists = _lists;
-      console.log(_lists);
-      console.log(lists);
-      // fetchRequest.post('lists', lists)
-      //   .catch(err => console.error(err));
-      _lists = [];
-
+      await lists.forEach( _list => axios.post(`/boards/1/lists`, _list));
     }
   }
 };
@@ -215,10 +218,10 @@ const mainEventBindings = () => {
     if (target.matches('.remove-list-btn')) mainEventHandlers.removeList(target.parentNode.parentNode.parentNode.id);
     if (target.matches('.card-add-btn')) {
       if (!target.parentNode.previousElementSibling.value) return;
-      mainEventHandlers.addCard(target.parentNode.previousElementSibling.value, target.parentNode.parentNode.parentNode.parentNode.parentNode);
+      mainEventHandlers.addCard(target.parentNode.previousElementSibling.value, target.parentNode.parentNode.parentNode.parentNode.parentNode.id);
       target.parentNode.previousElementSibling.value = '';
     }
-    if (target.matches('.card-remove-btn')) mainEventHandlers.removeCard(target.parentNode.parentNode.parentNode.id, target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode);
+    if (target.matches('.card-remove-btn')) mainEventHandlers.removeCard(target.parentNode.parentNode.parentNode.id, target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id);
   };
 
   // 버튼 클릭시 리스트 생성
@@ -231,18 +234,18 @@ const mainEventBindings = () => {
   // 인풋 입력시 리스트 생성
   $listNameBox.onkeyup = e => {
     if (!e.target === $listNameBox) return;
-    const content = e.target.value.trim();
-    if (e.keyCode !== 13 || content === '') return;
-    mainEventHandlers.addList(content);
+    const listName = e.target.value.trim();
+    if (e.keyCode !== 13 || listName === '') return;
+    mainEventHandlers.addList(listName);
     e.target.value = '';
   };
 
   // 인풋 입력시 카드생성
   $mainWrapper.onkeyup = e => {
     if (!e.target.matches('.card-name-box')) return;
-    const content = e.target.value.trim();
-    if (e.keyCode !== 13 || content === '') return;
-    mainEventHandlers.addCard(content, e.target.parentNode.parentNode.parentNode.parentNode);
+    const cardName = e.target.value.trim();
+    if (e.keyCode !== 13 || cardName === '') return;
+    mainEventHandlers.addCard(cardName, e.target.parentNode.parentNode.parentNode.parentNode.id);
     e.target.value = '';
   };
 
