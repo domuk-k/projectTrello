@@ -2,20 +2,21 @@
   "users": [
     {
       "id": 202001,
-      "username": "DongWook Kim",
+      "first_name": "Kim",
+      "last_name": "DongWook",
       "password": 123123,
       "boards": [
         {
           "id": 1,
-          "board_name": "개발자 배준선",
-          "description": "첫 번째 기본보드",
+          "board_name": "휴,...ㅠ",
+          "description": "첫 번째 기본보드입니다. 이 레포는 패스트캠퍼스의 프로젝트입니다. 2인 팀으로 바닐라자바스크립트를 기반으로 삽질해보는 경험이 됐습니다.",
           "collaborators": [
             202001,
             202002
           ],
           "recent_open": "2020-09-09 thr 13:21:12",
           "is_starred": false,
-          "background_image": "https://images.unsplash.com/photo-1580734889649-5f7597cc2561?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_image": "https://images.unsplash.com/photo-1458071192875-3cb259d01593?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
           "background_color": "",
           "activities": [
             {
