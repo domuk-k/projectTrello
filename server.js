@@ -108,7 +108,9 @@ server.patch('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
 server.delete('/boards/:board_id/lists/:list_id', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
     .remove(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}]`).value())
+    .last()
     .write()
+    .then(post => res.send(post))
 
   res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
 })

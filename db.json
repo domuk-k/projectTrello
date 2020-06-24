@@ -22,14 +22,11 @@
             {
               "id": 1,
               "list_name": "kim",
-              "board_id": 1,
-              "user_id": 1,
               "cards": [
                 {
                   "id": 1,
                   "card_name": "bae",
                   "list_id": "list-1",
-                  "user_id": 1,
                   "labels": [
                     "develop"
                   ],

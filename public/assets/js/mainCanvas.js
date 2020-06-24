@@ -92,7 +92,7 @@ const renderCard = target => {
 
 // 초기데이타 get
 const getMainData = async () => {
-  const responseLists = await axios.get('/boards/1/lists');
+  const responseLists = await axios.get(`/boards/1/lists`);
   const listData = await responseLists.data;
   lists = listData;
 
