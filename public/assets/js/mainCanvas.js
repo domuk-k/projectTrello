@@ -15,15 +15,55 @@ let listShadow = {};
 let listContent = {};
 let dragTarget = '';
 
+// 통신
+const dataMethod = {
+  // 초기데이타 get
+  async getMainData () {
+    const responseLists = await axios.get(`/boards/1/lists`);
+    const listData = await responseLists.data;
+    lists = listData;
+  },
 
-// 초기데이타 get
-const getMainData = async () => {
-  const responseLists = await axios.get(`/boards/1/lists`);
-  const listData = await responseLists.data;
-  lists = listData;
+  // 리스트 추가
+  async addList(newList) {
+    const response = await axios.post('/boards/1/lists', newList)
+    const listData = await response.data
+    lists = [...lists, listData]
+  },
+  // 리스트 제거
+  async removeList(listId) {
+    const response = await axios.delete(`boards/1/lists/${listId}`)
+    const removedlists = await response.data
+    lists = removedlists;
+  },
 
-  // cards = cardData;
-};
+  // 카드 추가
+  async addCard(listId, newCard) {
+    const response = await axios.post(`/boards/1/lists/${listId}/cards`, newCard);
+    const _lists = await response.data;
+    lists = _lists;
+  },
+  // 카드 제거
+  async removeCard(listId, cardId) {
+    const response = await axios.delete(`/boards/1/lists/${listId}/cards/${cardId}`);
+    const _lists = await response.data;
+    lists = _lists;
+  },
+
+  // 리스트 드래그 후 데이터 변환
+  async afterListDragChangeData() {
+    await lists.forEach( _list => axios.delete(`boards/1/lists/${_list.id}`));
+
+    let list = [];
+    lists = [];
+    [...listShadow.parentNode.parentNode.children].forEach(listNode => {
+      list = lists.find(_list => _list.id === +listNode.firstElementChild.id.split('-')[1]);
+      lists = [...lists, list];
+    });
+    await lists.forEach( _list => axios.post(`/boards/1/lists`, _list));
+  }
+}
+
 
 // 리스트랜더
 const renderList = () => {
@@ -77,28 +117,6 @@ const renderList = () => {
   });
 };
 
-// 카드랜더
-const renderCard = target => {
-  let html = '';
-  let _cards = [];
-  _cards = cards.filter(card => card.list_id === target.id);
-  const targetList = document.querySelector(`#${target.id}`);
-  _cards.forEach(card => {
-    html += `
-    <li id = "${card.id}" class="card-box">
-    <div class="card-shadow">
-    <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-      <a class="card" href="/c/jUKFKu6Q/5-df">${card.card_name}</a>
-      <button class="card-remove-btn">x</button>
-    </div>
-    </div>
-  </li>`;
-  });
-  targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML = html;
-  html = '';
-};
-
-
 // 이벤트 핸들러
 const mainEventHandlers = {
   // 애드 모드로 전환
@@ -110,49 +128,33 @@ const mainEventHandlers = {
   },
 
   // 리스트 추가 제거
-  async addList(listName) {
+  addList(listName) {
     const generatedListId = () => (lists.length ? Math.max(...lists.map(list => list.id)) + 1 : 1);
-
-    const newlist = new List(generatedListId(), listName);
-
-    const response = await axios.post('/boards/1/lists', newlist)
-    const listData = response.data
-    lists = [...lists, listData]
+    const newList = new List(generatedListId(), listName);
+    dataMethod.addList(newList);
     renderList();
   },
-  async removeList(listId) {
-    let id = +listId.split('-')[1];
-    const response = await axios.delete(`boards/1/lists/${id}`)
-    const removedlists = await response.data
-    lists = removedlists;
-    console.log(lists);
+  removeList(listId) {
+    const id = +listId.split('-')[1];
+    dataMethod.removeList(id);
     renderList();
   },
 
   // 카드 추가 제거
-  async addCard(cardName, _listId) {
+  addCard(cardName, _listId) {
     const listId = +_listId.split('-')[1];
     const _cards = lists.find(list => list.id === listId).cards;
     const generatedCardId = () => (_cards.length ? Math.max(..._cards.map(card => card.id)) + 1 : 1);
 
     const newCard = new Card(generatedCardId(), cardName, _listId);
-
-    const response = await axios.post(`/boards/1/lists/${listId}/cards`, newCard);
-    const _lists = await response.data;
-    console.log(_lists);
-
-    lists = _lists;
+    dataMethod.addCard(listId, newCard)
     renderList();
   },
-  async removeCard(_cardId, _listId) {
+  removeCard(_cardId, _listId) {
     let cardId = _cardId.split('-')[1];
-    console.log(cardId);
     let listId = _listId.split('-')[1];
-    console.log(listId);
-    const response = await axios.delete(`/boards/1/lists/${listId}/cards/${cardId}`);
-    const _lists = response.data;
-    lists = _lists;
 
+    dataMethod.removeCard(listId, cardId);
     renderList();
   },
 
@@ -186,22 +188,13 @@ const mainEventHandlers = {
       if (e.target.className === 'list-wrapper') e.target.parentNode.insertBefore(listShadow.parentNode, e.target);
     }
   },
-  async dropCard() {
+  dropCard() {
     if (dragTarget === 'card') cardShadow.appendChild(cardContent);
     if (dragTarget === 'list') {
       // console.log('칠드랜', listShadow.parentNode.parentNode.children); 
       listShadow.appendChild(listContent);
       listShadow.style.height = 'auto';
-
-      await lists.forEach( _list => axios.delete(`boards/1/lists/${_list.id}`));
-
-      let list = [];
-      lists = [];
-      [...listShadow.parentNode.parentNode.children].forEach(listNode => {
-        list = lists.find(_list => _list.id === +listNode.firstElementChild.id.split('-')[1]);
-        lists = [...lists, list];
-      });
-      await lists.forEach( _list => axios.post(`/boards/1/lists`, _list));
+      dataMethod.afterListDragChangeData(listShadow);
     }
   }
 };
@@ -271,7 +264,7 @@ const mainEventBindings = () => {
 // 메인엔트리
 // eslint-disable-next-line import/prefer-default-export
 export const initMain = async () => {
-  await getMainData();
+  await dataMethod.getMainData();
   await renderList();
   mainEventBindings();
   // dragEvent();
