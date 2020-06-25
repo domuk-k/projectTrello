@@ -1,0 +1,25 @@
+body {
+    position: relative;
+}
+.modal-wrapper{
+    background-color: rgb(233, 165, 165);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(9, 9, 9, 0.7);
+}
+.modal-box {
+    background-color: blueviolet;
+    width: 60vw;
+}
+.modal-header {
+    background-color: rgb(185, 14, 14);
+}
+.modal-description {
+    background-color: rgb(61, 36, 36);
+}
+.card-activity {
+    background-color: rgb(179, 88, 88);
+}

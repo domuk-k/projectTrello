@@ -20,6 +20,8 @@ let listContent = {};
 let dragTarget = '';
 let dragCard = {};
 let cardsAfterDrag = [];
+let offset = {x:0,y:0}
+let posX = 0;
 
 // 리스트랜더
 const renderList = () => {
@@ -29,11 +31,12 @@ const renderList = () => {
   lists.forEach(list => {
     if (list !== 'null') {
       html +=
-        `<div  class="list-wrapper">
+        `<div  class="list-wrapper" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
       <div id="list-${list.id}" class="list" >
         <div class='list-content' draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
           <div class="list-header">
-            <textarea class="list-header-name">${list.name}</textarea>
+            <div class="list-header-name">${list.name}</div>
+            <input class="list-header-name-input" value="${list.name}" autofocus>
             <button class="remove-list-btn">x</button>
           </div>
           <ul class="list-container">
@@ -42,7 +45,7 @@ const renderList = () => {
           <div class="card-add-box">
             <a class="list-open-add-mod-btn"><span>+</span>Add another card</a>
             <div class="card-add-mod" style="display: none;">
-              <input class="card-name-box" type=" text" placeholder="enter a title for this card...">
+              <input class="card-name-box" type=" text" placeholder="enter a title for this card..." autofocus>
               <div class="card-add-mod-btn">
                 <button class="card-add-btn">Add Card</button>
                 <a class="card-add-mod-close-btn">x</a>
@@ -76,6 +79,17 @@ const renderList = () => {
     });
   });
 };
+// // 모달랜더
+// const renderModal = () => {
+//   // console.log(lists);
+
+//   let html = '';
+//   lists.forEach(list => {
+//     if (list !== 'null') {
+//       html +=
+  
+//   });
+// };
 
 
 // 통신
@@ -108,6 +122,12 @@ const dataMethod = {
       name: state.user.full_name,
       act: `리스트를 제거`,
     })
+  },
+  async patchListName(listName, listId) {
+    const response = await axios.patch(`boards/${state.currentBoard.id}/lists/${listId}/list_name`, { name: listName })
+    const listsData = await response.data
+    lists = listsData;
+    renderList();
   },
 
   // 카드 추가
@@ -189,9 +209,25 @@ const mainEventHandlers = {
     target.parentNode.parentNode.style.display = 'none';
   },
   openAddMod(target) {
-    console.log('open add mod');
-
     target.nextElementSibling.style.display = 'block';
+    target.parentNode.parentNode.firstElementChild.click();
+  },
+
+  // 리스트 네임 변환창 오픈
+  openListNameInput(target) {
+    target.style.display = 'none';
+    target.nextElementSibling.style.display = 'block';
+    target.nextElementSibling.select();
+  },
+  // 리스트 네임 변환창 닫기
+  closeListNameInput(target) {
+    target.style.display = 'none';
+    target.previousElementSibling.style.display = 'block';
+  },
+  // 리스트 네임 변경
+  patchListName(listName, listId) {
+    const _listId = +listId.split('-')[1];
+    dataMethod.patchListName(listName, _listId);
   },
 
   // 리스트 추가 제거
@@ -257,7 +293,6 @@ const mainEventHandlers = {
       if (e.target.className === 'card-add-box') e.target.previousElementSibling.appendChild(cardBox);
       if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.insertBefore(cardBox, e.target.parentNode.parentNode);
       if (e.target.className === 'list-open-add-mod-btn') e.target.parentNode.previousElementSibling.appendChild(cardBox);
-     
     }
     if (dragTarget === 'list') {
       // console.log('리스트 드래그엔터', e.target);
@@ -274,8 +309,6 @@ const mainEventHandlers = {
     }
   },
   dropCard(e) {
-    console.log(e);
-
     if (dragTarget === 'card') {
       cardShadow.appendChild(cardContent);
       cardShadow.style.height = `100%`;
@@ -297,6 +330,11 @@ const mainEventHandlers = {
 
       dataMethod.afterListDragChangeData(_lists);
     }
+  },
+
+  // 카드 모달 오픈
+  cardModalOpen(target) {
+    renderModal();
   }
 };
 
@@ -308,17 +346,19 @@ const mainEventBindings = () => {
   }) => {
     // console.log(target);
     if (target.matches('.add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
-    if (target.matches('.card-add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
-    if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);
-    if (target.matches('.list-open-add-mod-btn')) mainEventHandlers.openAddMod(target);
+    else if (target.matches('.card-add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
+    else if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);
+    else if (target.matches('.list-open-add-mod-btn')) mainEventHandlers.openAddMod(target);
 
-    if (target.matches('.remove-list-btn')) mainEventHandlers.removeList(target.parentNode.parentNode.parentNode.id);
-    if (target.matches('.card-add-btn')) {
+    else if (target.matches('.remove-list-btn')) mainEventHandlers.removeList(target.parentNode.parentNode.parentNode.id);
+    else if (target.matches('.card-add-btn')) {
       if (!target.parentNode.previousElementSibling.value) return;
       mainEventHandlers.addCard(target.parentNode.previousElementSibling.value, target.parentNode.parentNode.parentNode.parentNode.parentNode.id);
       target.parentNode.previousElementSibling.value = '';
     }
-    if (target.matches('.card-remove-btn')) mainEventHandlers.removeCard(target.parentNode.parentNode.parentNode.id, target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id);
+    else if (target.matches('.card-remove-btn')) mainEventHandlers.removeCard(target.parentNode.parentNode.parentNode.id, target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id);
+    else if (target.matches('.list-header-name')) mainEventHandlers.openListNameInput(target);
+    else if (target.matches('.card')) mainEventHandlers.cardModalOpen(target);
   };
 
   // 버튼 클릭시 리스트 생성
@@ -339,12 +379,24 @@ const mainEventBindings = () => {
   };
 
   // 인풋 입력시 카드생성
-  $mainWrapper.onkeyup = e => {
+  $main.onkeyup = e => {
+    console.log('카드추가');
     if (!e.target.matches('.card-name-box')) return;
     const cardName = e.target.value.trim();
     if (e.keyCode !== 13 || cardName === '') return;
+    console.log('카드추가');
     mainEventHandlers.addCard(cardName, e.target.parentNode.parentNode.parentNode.parentNode.id);
     e.target.value = '';
+  };
+
+  // 인풋 입력시 리스트 이름 변경
+  $mainWrapper.onkeyup = e => {
+    if (!e.target.matches('.list-header-name-input')) return;
+    const listName = e.target.value.trim();
+    if (e.keyCode !== 13 || listName === '') return;
+    mainEventHandlers.patchListName(listName, e.target.parentNode.parentNode.parentNode.id);
+    e.target.value = '';
+    mainEventHandlers.closeListNameInput(e.target);
   };
 
   // 드래그 이벤트
@@ -367,7 +419,6 @@ const mainEventBindings = () => {
     // console.log('드랍', e.target, e.currentTarget);
     mainEventHandlers.dropCard(e);
   };
-
 };
 
 
