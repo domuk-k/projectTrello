@@ -237,10 +237,10 @@ const mainEventHandlers = {
     if (dragTarget === 'card') {
       console.log('카드 드래그엔터', e.target);
       if (e.target.className === 'list-header') e.target.nextElementSibling.insertBefore(cardBox, e.target.nextElementSibling.firstElementChild);
-      // if (e.target.className === 'card-box') e.target.parentNode.insertBefore(cardBox, e.target);
       if (e.target.className === 'card-add-box') e.target.previousElementSibling.appendChild(cardBox);
       if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.insertBefore(cardBox, e.target.parentNode.parentNode);
-      // if (e.target.className === 'card-shadow') e.target.parentNode.parentNode.insertBefore(cardBox, e.target.parentNode);
+      if (e.target.className === 'list-open-add-mod-btn') e.target.parentNode.previousElementSibling.appendChild(cardBox);
+     
     }
     if (dragTarget === 'list') {
       // console.log('리스트 드래그엔터', e.target);
