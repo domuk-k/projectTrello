@@ -86,8 +86,73 @@ button{
 .btn-board-selection {
   font-weight: 700;
 }
+.board-search-input-container{
+  display: flex;
+  align-items: flex-start;
+  height: 40px;
+}
 
+.modal-boards-selection{
+  display: none;
+  position: absolute;
+  top:40px;
 
+  min-height: 120px;
+  width: 280px;
+  background-color: whitesmoke;
+
+  z-index: 3;
+
+  border-radius: 5px;
+  padding: 8px;
+}
+.board-search-input-container input{
+  width: 230px;
+  font-size: 16px;
+  height: 36px;
+  line-height: 24px;
+  border-radius: 5px;
+  border: 3px rgba(184, 184, 184, 0.644) solid; 
+  padding: 5px;
+  margin-bottom: 5px; 
+}
+
+.btn-search-close{
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(https://icons-for-free.com/iconfiles/png/512/x-1321215629555778185.png);
+  
+  margin: 6px auto;
+}
+.modal-boards-selection.selection-active{
+  display: block;
+}
+
+[class$="boards-list"]{
+  margin: 15px 0 30px 15px;
+}
+[class$="boards-list"] i{
+  margin: 0 10px 0 0;
+}
+
+.board-result-item{
+  display: flex;
+  align-items: flex-start;
+  margin: 15px 27px 0 0;
+  padding: 7px;
+  background-color: rgba(131, 131, 131, 0.12);
+  border-radius: 4px;
+}
+.board-result-item:hover{
+  background-color: rgba(136, 136, 130, 0.3);
+}
+
+.modal-icon{
+  margin-right: 5px;
+}
 /* logo */
 .header-logo{
   width: 90px;
@@ -180,7 +245,8 @@ button{
 }
 .board-name{
   text-align: center;
-  min-width: 160px;
+  min-width: 210px;
+  color: rgba(255, 255, 255, 0.6);
   height: 25px;
   font-size: 20px;
 
@@ -191,7 +257,7 @@ button{
   display: none;
 }
 .board-name-input{
-  width: 160px;
+  width: 210px;
   height: 30px;
   font-size: 20px;
 

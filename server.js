@@ -43,8 +43,6 @@ server.get('/boards', (req, res) => {
 })
 // get a board
 server.get('/boards/:board_id', (req, res) => {
-
-
   res.send(
     db.get(`users[0].boards[${req.params.board_id - 1}]`)
       .value()
@@ -140,7 +138,7 @@ server.post('/boards/:board_id/lists/:list_id/cards/drag', (req, res) => {
 })
 // push lists
 server.post('/boards/:board_id/lists/all', (req, res) => {
-  req.body.forEach( list => {
+  req.body.forEach(list => {
     db.get(`users[0].boards[${req.params.board_id - 1}].lists`)
       .push(list)
       .write()
@@ -153,7 +151,7 @@ server.post('/boards/:board_id/lists/:list_id/cards/all', (req, res) => {
   const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
   const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
 
-  req.body.forEach( card => {
+  req.body.forEach(card => {
     db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards`)
       .push(card)
       .write()
@@ -174,6 +172,12 @@ server.patch('/boards/:board_id', (req, res) => {
     .assign(req.body)
     .write()
   res.send(req.body)
+})
+// update a board star
+server.patch('/boards/:board_id/star', (req, res) => {
+  db.get(`users[0].boards[${req.params.board_id - 1}]`)
+    .assign(req.body)
+    .write()
 })
 // update a board description
 server.patch('/boards/:board_id/description', (req, res) => {

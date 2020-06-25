@@ -5,7 +5,7 @@ class Board {
     this.descpition = "이것은 샘플 보드"
     this.background_image = ""
     this.is_starred = false
-    this.recent_open = new Date().toISOString()
+    this.recent_open = new Date()
     this.background_color = "rgb(0, 121, 191)"
     this.collaborators = [
       202001,

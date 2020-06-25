@@ -2,21 +2,21 @@
   "users": [
     {
       "id": 202001,
-      "first_name": "Kim",
+      "first_name": "Bae",
       "last_name": "DongWook",
       "password": 123123,
       "boards": [
         {
           "id": 1,
-          "board_name": "휴,...ㅠ",
+          "board_name": "개발자 배동선의 트렐로",
           "description": "THIST IS DATA FROM DB RESPONCED VIA SERVER orem ipsum dolor sit amet consectetur adipisicing elit. Porro, nesciunt! Eum, consectetur, assumenda quis voluptas quia a ex vero sint necessitatibus iusto quo harum. Voluptas aliquam sapiente voluptatem tempora doloribus?",
           "collaborators": [
             202001,
             202002
           ],
-          "recent_open": "2020-09-09 thr 13:21:12",
+          "recent_open": "2020-06-25T05:06:30.738Z",
           "is_starred": false,
-          "background_image": "https://images.unsplash.com/photo-1458071192875-3cb259d01593?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_image": "https://images.unsplash.com/photo-1581448454595-e0ab7bb076bd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
           "background_color": "",
           "activities": [
             {
@@ -26,82 +26,21 @@
           ],
           "lists": [
             {
+              "id": 3,
+              "name": "asdf",
+              "cards": []
+            },
+            {
               "id": 2,
               "name": "asdf",
               "cards": [
-                {
-                  "id": 6,
-                  "card_name": "fjy",
-                  "list_id": 2,
-                  "labels": [
-                    "df",
-                    "SD"
-                  ],
-                  "descpition": "",
-                  "members": [],
-                  "date_created": "Thu, 25 Jun 2020 02:56:22 GMT",
-                  "due_date": "",
-                  "sticker": [],
-                  "locY": 0
-                },
-                {
-                  "id": 7,
-                  "card_name": "asdf",
-                  "list_id": 3,
-                  "labels": [
-                    "df",
-                    "SD"
-                  ],
-                  "descpition": "",
-                  "members": [],
-                  "date_created": "Thu, 25 Jun 2020 03:01:19 GMT",
-                  "due_date": "",
-                  "sticker": [],
-                  "locY": 0
-                }
-              ]
-            },
-            {
-              "id": 3,
-              "name": "asdf",
-              "cards": [
-                {
-                  "id": 8,
-                  "card_name": "asdf",
-                  "list_id": 1,
-                  "labels": [
-                    "df",
-                    "SD"
-                  ],
-                  "descpition": "",
-                  "members": [],
-                  "date_created": "Thu, 25 Jun 2020 03:01:20 GMT",
-                  "due_date": "",
-                  "sticker": [],
-                  "locY": 0
-                }
+                null
               ]
             },
             {
               "id": 1,
               "name": "asdf",
-              "cards": [
-                {
-                  "id": 9,
-                  "card_name": "asdf",
-                  "list_id": 1,
-                  "labels": [
-                    "df",
-                    "SD"
-                  ],
-                  "descpition": "",
-                  "members": [],
-                  "date_created": "Thu, 25 Jun 2020 03:01:21 GMT",
-                  "due_date": "",
-                  "sticker": [],
-                  "locY": 0
-                }
-              ]
+              "cards": []
             }
           ]
         }

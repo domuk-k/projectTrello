@@ -9,7 +9,8 @@ const $ = (target) => document.querySelector(target)
 export const bindEvents = () => {
   // 메인 헤더
   // 보드 선택
-  $('.btn-board-selection').onclick = handlers.showBoards
+  $('.btn-boards-selection').onclick = handlers.showBoards
+  $('.btn-search-close').onclick = handlers.showBoards
   // 즐겨찾기
   $('.btn-favorite').onclick = handlers.toggleStar
   // 글로벌 카드 검색 인풋 //클래스로만 구현하자..
@@ -39,12 +40,29 @@ export const bindEvents = () => {
 }
 
 const handlers = {
-  showBoards() {
-    console.log("we have boards!")
+  async showBoards({ target }) {
+    $('.modal-boards-selection').classList.toggle('selection-active')
+    // stuff inside the modal
+    const res = await axios.get('/boards');
+    const allBoards = res.data;
+    const recentBoard = allBoards.sort((board1, board2) => board1.recent_open < board2.recent_open)[0]
+    let allBoardsElm = ''
+    let starredBoardsElm = ''
+    let recentBoardElm = `<div class="board-result-item"><span class="bg-squre modal-icon" style="background-image:url(${recentBoard.background_image})"></span><span class="board-li-elms">${recentBoard.board_name}</span></div>`
+    allBoards.forEach(board => {
+      allBoardsElm += `<div class="board-result-item"><span class="bg-squre modal-icon" style="background-image:url(${board.background_image})"></span><span class="board-li-elms">${board.board_name}</span></div>`
+      if (board.is_starred) starredBoardsElm += `<div class="board-result-item"><span class="bg-squre modal-icon" style="background-image:url(${board.background_image})"></span><span class="board-li-elms">${board.board_name}</span></div>`
+    })
+    $('.personnal-boards-loaded').innerHTML = `${allBoardsElm} `
+    $('.starred-boards-loaded').innerHTML = `${starredBoardsElm} `
+    $('.recent-boards-loaded').innerHTML = `${recentBoardElm} `
   },
-  toggleStar({ target }) {
+  async toggleStar({ target }) {
     target.classList.toggle('far')
     target.classList.toggle('fas')
+    const latestStateRes = await axios.get(`/boards/${state.currentBoard.id}`)
+    const latestBoard = latestStateRes.data
+    axios.patch(`/boards/${state.currentBoard.id}/star`, { is_starred: !latestBoard.is_starred })
   },
   openSearchInput({ target }) {
     target.parentElement.classList.add('search-active')

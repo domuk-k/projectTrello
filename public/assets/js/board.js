@@ -35,23 +35,42 @@ const template = {
     const $header = document.querySelector('.main-header');
     $header.innerHTML =
       ` <div class="header-left">
-        <button class="btn-home fas fa-home"></button>
-        <button class="btn-board-selection">Boards</button>
-
-        <div class="card-search">
-          <input class="card-search-input" type="text">
-          <i class="fas fa-search"></i>
-        </div>
-      </div>
-      <div class="header-logo"></div>
-      <div class="header-right">
-        <button class="btn-create-board fas fa-plus"></button>
-        <section class="my-profile" style="display:inline">
-          <button class="btn-my-profile-icon">${state.user.last_name.match(/[A-Z]/g).join("")}</button>
-          <div class="my-cards">
+          <button class="btn-home fas fa-home"></button>
+          <button class="btn-boards-selection">Boards</button>
+          <div class="modal-boards-selection">
+            <div class="board-search-input-container">
+            <input type="text" placeholder="Find boards by name">
+            <button class="btn-search-close"></button>
+            </div>
+            <div class="starred-boards-list">
+            <i class="far fa-star"></i>
+            <span>STARRED BOARDS</span> 
+            <div class="starred-boards-loaded"></div>
+            </div>
+            <div class="recent-boards-list">
+            <i class="far fa-clock"></i>
+            <span>RECENT BOARDS</span> 
+            <div class="recent-boards-loaded"></div>
+            </div>
+            <div class="personal-boards-list">
+            <i class="far fa-clipboard"></i>
+            <span>PERSONNAL BOARDS</span>
+            <div class="personnal-boards-loaded"></div>
+            </div>
           </div>
-        </section>
-      </div>
+          <div class="card-search">
+            <input class="card-search-input" type="text">
+            <i class="fas fa-search"></i>
+          </div>
+        </div> 
+          <div class="header-logo"></div>
+          <div class="header-right">
+            <button class="btn-create-board fas fa-plus"></button>
+            <section class="my-profile" style="display:inline">
+              <button class="btn-my-profile-icon">${state.user.last_name.match(/[A-Z]/g).join("")}</button>
+              <div class="my-cards"></div>
+            </section>
+          </div>
     `
   },
   subHeader() {
