@@ -26,7 +26,8 @@ const renderList = () => {
 
   let html = '';
   lists.forEach(list => {
-    html +=
+    if (list !== 'null') {
+      html +=
       `<div  class="list-wrapper">
       <div id="list-${list.id}" class="list" >
         <div class='list-content' draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
@@ -50,6 +51,7 @@ const renderList = () => {
         </div>
       </div>
     </div>`;
+    }
   });
 
   $mainWrapper.innerHTML = html;
@@ -58,6 +60,7 @@ const renderList = () => {
   lists.forEach(list => {
     if (!list.cards.length) return;
     list.cards.forEach(card => {
+      if (card !== null) {
       const targetList = document.querySelector(`#list-${list.id}`);
       targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
       <li id ="card-${card.id}" class="card-box">
@@ -68,6 +71,7 @@ const renderList = () => {
             </div>
           </div>
         </li>`
+      }
     });
   });
 };
@@ -114,18 +118,24 @@ const dataMethod = {
   },
   // 드래그 후 카드 추카
   async addDragCard(listId, card) {
-    const response = await axios.post(`/boards/1/lists/${listId}/cards/drag`, card);
-    const cardsData = await response.data;
+    const responseCards = await axios.post(`/boards/1/lists/${listId}/cards/drag`, card);
+    const cardsData = await responseCards.data;
     cardsAfterDrag = await cardsData;  
 
-    let _cards = await [];
- 
+    let _cards = [];
+    console.log(cardsAfterDrag);
+    
     [...cardBox.parentNode.children].forEach(cardNode => {
       _cards = [..._cards, cardsAfterDrag.find(_card => _card.id === +cardNode.id.split('-')[1])];
     });
-    await console.log(_cards);
+    console.log(_cards);
 
-    await dataMethod.afterCardDrangChangeData(_cards, listId);
+    // await dataMethod.afterCardDrangChangeData(_cards, listId);
+    await axios.delete(`/boards/1/lists/${listId}/cards/all`);
+    const response = await axios.post(`/boards/1/lists/${listId}/cards/all`, _cards);
+    const listsData = await response.data;
+    lists = await listsData;
+    renderList();
 
     
   },
@@ -134,7 +144,6 @@ const dataMethod = {
     const response = await axios.delete(`/boards/1/lists/${listId}/cards/${cardId}/drag`);
     const _card = await response.data;
     dragCard = _card;
-    renderList();
   },
 
   // 리스트 드래그 후 데이터 변환
@@ -142,8 +151,7 @@ const dataMethod = {
     await axios.delete('/boards/1/lists/all');
     const response = await axios.post('/boards/1/lists/all', _lists);
     const listsData = await response.data;
-    lists = listsData;
-    console.log(lists);
+    lists = await listsData;
     renderList();
   },
   // 카드 드래그 후 데이터 변환
@@ -152,7 +160,6 @@ const dataMethod = {
     const response = await axios.post(`/boards/1/lists/${listId}/cards/all`, _cards);
     const listsData = await response.data;
     lists = await listsData;
-    console.log(lists);
     renderList();
   }
 }
@@ -206,12 +213,12 @@ const mainEventHandlers = {
     cardBox = e.target.parentNode.parentNode;
     cardShadow = e.target.parentNode;
     cardContent = e.target;
-    cardShadow.removeChild(cardContent)
+    
     dragTarget = 'card';
 
     const listId = cardShadow.parentNode.parentNode.parentNode.parentNode.id.split('-')[1];
     const cardId = cardShadow.parentNode.id.split('-')[1];
-
+    cardShadow.removeChild(cardContent)
     dataMethod.removeDragCard(listId, cardId);
   },
   // 리스트 드래그
@@ -226,11 +233,12 @@ const mainEventHandlers = {
   },
   dragEnterCard(e) {
     if (dragTarget === 'card') {
-      // console.log('카드 드래그엔터', e.target, e.currentTarget);
+      console.log('카드 드래그엔터', e.target);
       if (e.target.className === 'list-header') e.target.nextElementSibling.firstElementChild.appendChild(cardBox);
-      if (e.target.className === 'card-box') e.target.parentNode.insertBefore(cardBox, e.target);
+      // if (e.target.className === 'card-box') e.target.parentNode.insertBefore(cardBox, e.target);
       if (e.target.className === 'card-add-box') e.target.previousElementSibling.appendChild(cardBox);
       if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.insertBefore(cardBox, e.target.parentNode.parentNode);
+      // if (e.target.className === 'card-shadow') e.target.parentNode.parentNode.insertBefore(cardBox, e.target.parentNode);
     }
     if (dragTarget === 'list') {
       // console.log('리스트 드래그엔터', e.target);
@@ -242,10 +250,14 @@ const mainEventHandlers = {
       if (e.target.className === 'list-header') e.target.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode);
       if (e.target.className === 'card-add-box') e.target.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode);
       if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode.parentNode);
+      if (e.target.className === 'card-shadow') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode);
       if (e.target.className === 'list-add-box') e.target.parentNode.previousElementSibling.appendChild(listBox);
+      if (e.target.className === 'list-add-button') listShadow.appendChild(listContent);
     }
   },
-  dropCard() {
+  dropCard(e) {
+    console.log(e);
+    
     if (dragTarget === 'card') {
       cardShadow.appendChild(cardContent);
       const listId = +cardBox.parentNode.parentNode.parentNode.id.split('-')[1];
@@ -318,14 +330,19 @@ const mainEventBindings = () => {
     if (e.target.matches('.list-content')) mainEventHandlers.dragList(e);
   };
   $main.ondragenter = e => {
+    e.preventDefault();
     mainEventHandlers.dragEnterCard(e);
   };
   $main.ondragover = e => {
     e.preventDefault();
   };
+  // $main.ondragend = e => {
+  //   e.preventDefault();
+  // };
   $main.ondrop = e => {
+    // e.preventDefault();
     // console.log('드랍', e.target, e.currentTarget);
-    mainEventHandlers.dropCard();
+    mainEventHandlers.dropCard(e);
   };
 
 };
