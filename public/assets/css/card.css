@@ -1,15 +1,18 @@
 .card-box {
+    min-height: 30px;
     width: 100%;
     background-color: #ebecf0;    
     list-style: none;
+    padding: 0px 3px;
 }
 .card-shadow {
-    width: 254px;
-    height: 30px;
-    background-color: rgba(250, 128, 114, 0.41);
+    width: 250px;
+    height: 100%;
+    background-color: rgba(115, 175, 194, 0.41);
     list-style: none;
-    margin: 3px auto;
+    margin: 7px auto;
     border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
     
 }
 .card-content {
@@ -20,8 +23,29 @@
     background-color: #fff;
     border: 0px;
     border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
 }
+.card-content:hover {
+    background-color: rgba(115, 175, 194, 0.41);
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    width: 100% 
+    line-height: 5px;
+}
+
 .card-remove-btn {
+    background-color: rgba(255,255,255, 0);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0);
+    margin: 5px;
+}
+.card-remove-btn:hover {
+  
+    background-color: rgba(43, 95, 110, 0.41);
     color: black;
 }
 .drag-shadow {
