@@ -3,7 +3,14 @@ import { state } from "./board.js"
 //State
 
 const renderSideMenu = {
-  initTab() {
+  async initTab() {
+    let activitiesLogElms = ''
+    state.activities.forEach(datum => {
+      activitiesLogElms += `<li><span class="log-name">${datum.name}님이 </span>
+                                <span class="log-act">${datum.act}</span>했습니다.
+                                <div class="log-value"> ${datum.value ? `바뀐 이름:${datum.value}` : ""} </div>
+                            </li>`
+    })
     document.querySelector('.side-menu').innerHTML =
       `
       <div class="main-tab-wrapper tab-wrapper-active">
@@ -18,7 +25,7 @@ const renderSideMenu = {
             About this board
           </li>
           <li class="btn-bg-tab"><span class="bg-squre" style="background-image: url(${state.currentBoard.background_image})"></span>Change Background</li>
-          <li><span class="sticker"></span>Stickers</li>
+          <li><span class="i-sticker"></span>Stickers</li>
           <li><i class="fas fa-cog"></i>More</li>
         </ul>
         <hr>
@@ -26,21 +33,15 @@ const renderSideMenu = {
           <i class="list-icon fas fa-list"></i>
           <h3 class="activity-header">Activity</h3>
           <ul class="activity-list">
+          ${activitiesLogElms}
           </ul>
         </div>
       </div>
       `
-    this.refreshLogs();
     this.bgSettingTab();
     this.aboutBoardTab();
   },
-  refreshLogs() {
-    let activitiesElms = ''
-    state.currentBoard.activities.forEach(activity => {
-      activitiesElms += `<li class="activity-item">${activity.act}:${activity.name}</li>`
-    })
-    document.querySelector('.activity-list').innerHTML = activitiesElms
-  },
+
   bgSettingTab() {
     //요소 만들기
     const bgTab = document.createElement('div')
@@ -99,4 +100,4 @@ const initSideMenu = async () => {
 }
 
 
-export { initSideMenu, getLIelems }
+export { initSideMenu, getLIelems, renderSideMenu }

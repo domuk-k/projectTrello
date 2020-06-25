@@ -33,7 +33,7 @@
   
 }
 .list-content{
-  background-color: #ebecf0;
+  background-color: rgb(235,236,240);
   border-radius: 3px;
   box-sizing: border-box;
   min-height: 50px;
@@ -42,8 +42,11 @@
   max-height: 100%;
   position: relative;
 }
-.list *{
-  border: 1px rgba(250, 128, 114, 0.041) solid;
+.list-header{
+  flex: 0 0 auto;
+  padding: 10px 8px;
+  position: relative;
+  min-height: 20px;
 }
 .list-header-name {
   overflow: hidden;
@@ -61,6 +64,7 @@
     text-transform: none;
     text-indent: 0px;
     text-shadow: none;
+    border: none;
 }
 .list-container {
   padding: 0;

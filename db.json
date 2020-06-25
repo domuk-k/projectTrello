@@ -2,26 +2,248 @@
   "users": [
     {
       "id": 202001,
+      "full_name": "DongWook, Bae",
       "first_name": "Bae",
       "last_name": "DongWook",
       "password": 123123,
       "boards": [
         {
           "id": 1,
-          "board_name": "개발자 배동선의 트렐로",
+          "board_name": "진짜?",
           "description": "THIST IS DATA FROM DB RESPONCED VIA SERVER orem ipsum dolor sit amet consectetur adipisicing elit. Porro, nesciunt! Eum, consectetur, assumenda quis voluptas quia a ex vero sint necessitatibus iusto quo harum. Voluptas aliquam sapiente voluptatem tempora doloribus?",
           "collaborators": [
             202001,
             202002
           ],
           "recent_open": "2020-06-25T05:06:30.738Z",
+          "is_starred": true,
+          "background_image": "https://images.unsplash.com/photo-1578094415854-9b177e586c01?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_color": "",
+          "activities": [
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 이름을 변경",
+              "value": "진짜?",
+              "recent_value": "진짜?"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "ㄹㅇㅎ 카드를 sadfd 리스트에 추가 "
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "리스트를 제거"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "리스트를 추가"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드를 즐겨찾기를 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드를 즐겨찾기를 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "리스트를 추가"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "ㅁㄴㅇㄻ 카드를 ㄹㅇ 리스트에 추가 "
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "ㄻㄴㅇㄹ 카드를 ㄹㅇ 리스트에 추가 "
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "카드를 제거"
+            }
+          ],
+          "lists": [
+            {
+              "id": 1,
+              "name": "sadfd",
+              "cards": [
+                {
+                  "id": 3,
+                  "card_name": "ㄴㅇㄹㅇㄴ",
+                  "list_id": 1,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "date_created": "Thu, 25 Jun 2020 09:16:28 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                },
+                {
+                  "id": 4,
+                  "card_name": "김돔묵",
+                  "list_id": 1,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "date_created": "Thu, 25 Jun 2020 09:16:36 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                },
+                {
+                  "id": 6,
+                  "card_name": "ㄹㅇㅎ",
+                  "list_id": 1,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "date_created": "Thu, 25 Jun 2020 09:17:43 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "name": "ㄴㅇㄻㄴㅇㄹㄴㅁㄹ",
+              "cards": []
+            },
+            {
+              "id": 3,
+              "name": "dsafdsa",
+              "cards": []
+            },
+            {
+              "id": 4,
+              "name": "ㄹㅇ",
+              "cards": [
+                {
+                  "id": 7,
+                  "card_name": "ㅁㄴㅇㄻ",
+                  "list_id": 4,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "date_created": "Thu, 25 Jun 2020 09:52:46 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                },
+                {
+                  "id": 9,
+                  "card_name": "ㄻㄴㅇㄹ",
+                  "list_id": 4,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "date_created": "Thu, 25 Jun 2020 09:52:51 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "board_name": "2222",
+          "description": "THIST IS DATA FROM DB RESPONCED VIA SERVER orem ipsum dolor sit amet consectetur adipisicing elit. Porro, nesciunt! Eum, consectetur, assumenda quis voluptas quia a ex vero sint necessitatibus iusto quo harum. Voluptas aliquam sapiente voluptatem tempora doloribus?",
+          "collaborators": [
+            202001,
+            202002
+          ],
+          "recent_open": "2020-06-25T05:06:12.738Z",
           "is_starred": false,
-          "background_image": "https://images.unsplash.com/photo-1581448454595-e0ab7bb076bd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_image": "https://images.unsplash.com/photo-1574618448809-55c52872d207?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
           "background_color": "",
           "activities": [
             {
               "act": "added a card",
               "name": "치과가기"
+            },
+            {
+              "name": "state.user.full_name"
+            }
+          ],
+          "lists": []
+        },
+        {
+          "id": 3,
+          "board_name": "3333",
+          "description": "THIST IS DATA FROM DB RESPONCED VIA SERVER orem ipsum dolor sit amet consectetur adipisicing elit. Porro, nesciunt! Eum, consectetur, assumenda quis voluptas quia a ex vero sint necessitatibus iusto quo harum. Voluptas aliquam sapiente voluptatem tempora doloribus?",
+          "collaborators": [
+            202001,
+            202002
+          ],
+          "recent_open": "2020-06-25T05:06:31.738Z",
+          "is_starred": false,
+          "background_image": "https://images.unsplash.com/photo-1574618448809-55c52872d207?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_color": "",
+          "activities": [
+            {
+              "act": "added a card",
+              "name": "치과가기"
+            },
+            {
+              "name": "state.user.full_name"
+            }
+          ],
+          "lists": []
+        },
+        {
+          "id": 4,
+          "board_name": "4444",
+          "description": "THIST IS DATA FROM DB RESPONCED VIA SERVER orem ipsum dolor sit amet consectetur adipisicing elit. Porro, nesciunt! Eum, consectetur, assumenda quis voluptas quia a ex vero sint necessitatibus iusto quo harum. Voluptas aliquam sapiente voluptatem tempora doloribus?",
+          "collaborators": [
+            202001,
+            202002
+          ],
+          "recent_open": "2020-06-25T05:07:30.738Z",
+          "is_starred": false,
+          "background_image": "https://images.unsplash.com/photo-1574618448809-55c52872d207?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_color": "",
+          "activities": [
+            {
+              "act": "added a card",
+              "name": "치과가기"
+            },
+            {
+              "name": "state.user.full_name"
             }
           ],
           "lists": []

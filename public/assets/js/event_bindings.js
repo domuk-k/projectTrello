@@ -63,6 +63,10 @@ const handlers = {
     const latestStateRes = await axios.get(`/boards/${state.currentBoard.id}`)
     const latestBoard = latestStateRes.data
     axios.patch(`/boards/${state.currentBoard.id}/star`, { is_starred: !latestBoard.is_starred })
+    refreshActivityLog({
+      name: state.user.full_name,
+      act: "보드를 즐겨찾기를 변경",
+    })
   },
   openSearchInput({ target }) {
     target.parentElement.classList.add('search-active')
@@ -76,13 +80,20 @@ const handlers = {
     target.parentElement.classList.add('board-name-active')
     target.nextElementSibling.select();
   },
-  endSettingBoardName(e) {
+  async endSettingBoardName(e) {
     if (!e.key) e.target.parentElement.classList.remove('board-name-active')
     if (e.keyCode !== 13) return;
     const nameBlock = e.target.previousElementSibling
     nameBlock.textContent = e.target.value
     e.target.parentElement.classList.remove('board-name-active')
-    axios.patch('/boards/1/board_name', { board_name: e.target.value })
+    await refreshActivityLog({
+      name: state.user.full_name,
+      act: '보드의 이름을 변경',
+      value: e.target.value,
+      recent_value: state.currentBoard.board_name
+    })
+    await axios.patch(`/boards/${state.defaultBoardId}/board_name`, { board_name: e.target.value })
+    state.currentBoard.board_name = e.target.value
   },
   mainTab(e) {
     tabMode = "main"
@@ -105,13 +116,33 @@ const handlers = {
     state.currentBoard.background_image = target.dataset.source
     template.background()
     document.querySelector('.bg-squre').style.backgroundImage = `url(${target.dataset.src})`
-    axios.patch(`/boards/${state.defaultBoardId}`, { background_image: target.dataset.source })
+    axios.patch(`/boards/${state.currentBoard.id}`, { background_image: target.dataset.source })
+    refreshActivityLog({
+      name: state.user.full_name,
+      act: "보드의 배경사진을 변경",
+    })
   },
   aboutTab() {
     document.querySelector('.tab-wrapper-active').classList.remove('tab-wrapper-active')
     $('.about-tab-wrapper').classList.add('tab-wrapper-active')
   }
 }
+
+const refreshActivityLog = async (payload) => {
+  await axios.post(`/boards/${state.currentBoard.id}/activities`, payload)
+  state.activities = [...state.activities, payload]
+
+  let activitiesLogElms = ''
+  state.activities.forEach(datum => {
+    activitiesLogElms += `<li><span class="log-name">${datum.name}님이 </span>
+                              <span class="log-act">${datum.act}</span>했습니다.
+                              <div class="log-value"> ${datum.value ? `바뀐 이름:${datum.value}` : ""} </div>
+                          </li>`
+  })
+
+  $('.activity-list').innerHTML = activitiesLogElms
+}
+
 const attachPhotoUrlsAndLazyLoad = async () => {
   // bgTab이 열릴 때 요청해서 data-src에 담아준다.
   if (!photoUrls.length) await getPhotos() // photoUrl에 재할당
@@ -145,4 +176,4 @@ const getPhotos = async () => {
   photoUrls = res.data.map(photo => photo.urls)
 }
 
-export { attachPhotoUrlsAndLazyLoad, getPhotos, photoUrls }
+export { attachPhotoUrlsAndLazyLoad, getPhotos, refreshActivityLog, photoUrls }
