@@ -208,6 +208,18 @@ server.patch('/boards/:board_id/lists/:list_id', (req, res) => {
     .write()
   res.send(req.body)
 })
+
+// update a list list_name
+server.patch('/boards/:board_id/lists/:list_id/list_name', (req, res) => {
+  const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
+  const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
+
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}]`)
+    .assign(req.body)
+    .write();
+
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
+})
 // update a card
 server.patch('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards[${req.params.card_id - 1}]`)
