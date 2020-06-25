@@ -22,8 +22,8 @@
   white-space: nowrap;
 }
 .list{
-  background-color:rgba(250, 128, 114, 0.41);
-  border-radius: 3px;
+  background-color: rgba(115, 175, 194, 0.41);
+  border-radius: 6px;
   box-sizing: border-box;
   min-height: 50px;
   display: flex;
@@ -34,7 +34,7 @@
 }
 .list-content{
   background-color: #ebecf0;
-  border-radius: 3px;
+  border-radius: 5px;
   box-sizing: border-box;
   min-height: 50px;
   display: flex;
@@ -43,51 +43,90 @@
   position: relative;
 }
 .list *{
-  border: 1px rgba(250, 128, 114, 0.041) solid;
+  /* border: 1px rgba(250, 128, 114, 0.041) solid; */
 }
 .list-header-name {
+  cursor: pointer;
+  line-height: 16px;
   overflow: hidden;
   overflow-wrap: break-word;
   height: 28px;
   background: transparent;
   border-radius: 3px;
   box-shadow: none;
+  font-size: 1.2em;
   font-weight: 600;
-  margin: -4px 0;
+  margin: 6px 0 1px 5px;
   resize: none;
   padding: 4px 8px;
-  letter-spacing: normal;
+  border: 1px rgba(250, 128, 114, 0.0);
+  /* letter-spacing: normal;
     word-spacing: normal;
     text-transform: none;
     text-indent: 0px;
-    text-shadow: none;
+    text-shadow: none; */
+}
+.list-header-name:checked {
+  border: 1px rgba(250, 128, 114, 1) solid;
 }
 .list-container {
   padding: 0;
   margin: 0;
 }
 .remove-list-btn {
+  cursor: pointer;
+  background-color: rgba(250, 128, 114, 0);
+  font-size: 1.5em;
   color: black;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 3px;
+  right: 5px;
+}
+.remove-list-btn:hover {
+  background-color: rgba(6, 24, 56, 0.08);
 }
 
 /* 리스트 추가 박스 */
 /* 카드추가 박스랑 중복 통일 하기 */
 .list-add-box {
-  font-size: 1.5em;
-  line-height: 26px;
-  height: 40px;
-  width: 270px;
-  min-height: 32px;
-  background-color: rgba(0,0,0,.08);
-  cursor: pointer;
-  border-radius: 3px;
-  margin-right: 8px;
+  line-height: 35px;
+  /* height: 40px;
+  width: 270px; */
   position: relative;
-  border-radius: 3px;
+  border-radius: 10px;
   box-sizing: border-box;
+  font-size: 1.5em;
+}
+.open-add-mod-btn {
+  width: 270px;
+  height: 40px;
+  background-color: rgba(199, 61, 61, 0.38);
+  color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+.open-add-mod-btn:hover {
+  background-color: rgba(199, 61, 61, 0.58);
+}
+.add-mod
+
+.card-add-box {
+  padding: 5px;
+}
+.list-open-add-mod-btn
+{
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  padding-bottom: 5px;
+  color: black;
+  width: 250px;
+  height: 100%;
+}
+.list-open-add-mod-btn:hover {
+  background-color: rgba(6, 24, 56, 0.08);
 }
 
 .add-mod {
@@ -96,15 +135,32 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 80px;
+  height: 95px;
+  border-radius: 5px;
+}
+.list-name-box {
+  display: inline-block;
+  margin: 5px;
+  border: blueviolet 2px solid;
+  width: 255px;
+  height: 36px;
 }
 .list-add-btn {
   background-color: rgb(165, 27, 27);
   cursor: pointer;
+  margin-left: 5px;
+}
+.list-add-btn:hover {
+  background-color: rgb(182, 65, 65);
 }
 .add-mod-close-btn {
-  width: 24px;
-  height: 25px;
+  margin-left: 10px;
+  font-size: 1.5em;
+  width: 30px;
+  height: 15pxpx;
+}
+.add-mod-close-btn: hover {
+  background-color: rgba(9,30,66,0.08);
 }
 
 /* 카드 추가 박스 */
@@ -123,24 +179,36 @@
   border-radius: 3px;
   box-sizing: border-box;
 }
+.card-add-mod-btn {
+
+}
+.card-add-btn:hover {
+  background-color: rgba(9,30,66,0.08);
+}
 
 .card-name-box {
-  width: 256px;
+  width: 248px;
   height: 66px;
+  margin-left: 6px;
+  border: rgba(250, 128, 114, 0.0);
+  box-shadow: 0 1px 0 rgba(9,30,66,.25);
+  border-radius: 5px;
 }
 
 .card-add-mod {
-  width: 270px;
+  width: 262px;
   background-color: #ebecf0;
   position: absolute;
   top: 0;
   left: 0;
+  border-radius: 0 0 5px 5px;
   /* height: 80px; */
 }
 
 .card-add-btn {
   background-color: rgb(165, 27, 27);
   cursor: pointer;
+  margin: 7px;
 }
 
 .card-add-mod-close-btn {
