@@ -9,7 +9,7 @@
       "boards": [
         {
           "id": 1,
-          "board_name": "1번째",
+          "board_name": "증말?",
           "description": "THIST IS DATA FROM DB RESPONCED VIA SERVER orem ipsum dolor sit amet consectetur adipisicing elit. Porro, nesciunt! Eum, consectetur, assumenda quis voluptas quia a ex vero sint necessitatibus iusto quo harum. Voluptas aliquam sapiente voluptatem tempora doloribus?",
           "collaborators": [
             202001,
@@ -17,30 +17,144 @@
           ],
           "recent_open": "2020-06-25T05:06:30.738Z",
           "is_starred": true,
-          "background_image": "https://images.unsplash.com/photo-1567999913778-ea4804c80671?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_image": "https://images.unsplash.com/photo-1564974429-3d7f9eb21190?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
           "background_color": "",
           "activities": [
             {
               "name": "DongWook, Bae",
               "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드를 즐겨찾기를 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드를 즐겨찾기를 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 이름을 변경",
+              "value": "1번째??",
+              "recent_value": "1번째"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 이름을 변경",
+              "value": "입니다",
+              "recent_value": "1번째??"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 이름을 변경",
+              "value": "증말?",
+              "recent_value": "입니다"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "리스트를 추가"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "리스트를 추가"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            },
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
             }
           ],
-          "lists": []
+          "lists": [
+            {
+              "id": 1,
+              "name": "아름다워",
+              "cards": []
+            },
+            {
+              "id": 2,
+              "name": "증말",
+              "cards": [
+                {
+                  "id": 1,
+                  "card_name": "증말",
+                  "list_id": 2,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "descpition": "",
+                  "members": [],
+                  "date_created": "Thu, 25 Jun 2020 13:35:38 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                }
+              ]
+            }
+          ]
         },
         {
           "id": 2,
-          "board_name": "배준선의 새로운 트렐로",
+          "board_name": "새로운 보드",
           "descpition": "이것은 샘플 보드",
           "background_color": "rgb(0, 121, 191)",
-          "background_image": "",
+          "background_image": "https://images.unsplash.com/photo-1566935727941-4f63db037eaa?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
           "is_starred": false,
-          "recent_open": "2020-06-25T13:19:24.474Z",
+          "recent_open": "2020-06-25T13:36:13.072Z",
           "collaborators": [
             202001,
             202002
           ],
-          "list": [],
-          "activities": []
+          "lists": [
+            {
+              "id": 1,
+              "name": "to do",
+              "cards": []
+            },
+            {
+              "id": 2,
+              "name": "doing",
+              "cards": []
+            },
+            {
+              "id": 3,
+              "name": "done",
+              "cards": []
+            }
+          ],
+          "activities": [
+            {
+              "name": "DongWook, Bae",
+              "act": "보드의 배경사진을 변경"
+            }
+          ]
         }
       ]
     }

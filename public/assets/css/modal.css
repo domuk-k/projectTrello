@@ -2,6 +2,7 @@ body {
     position: relative;
 }
 .modal-wrapper{
+    display: none;
     background-color: rgb(233, 165, 165);
     position: absolute;
     top: 0;
@@ -11,6 +12,7 @@ body {
     background-color: rgba(9, 9, 9, 0.7);
 }
 .modal-box {
+
     background-color: blueviolet;
     width: 60vw;
 }

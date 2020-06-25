@@ -103,6 +103,7 @@ const handlers = {
     }
   },
   async createNewBoard() {
+    if (!$('.board-setting').value.trim()) return;
     const newBoard = new Board(Math.max(...state.boards.map(board => board.id), 0) + 1, `${$('.board-setting').value}`)
     state.boards.push(newBoard)
     state.currentBoard = newBoard
