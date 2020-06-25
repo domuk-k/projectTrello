@@ -3,7 +3,8 @@ let state = {
   user: {},
   boards: [],
   defaultBoardId: 1,
-  currentBoard: {}
+  currentBoard: {},
+  activities: []
 }
 
 // DOM picks
@@ -77,8 +78,9 @@ const template = {
     document.querySelector('.sub-header').innerHTML =
       ` <div class="sub-header-left">    
         <span class="board-name">${state.currentBoard.board_name}</span>
-        <textarea class="board-name-input" maxlength=10>${state.currentBoard.board_name}</textarea>
-        <div class="btn-favorite favorite far fa-star"></div>
+        <textarea class="board-name-input" maxlength=12>${state.currentBoard.board_name}</textarea>
+        <div class="btn-favorite favorite 
+        ${state.currentBoard.is_starred ? "fas fa-star" : "far fa-star"}"></div>
         <button class="btn-invite">Invite</button>
       </div>
       <div class="sub-header-right">
@@ -88,6 +90,7 @@ const template = {
     `
   }
 }
+
 
 const render = () => {
   template.init()
@@ -100,6 +103,7 @@ const getBoard = async () => {
   state.user = _user
   state.boards = _user.boards
   state.currentBoard = state.boards[state.defaultBoardId - 1]
+  state.activities = state.currentBoard.activities
 }
 
 const initBoard = async () => {

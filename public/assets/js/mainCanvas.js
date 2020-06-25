@@ -1,5 +1,6 @@
-// import { header } from "./header.js"
+import { state } from "./board.js"
 import { User, Board, Card, List } from "./constructors.js"
+import { refreshActivityLog } from './event_bindings.js'
 
 
 const $listNameBox = document.querySelector('.list-name-box');
@@ -28,7 +29,7 @@ const renderList = () => {
   lists.forEach(list => {
     if (list !== 'null') {
       html +=
-      `<div  class="list-wrapper">
+        `<div  class="list-wrapper">
       <div id="list-${list.id}" class="list" >
         <div class='list-content' draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
           <div class="list-header">
@@ -61,8 +62,8 @@ const renderList = () => {
     if (!list.cards.length) return;
     list.cards.forEach(card => {
       if (card !== null) {
-      const targetList = document.querySelector(`#list-${list.id}`);
-      targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
+        const targetList = document.querySelector(`#list-${list.id}`);
+        targetList.firstElementChild.firstElementChild.nextElementSibling.innerHTML += `
       <li id ="card-${card.id}" class="card-box">
         <div class="card-shadow">
           <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
@@ -80,7 +81,7 @@ const renderList = () => {
 // 통신
 const dataMethod = {
   // 초기데이타 get
-  async getMainData () {
+  async getMainData() {
     const responseLists = await axios.get(`/boards/1/lists`);
     const listData = await responseLists.data;
     lists = listData;
@@ -92,39 +93,55 @@ const dataMethod = {
     const listData = await response.data
     lists = [...lists, listData]
     renderList();
+    refreshActivityLog({
+      name: state.user.full_name,
+      act: `리스트를 추가`,
+    })
   },
   // 리스트 제거
   async removeList(listId) {
-    const response = await axios.delete(`boards/1/lists/${listId}`, { id: listId})
+    const response = await axios.delete(`boards/1/lists/${listId}`, { id: listId })
     const removedlists = await response.data
     lists = removedlists;
     renderList();
+    refreshActivityLog({
+      name: state.user.full_name,
+      act: `리스트를 제거`,
+    })
   },
 
   // 카드 추가
   async addCard(listId, card) {
     console.log(listId);
-    const response = await axios.post(`/boards/1/lists/${listId}/cards`, card);
+    const response = await axios.post(`/boards/${state.currentBoard.id}/lists/${listId}/cards`, card);
     const listsData = await response.data;
     lists = await listsData;
     renderList();
+    refreshActivityLog({
+      name: state.user.full_name,
+      act: `${card.card_name} 카드를 ${state.currentBoard.lists.find(list => list.id === listId).name} 리스트에 추가 `,
+    })
   },
   // 카드 제거
   async removeCard(listId, cardId) {
-    const response = await axios.delete(`/boards/1/lists/${listId}/cards/${cardId}`);
+    const response = await axios.delete(`/boards/${state.currentBoard.id}/lists/${listId}/cards/${cardId}`);
     const _lists = await response.data;
     lists = _lists;
     renderList();
+    refreshActivityLog({
+      name: state.user.full_name,
+      act: `카드를 제거`,
+    })
   },
   // 드래그 후 카드 추카
   async addDragCard(listId, card) {
     const responseCards = await axios.post(`/boards/1/lists/${listId}/cards/drag`, card);
     const cardsData = await responseCards.data;
-    cardsAfterDrag = await cardsData;  
+    cardsAfterDrag = await cardsData;
 
     let _cards = [];
     console.log(cardsAfterDrag);
-    
+
     [...cardBox.parentNode.children].forEach(cardNode => {
       _cards = [..._cards, cardsAfterDrag.find(_card => _card.id === +cardNode.id.split('-')[1])];
     });
@@ -137,7 +154,7 @@ const dataMethod = {
     lists = await listsData;
     renderList();
 
-    
+
   },
   // 드래그 후 카드 제거
   async removeDragCard(listId, cardId) {
@@ -173,7 +190,7 @@ const mainEventHandlers = {
   },
   openAddMod(target) {
     console.log('open add mod');
-    
+
     target.nextElementSibling.style.display = 'block';
   },
 
@@ -193,7 +210,7 @@ const mainEventHandlers = {
     const listId = +_listId.split('-')[1];
     let cardsAll = [];
     let cardsArray = [];
- 
+
     lists.forEach(list => {
       cardsArray = list.cards;
       cardsAll = [...cardsAll, ...cardsArray]
@@ -258,7 +275,7 @@ const mainEventHandlers = {
   },
   dropCard(e) {
     console.log(e);
-    
+
     if (dragTarget === 'card') {
       cardShadow.appendChild(cardContent);
       cardShadow.style.height = `100%`;

@@ -1,7 +1,8 @@
 .side-menu{
   width: 340px;
   height: 98vh;
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(244,245,247);
+  
 
   margin: 0;
   overflow-y: scroll;
@@ -24,6 +25,9 @@
 .btn-menu-show{
   transform: translate3d(0,6px,0);
 }
+
+
+
 .main-tab-header{
   height: 44px;
   text-align: center;
@@ -85,7 +89,8 @@ margin:  0 10px 0 0;
 }
 
 
-.bg-squre,.sticker{
+.bg-squre,
+.i-sticker{
   display: inline-block;
   width: 18px;
   height: 18px;
@@ -139,7 +144,7 @@ margin:  0 10px 0 0;
   padding: 0;
   margin: 0;
   width: 300px;
-  height: 700px;
+  height: 98vh;
   padding-top: 60px;
 
   overflow: scroll;
@@ -225,9 +230,28 @@ display: inline;
 background-color: springgreen;
 height: 200px;
 }
+.activity-list{
+  padding-left: 30px;
+  margin-top:15px;
+  height: 380px;
+  overflow-y: scroll;
 
+  font-weight: 400;
+  font-size: 16px;
+}
+.activity-list li{
+  margin-bottom: 13px;
 
-.sticker{
+}
+.log-act{
+  color: dodgerblue;
+}
+.log-value{
+  font-size: 14px;
+  color: rgb(161, 161, 161);
+}
+
+.i-sticker{
   background-size: contain;
   background-image: url(https://image.flaticon.com/icons/png/512/202/202680.png);  
 }

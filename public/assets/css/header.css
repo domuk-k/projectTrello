@@ -7,17 +7,17 @@
 
 ::-webkit-scrollbar {
   background: transparent;
-  width: 8px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: transparent;
-  background-color: rgb(184, 184, 184);
+  background-color: rgba(216, 216, 216, 0.87);
   scrollbar-track-color: transparent;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
-h1,h2,h3{
+h1,h2,h3,ul{
   margin: 0;
   font-weight: 500;
 }
@@ -28,6 +28,7 @@ body{
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
+  color: rgb(61, 61, 61);
 }
 body::-webkit-scrollbar-track {
   background-color: transparent;
@@ -78,7 +79,7 @@ button{
   width: 15%;
 
 }
-.header-left button{
+.header-left [class^="btn"]{
   margin-right: 3px;
 }
 
