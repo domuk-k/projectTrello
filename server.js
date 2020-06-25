@@ -127,6 +127,17 @@ server.post('/boards/:board_id/lists/:list_id/cards', (req, res) => {
 
   res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
 })
+// push a card after drag
+server.post('/boards/:board_id/lists/:list_id/cards/drag', (req, res) => {
+  const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
+  const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
+
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards`)
+    .push(req.body)
+    .write()
+
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards`).value());
+})
 // push lists
 server.post('/boards/:board_id/lists/all', (req, res) => {
   req.body.forEach( list => {
@@ -207,24 +218,30 @@ server.delete('/boards/:board_id/lists/:list_id', (req, res) => {
 // remove a card
 server.delete('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
   const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
-  console.log(lists);
-  
   const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
-  console.log(+req.params.list_id);
-  
-  console.log(listIndex);
-  
   const cards = db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards`).value();
-  console.log(cards);
   const cardIndex = cards.findIndex(card => card.id === +req.params.card_id);
-  
-  
+
   db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards`)
     .remove(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards[${cardIndex}]`).value())
     .last()
     .write()
 
   res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value());
+})
+// remove a card after drag
+server.delete('/boards/:board_id/lists/:list_id/cards/:card_id/drag', (req, res) => {
+  const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
+  const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
+  const cards = db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards`).value();
+  const cardIndex = cards.findIndex(card => card.id === +req.params.card_id);
+
+  res.send(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards[${cardIndex}]`).value());
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards`)
+    .remove(db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards[${cardIndex}]`).value())
+    .last()
+    .write();
+
 })
 // remove lists
 server.delete('/boards/:board_id/lists/all', (req, res) => {
