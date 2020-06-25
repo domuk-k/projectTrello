@@ -13,9 +13,12 @@ let lists = [];
 let cardBox = {};
 let cardShadow = {};
 let cardContent = {};
+let listBox = {};
 let listShadow = {};
 let listContent = {};
 let dragTarget = '';
+let dragCard = {};
+let cardsAfterDrag = [];
 
 // 리스트랜더
 const renderList = () => {
@@ -95,9 +98,9 @@ const dataMethod = {
   },
 
   // 카드 추가
-  async addCard(listId, newCard) {
+  async addCard(listId, card) {
     console.log(listId);
-    const response = await axios.post(`/boards/1/lists/${listId}/cards`, newCard);
+    const response = await axios.post(`/boards/1/lists/${listId}/cards`, card);
     const listsData = await response.data;
     lists = await listsData;
     renderList();
@@ -107,6 +110,30 @@ const dataMethod = {
     const response = await axios.delete(`/boards/1/lists/${listId}/cards/${cardId}`);
     const _lists = await response.data;
     lists = _lists;
+    renderList();
+  },
+  // 드래그 후 카드 추카
+  async addDragCard(listId, card) {
+    const response = await axios.post(`/boards/1/lists/${listId}/cards/drag`, card);
+    const cardsData = await response.data;
+    cardsAfterDrag = await cardsData;  
+
+    let _cards = await [];
+ 
+    [...cardBox.parentNode.children].forEach(cardNode => {
+      _cards = [..._cards, cardsAfterDrag.find(_card => _card.id === +cardNode.id.split('-')[1])];
+    });
+    await console.log(_cards);
+
+    await dataMethod.afterCardDrangChangeData(_cards, listId);
+
+    
+  },
+  // 드래그 후 카드 제거
+  async removeDragCard(listId, cardId) {
+    const response = await axios.delete(`/boards/1/lists/${listId}/cards/${cardId}/drag`);
+    const _card = await response.data;
+    dragCard = _card;
     renderList();
   },
 
@@ -124,7 +151,7 @@ const dataMethod = {
     await axios.delete(`/boards/1/lists/${listId}/cards/all`);
     const response = await axios.post(`/boards/1/lists/${listId}/cards/all`, _cards);
     const listsData = await response.data;
-    lists = listsData;
+    lists = await listsData;
     console.log(lists);
     renderList();
   }
@@ -157,15 +184,12 @@ const mainEventHandlers = {
     const listId = +_listId.split('-')[1];
     let cardsAll = [];
     let cardsArray = [];
-    console.log(cardsAll);
-    console.log(lists.map(list => list.cards));
-    
-    lists.forEach(list => { 
+ 
+    lists.forEach(list => {
       cardsArray = list.cards;
       cardsAll = [...cardsAll, ...cardsArray]
     });
-    // console.log(lists.map(list => list.cards));
-    
+
     const generatedCardId = () => (cardsAll.length ? Math.max(...cardsAll.map(card => card.id)) + 1 : 1);
     const newCard = new Card(generatedCardId(), cardName, listId);
     dataMethod.addCard(listId, newCard)
@@ -185,13 +209,15 @@ const mainEventHandlers = {
     cardShadow.removeChild(cardContent)
     dragTarget = 'card';
 
-    const listId = cardShadow.parentNode.parentNode.parentNode.parentNode.id;
-    const cardId = cardShadow.parentNode.id;
-    dataMethod.removeCard(cardId, listId)
+    const listId = cardShadow.parentNode.parentNode.parentNode.parentNode.id.split('-')[1];
+    const cardId = cardShadow.parentNode.id.split('-')[1];
+
+    dataMethod.removeDragCard(listId, cardId);
   },
   // 리스트 드래그
   dragList(e) {
     // console.log('리스트 드래그스타트', e.target);
+    listBox = e.target.parentNode.parentNode;
     listShadow = e.target.parentNode;
     listContent = e.target;
     listShadow.style.height = `${listShadow.getBoundingClientRect().height}px`;
@@ -201,39 +227,30 @@ const mainEventHandlers = {
   dragEnterCard(e) {
     if (dragTarget === 'card') {
       // console.log('카드 드래그엔터', e.target, e.currentTarget);
-      if (e.target.className === 'list-header') {
-        e.target.nextElementSibling.firstElementChild.appendChild(cardBox);
-      }
-      if (e.target.className === 'card-box') {
-        e.target.parentNode.insertBefore(cardBox, e.target);
-        e.target.parentNode.insertBefore(cardBox, e.target);
-      }
+      if (e.target.className === 'list-header') e.target.nextElementSibling.firstElementChild.appendChild(cardBox);
+      if (e.target.className === 'card-box') e.target.parentNode.insertBefore(cardBox, e.target);
       if (e.target.className === 'card-add-box') e.target.previousElementSibling.appendChild(cardBox);
+      if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.insertBefore(cardBox, e.target.parentNode.parentNode);
     }
     if (dragTarget === 'list') {
       // console.log('리스트 드래그엔터', e.target);
-      if (e.target.className === 'list') e.target.parentNode.parentNode.insertBefore(listShadow.parentNode, e.target.parentNode)
-      if (e.target.className === 'list-wrapper') e.target.parentNode.insertBefore(listShadow.parentNode, e.target);
+      if (e.target.className === 'list') e.target.parentNode.parentNode.insertBefore(listBox, e.target.parentNode)
+      if (e.target.className === 'list-wrapper') e.target.parentNode.insertBefore(listBox, e.target);
+      if (e.target.className === 'list-add-wrapper') e.target.previousElementSibling.appendChild(listBox);
+      if (e.target.className === 'main') e.target.firstElementChild.appendChild(listBox);
+      if (e.target.className === 'card-box') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode);
+      if (e.target.className === 'list-header') e.target.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode);
+      if (e.target.className === 'card-add-box') e.target.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode);
+      if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode.parentNode);
+      if (e.target.className === 'list-add-box') e.target.parentNode.previousElementSibling.appendChild(listBox);
     }
   },
   dropCard() {
     if (dragTarget === 'card') {
       cardShadow.appendChild(cardContent);
-      const listId = cardShadow.parentNode.parentNode.parentNode.id.split('-')[1];
-      
-      let cardss = lists[lists.findIndex(list => list.id === +listId)].cards;
-      let _cards = [];
-      
-      console.log(cardShadow.parentNode.children);
-      
-      
-      [...cardShadow.parentNode.children].forEach(cardNode => {
-        _cards = [..._cards, cardss.find(_card => _card.id === +cardNode.parentNode.id.split('-')[1])];
-      });
-      console.log(_cards);
-      
-      dataMethod.afterCardDrangChangeData(_cards, listId);
+      const listId = +cardBox.parentNode.parentNode.parentNode.id.split('-')[1];
 
+      dataMethod.addDragCard(listId, dragCard);
     }
 
     if (dragTarget === 'list') {

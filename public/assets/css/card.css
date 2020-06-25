@@ -6,9 +6,11 @@
 .card-shadow {
     width: 254px;
     height: 30px;
-    background-color: rgb(49, 41, 41);    
+    background-color: rgba(250, 128, 114, 0.41);
     list-style: none;
     margin: 3px auto;
+    border-radius: 3px;
+    
 }
 .card-content {
     width: 100%;
@@ -16,6 +18,8 @@
     display: flex;
     justify-content: space-between;
     background-color: #fff;
+    border: 0px;
+    border-radius: 3px;
 }
 .card-remove-btn {
     color: black;
