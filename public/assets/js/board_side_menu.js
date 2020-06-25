@@ -73,7 +73,13 @@ const renderSideMenu = {
       <div class="board-user">${state.user.last_name} ${state.user.first_name}</div>
       <span class="about-tab-sub-title-description"><i class="fas fa-align-left"></i>Description</span>
       <div class="board-description">
-      ${state.currentBoard.description}
+        <textarea class="board-description-input">
+        ${state.currentBoard.description}
+        </textarea>
+        <div class="buttons-description">
+          <button class="save-description">Save</button>
+          <button class="cancel-description">Cancel</button>
+         </div>
       </div>
       `
     document.querySelector('.side-menu').appendChild(aboutTab);

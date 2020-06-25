@@ -3,6 +3,7 @@ class Board {
     this.id = id
     this.board_name = name
     this.descpition = "이것은 샘플 보드"
+    this.background_color = ""
     this.background_image = ""
     this.is_starred = false
     this.recent_open = new Date()

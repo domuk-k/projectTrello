@@ -23,7 +23,7 @@ let cardsAfterDrag = [];
 
 // 리스트랜더
 const renderList = () => {
-  // console.log(lists);
+  console.log(lists);
 
   let html = '';
   lists.forEach(list => {
@@ -82,14 +82,14 @@ const renderList = () => {
 const dataMethod = {
   // 초기데이타 get
   async getMainData() {
-    const responseLists = await axios.get(`/boards/1/lists`);
+    const responseLists = await axios.get(`/boards/${state.currentBoard.id}/lists`);
     const listData = await responseLists.data;
     lists = listData;
   },
 
   // 리스트 추가
   async addList(newList) {
-    const response = await axios.post('/boards/1/lists', newList)
+    const response = await axios.post(`/boards/${state.currentBoard.id}/lists`, newList)
     const listData = await response.data
     lists = [...lists, listData]
     renderList();
@@ -100,7 +100,7 @@ const dataMethod = {
   },
   // 리스트 제거
   async removeList(listId) {
-    const response = await axios.delete(`boards/1/lists/${listId}`, { id: listId })
+    const response = await axios.delete(`boards/${state.currentBoard.id}/lists/${listId}`, { id: listId })
     const removedlists = await response.data
     lists = removedlists;
     renderList();
@@ -135,7 +135,7 @@ const dataMethod = {
   },
   // 드래그 후 카드 추카
   async addDragCard(listId, card) {
-    const responseCards = await axios.post(`/boards/1/lists/${listId}/cards/drag`, card);
+    const responseCards = await axios.post(`/boards/${state.currentBoard.id}/lists/${listId}/cards/drag`, card);
     const cardsData = await responseCards.data;
     cardsAfterDrag = await cardsData;
 
@@ -148,7 +148,7 @@ const dataMethod = {
     console.log(_cards);
 
     // await dataMethod.afterCardDrangChangeData(_cards, listId);
-    await axios.delete(`/boards/1/lists/${listId}/cards/all`);
+    await axios.delete(`/boards/${state.currentBoard.id}/lists/${listId}/cards/all`);
     const response = await axios.post(`/boards/1/lists/${listId}/cards/all`, _cards);
     const listsData = await response.data;
     lists = await listsData;
@@ -158,23 +158,23 @@ const dataMethod = {
   },
   // 드래그 후 카드 제거
   async removeDragCard(listId, cardId) {
-    const response = await axios.delete(`/boards/1/lists/${listId}/cards/${cardId}/drag`);
+    const response = await axios.delete(`/boards/${state.currentBoard.id}/lists/${listId}/cards/${cardId}/drag`);
     const _card = await response.data;
     dragCard = _card;
   },
 
   // 리스트 드래그 후 데이터 변환
   async afterListDragChangeData(_lists) {
-    await axios.delete('/boards/1/lists/all');
-    const response = await axios.post('/boards/1/lists/all', _lists);
+    await axios.delete(`/boards/${state.currentBoard.id}/lists/all`);
+    const response = await axios.post(`/boards/${state.currentBoard.id}/lists/all`, _lists);
     const listsData = await response.data;
     lists = await listsData;
     renderList();
   },
   // 카드 드래그 후 데이터 변환
   async afterCardDrangChangeData(_cards, listId) {
-    await axios.delete(`/boards/1/lists/${listId}/cards/all`);
-    const response = await axios.post(`/boards/1/lists/${listId}/cards/all`, _cards);
+    await axios.delete(`/boards/${state.currentBoard.id}/lists/${listId}/cards/all`);
+    const response = await axios.post(`/boards/${state.currentBoard.id}/lists/${listId}/cards/all`, _cards);
     const listsData = await response.data;
     lists = await listsData;
     renderList();
@@ -375,7 +375,7 @@ const mainEventBindings = () => {
 // eslint-disable-next-line import/prefer-default-export
 export const initMain = async () => {
   await dataMethod.getMainData();
-  await renderList();
+  renderList();
   mainEventBindings();
   // dragEvent();
 };

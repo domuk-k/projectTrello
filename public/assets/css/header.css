@@ -4,7 +4,9 @@
   outline: none;
 }
 
-
+textarea{
+  resize: none;
+}
 ::-webkit-scrollbar {
   background: transparent;
   width: 3px;
@@ -41,13 +43,15 @@ button{
   padding: 0 10px;
   border-radius: 3px;
   color: white;
+  cursor: pointer;
 }
 
 [class^='btn']:hover{
   background-color: rgba(255, 255, 255, 0.144);
 }
 
-.board-bg {
+.board-bg,
+.board-creation-modal-background{
   background-color: transparent;
   background-size: cover;
   background-position: center center;
@@ -69,7 +73,8 @@ button{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.301);
+  background-color: rgba(49, 49, 49, 0.274);
+  
 }
 
 /* header-left */
@@ -102,7 +107,7 @@ button{
   width: 280px;
   background-color: whitesmoke;
 
-  z-index: 3;
+  z-index: 2;
 
   border-radius: 5px;
   padding: 8px;
@@ -146,6 +151,7 @@ button{
   padding: 7px;
   background-color: rgba(131, 131, 131, 0.12);
   border-radius: 4px;
+  cursor: pointer;
 }
 .board-result-item:hover{
   background-color: rgba(136, 136, 130, 0.3);
@@ -156,12 +162,12 @@ button{
 }
 /* logo */
 .header-logo{
-  width: 90px;
-  height: 35px;
+  width: 80px;
+  height: 32px;
   background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-2x.01ef898811a879595cea.png);
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 
@@ -204,6 +210,74 @@ button{
 }
 .search-active  i{
   color: black;
+}
+.board-creation-modal-background{
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 90;
+}
+
+.board-creation-modal-background.creation-active{
+  display: block;
+}
+.board-creation-wrapper{
+  position: absolute;
+  top:30%;
+  right: 50%;
+  z-index: 99;
+  width: 60%;
+  transform: translate3d(50%,0,0);
+}
+.board-creation-modal{
+  background-color: rgb(61, 61, 61);
+  padding: 20px;
+  padding-left: 30px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px black;
+
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.creation-modal-buttons{
+  width: 30%;
+  display: flex;
+  transform: translate3d(0,10px,0);
+  position: absolute;
+  right:0
+}
+.creation-modal-buttons *{
+  display: inline-block;
+  margin: 10px 10px;
+}
+.board-setting{
+  background-color: transparent;
+  color: white;
+  border: none;
+text-align: center;
+  font-size: 28px;
+  width: 100%;
+}
+.button-create-board{
+  width: 100%;
+  background-color: rgb(165, 165, 165);
+}
+.button-create-board.active{
+  background-color: rgb(61, 167, 75);
+}
+
+.cancel-modal{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url(https://icons-for-free.com/iconfiles/png/512/x-1321215629555778185.png);
+}
+.cancel-modal:hover{
+ background-color: rgb(116, 116, 116); 
 }
 
 .btn-my-profile-icon{
@@ -264,7 +338,7 @@ button{
 
   padding: 0;
   margin: 0;
-  resize: none;
+
   overflow-y: hidden;
   overflow-wrap: break-word; 
   scroll-snap-type: none;

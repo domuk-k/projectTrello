@@ -104,6 +104,9 @@ server.post('/boards/', (req, res) => {
   db.get(`users[0].boards`)
     .push(req.body)
     .write()
+  res.send(
+    db.get(`users[0].boards`)
+  )
 })
 
 // push a list
@@ -181,6 +184,7 @@ server.patch('/boards/:board_id/star', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}]`)
     .assign(req.body)
     .write()
+  res.send(req.body)
 })
 // update a board description
 server.patch('/boards/:board_id/description', (req, res) => {

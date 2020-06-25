@@ -59,6 +59,9 @@ margin: 0;
 padding: 0;
 font-size: 16px;
 }
+.menu-list li{
+  cursor: pointer;
+}
 .menu-list li,
 .activity-item{
   margin: 10px 0;
@@ -105,10 +108,9 @@ margin:  0 10px 0 0;
 /* bg-chang */
 .about-tab-header,
 .bg-tab-header{
-  position: fixed;
   top:38px;
   display: flex;
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(244,245,247);
   align-items: flex-start;
 }
 .btn-about-previous,
@@ -145,7 +147,6 @@ margin:  0 10px 0 0;
   margin: 0;
   width: 300px;
   height: 98vh;
-  padding-top: 60px;
 
   overflow: scroll;
 }
@@ -194,10 +195,6 @@ margin:  0 10px 0 0;
 .about-tab-wrapper span i{
   margin: 0 10px 0 0;
 }
-.about-tab-wrapper hr{
-  margin-top: 50px;  
-  
-}
 .about-tab-sub-title-made-by,
 .about-tab-sub-title-description{
   display: inline-block;
@@ -208,11 +205,44 @@ margin:  0 10px 0 0;
   font-size: 24px;
   margin-bottom: 16px;
 }
-.board-description{
+.board-description-input{
   font-weight: 500;
   font-size: 16px;
+  
+  background-color: rgb(234,236,240);
+  border: none;
+  width: 100%;
+  min-height: 200px;
+  
+  padding: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
-
+.description-active{
+  border-radius: 5px;
+  background-color: white;
+  border: 3px rgb(62, 156, 250) solid;
+}
+.buttons-description{
+  text-align: center;
+}
+.save-description,
+.cancel-description{
+  display: none;
+  width: 140px;
+  height: 30px;
+  color: black; 
+}
+.save-description{
+  background-color: rgb(22, 161, 22) !important;
+}
+.cancel-description{
+  background-color: rgb(187, 187, 187) !important;
+}
+.btn-active{
+  display: inline-block;
+}
 /* activity */
 .list-icon{
 margin: 0 12px;
@@ -233,7 +263,7 @@ height: 200px;
 .activity-list{
   padding-left: 30px;
   margin-top:15px;
-  height: 380px;
+  height: 63vh;
   overflow-y: scroll;
 
   font-weight: 400;

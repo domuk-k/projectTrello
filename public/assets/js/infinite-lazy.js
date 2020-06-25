@@ -4,7 +4,7 @@ import { getLIelems } from './board_side_menu.js'
 let options = {
   root: document.querySelector('#scroll-area'),
   rootMargin: '0px',
-  threshold: 0.4
+  threshold: 0.1
 }
 // lazy loading
 const lazyLoader = (target) => {

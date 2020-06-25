@@ -12,7 +12,7 @@ const $header = document.querySelector('header');
 
 const template = {
   init() {
-    $header.innerHTML +=
+    $header.innerHTML =
       `<div class="bg-container"></div>
         <section class="main-header"></section>
         <section class="sub-header"></section>
@@ -67,6 +67,17 @@ const template = {
           <div class="header-logo"></div>
           <div class="header-right">
             <button class="btn-create-board fas fa-plus"></button>
+            <div class="board-creation-modal-background">
+              <div class="board-creation-wrapper">
+                <div class="board-creation-modal">
+                  <input class="board-setting"/>
+                </div>
+                <div class="creation-modal-buttons">
+                  <button class="button-create-board">Create</button>
+                  <button class="cancel-modal">　</button>
+                </div>
+              </div>
+            </div>
             <section class="my-profile" style="display:inline">
               <button class="btn-my-profile-icon">${state.user.last_name.match(/[A-Z]/g).join("")}</button>
               <div class="my-cards"></div>
@@ -98,11 +109,13 @@ const render = () => {
 
 //1번 유저기준으로 보드배열과 디폴트로 표시할 보드 설정
 const getBoard = async () => {
-  const res = await axios.get(`/users/${1}`);
+  const res = await axios.get(`/users/${state.defaultBoardId}`);
   const _user = await res.data
   state.user = _user
   state.boards = _user.boards
   state.currentBoard = state.boards[state.defaultBoardId - 1]
+
+  console.log(state)
   state.activities = state.currentBoard.activities
 }
 
