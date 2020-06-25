@@ -24,25 +24,7 @@
               "name": "치과가기"
             }
           ],
-          "lists": [
-            {
-              "id": 3,
-              "name": "asdf",
-              "cards": []
-            },
-            {
-              "id": 2,
-              "name": "asdf",
-              "cards": [
-                null
-              ]
-            },
-            {
-              "id": 1,
-              "name": "asdf",
-              "cards": []
-            }
-          ]
+          "lists": []
         }
       ]
     }
