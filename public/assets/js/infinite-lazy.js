@@ -1,4 +1,4 @@
-import { attachPhotoUrlsAndLazyLoad } from './event_bindings.js'
+import { attachPhotoUrlsAndLazyLoad, getPhotos, photoUrls } from './event_bindings.js'
 import { getLIelems } from './board_side_menu.js'
 
 let options = {
@@ -21,14 +21,28 @@ const lazyLoader = (target) => {
   imageObserver.observe(target);
 }
 
-const inifiniteObserver = new IntersectionObserver((entry, observer) => {
+const inifiniteObserver = new IntersectionObserver(async (entry, observer) => {
   const newLIelems = document.createElement('div')
   newLIelems.innerHTML = getLIelems()
   document.querySelector('.bg-photos-list').appendChild(newLIelems)
-  observer.disconnect();
   document.querySelector('.infinite-trigger').classList.remove('infinite-trigger')
+  observer.disconnect();
+  await getPhotos()
+  const lazyImgs = [...document.querySelectorAll('.lazy-img')].filter(node => !node.src)
+  photoUrls.forEach((photoUrl, photoIndex) => {
+    lazyImgs.forEach((img, imgIndex) => {
+      if (photoIndex !== imgIndex) return;
+      img.dataset.src = photoUrl.thumb
+      img.dataset.source = photoUrl.custom
+    })
+  })
+  // attachPhotoUrlsAndLazyLoad()
+  lazyImgs.forEach(target => lazyLoader(target));
+  // 
+  document.querySelector('.infinite-trigger').onload = () => {
+    inifiniteObserver.observe(document.querySelector('.infinite-trigger'))
+  }
 }, options)
-
 
 
 

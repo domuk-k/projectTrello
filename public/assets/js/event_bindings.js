@@ -29,6 +29,7 @@ export const bindEvents = () => {
   $('.btn-bg-tab').onclick = handlers.bgTab
   // 사이드 메뉴 중 돌아가기 버튼
   $('.btn-bg-previous').onclick = handlers.mainTab
+  $('.btn-about-previous').onclick = handlers.mainTab
   $('.bg-photos-list').onclick = handlers.setBgImage
   // 배경화면 변경 탭
   // 보드 설정 탭
@@ -80,7 +81,6 @@ const handlers = {
     document.querySelector('.tab-wrapper-active').classList.remove('tab-wrapper-active')
     $('.bg-tab-wrapper').classList.add('tab-wrapper-active')
     await attachPhotoUrlsAndLazyLoad()
-    attachInfiniteObserver()
   },
   setBgImage({ target }) {
     if (!target.matches('.bg-photos-list-items')) return;
@@ -97,6 +97,7 @@ const handlers = {
 const attachPhotoUrlsAndLazyLoad = async () => {
   // bgTab이 열릴 때 요청해서 data-src에 담아준다.
   if (!photoUrls.length) await getPhotos() // photoUrl에 재할당
+
   const lazyImgs = document.querySelectorAll('.lazy-img')
   photoUrls.forEach((photoUrl, photoIndex) => {
     lazyImgs.forEach((img, imgIndex) => {
@@ -106,12 +107,14 @@ const attachPhotoUrlsAndLazyLoad = async () => {
     })
   })
   lazyImgs.forEach(target => lazyLoader(target));
+
+  $('.infinite-trigger').onload = attachInfiniteObserver
 }
 
-const attachInfiniteObserver = () => {
-  $('.infinite-trigger').onload = () => {
-    inifiniteObserver.observe($('.infinite-trigger'))
-  }
+
+const attachInfiniteObserver = async () => {
+  inifiniteObserver.observe($('.infinite-trigger'))
+
 }
 
 const getPhotos = async () => {
@@ -124,4 +127,4 @@ const getPhotos = async () => {
   photoUrls = res.data.map(photo => photo.urls)
 }
 
-export { attachPhotoUrlsAndLazyLoad }
+export { attachPhotoUrlsAndLazyLoad, getPhotos, photoUrls }

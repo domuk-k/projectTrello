@@ -50,7 +50,7 @@ const renderSideMenu = {
       `
       <div class="bg-tab-header">
         <div class="btn-bg-previous"></div>
-        <span class="bg-source">Photos by <a href="http://www.unsplash.com" target="_blank">Unsplash</a></span>
+        <span class="bg-tab-title">Photos by <a href="http://www.unsplash.com" target="_blank">Unsplash</a></span>
       </div>
       <ul class="bg-photos-list">
         ${getLIelems()}
@@ -65,12 +65,12 @@ const renderSideMenu = {
       `
       <div class="about-tab-header">
         <div class="btn-about-previous"></div>
-        <h3>About This Board</h3>
+        <span class="about-tab-title">About This Board</span>
       </div>
       <hr>
-      <h4><span class="fas fa-user-circle"></span>Made by</h4>
+      <span class="about-tab-sub-title-made-by"><i class="fas fa-user-circle"></i>Made by</span>
       <div class="board-user">${state.user.last_name} ${state.user.first_name}</div>
-      <h4><span class="fas fa-align-left"></span>Description</h4>
+      <span class="about-tab-sub-title-description"><i class="fas fa-align-left"></i>Description</span>
       <div class="board-description">
       ${state.currentBoard.description}
       </div>

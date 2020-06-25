@@ -4,7 +4,6 @@
   background-color: rgb(231, 231, 231);
 
   margin: 0;
-  padding-left: 18px;
   overflow-y: scroll;
   flex-direction: column;
   justify-content: center;
@@ -82,6 +81,7 @@ background-color: rgba(0, 0, 0, 0.06);
 
 .menu-list li i{
 margin:  0 10px 0 0;
+
 }
 
 
@@ -98,6 +98,7 @@ margin:  0 10px 0 0;
 }
 
 /* bg-chang */
+.about-tab-header,
 .bg-tab-header{
   position: fixed;
   top:38px;
@@ -105,6 +106,7 @@ margin:  0 10px 0 0;
   background-color: rgb(231, 231, 231);
   align-items: flex-start;
 }
+.btn-about-previous,
 .btn-bg-previous{
   color:black !important;
   display: inline-block;
@@ -113,21 +115,21 @@ margin:  0 10px 0 0;
   margin-right: 10px;
 
   z-index: 3;
-  
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   background-image: url(https://cdn.icon-icons.com/icons2/494/PNG/512/chevron-left_icon-icons.com_48335.png);
 }
-.bg-source{
+.about-tab-title,
+.bg-tab-title{
   display: inline-block;
   font-size: 16px;
   margin: 0;
   width: 270px;
+  text-align: center;
   line-height: 50px; 
 }
-
-.bg-source a{
+.bg-tab-title a{
   text-decoration: none;
   color: rgb(90, 90, 90);
 }
@@ -168,6 +170,8 @@ margin:  0 10px 0 0;
 .bg-menu-header *{
   display: inline-block;
 }
+
+
 /* lazy loading */
 .lazy-img{
   background-image: url(https://thumbs.gfycat.com/ArtisticShoddyKudu-small.gif);
@@ -176,6 +180,32 @@ margin:  0 10px 0 0;
 .fade {
   transition: opacity .8s;
   opacity: 1;
+}
+
+
+/* About */
+.about-tab-wrapper{
+}
+.about-tab-wrapper span i{
+  margin: 0 10px 0 0;
+}
+.about-tab-wrapper hr{
+  margin-top: 50px;  
+  
+}
+.about-tab-sub-title-made-by,
+.about-tab-sub-title-description{
+  display: inline-block;
+  font-size: 18px;
+  margin: 20px 0;
+}
+.board-user{
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+.board-description{
+  font-weight: 500;
+  font-size: 16px;
 }
 
 /* activity */
@@ -205,6 +235,7 @@ height: 200px;
 .main-tab-wrapper,
 .bg-tab-wrapper,
 .about-tab-wrapper{
+  padding:0  18px;
   user-select: none;
   display: none;
 } 
