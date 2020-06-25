@@ -40,7 +40,7 @@ const renderList = () => {
           </ul>
 
           <div class="card-add-box">
-            <a class="open-add-mod-btn"><span>+</span>Add another card</a>
+            <a class="list-open-add-mod-btn"><span>+</span>Add another card</a>
             <div class="card-add-mod" style="display: none;">
               <input class="card-name-box" type=" text" placeholder="enter a title for this card...">
               <div class="card-add-mod-btn">
@@ -67,7 +67,7 @@ const renderList = () => {
       <li id ="card-${card.id}" class="card-box">
         <div class="card-shadow">
           <div class="card-content" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
-              <a class="card" href="/c/jUKFKu6Q/5-df">${card.card_name}</a>
+              <button class="card" href="/c/jUKFKu6Q/5-df">${card.card_name}</button>
               <button class="card-remove-btn">x</button>
             </div>
           </div>
@@ -189,6 +189,8 @@ const mainEventHandlers = {
     target.parentNode.parentNode.style.display = 'none';
   },
   openAddMod(target) {
+    console.log('open add mod');
+
     target.nextElementSibling.style.display = 'block';
   },
 
@@ -230,7 +232,7 @@ const mainEventHandlers = {
     cardBox = e.target.parentNode.parentNode;
     cardShadow = e.target.parentNode;
     cardContent = e.target;
-
+    cardShadow.style.height = `${cardShadow.getBoundingClientRect().height}px`;
     dragTarget = 'card';
 
     const listId = cardShadow.parentNode.parentNode.parentNode.parentNode.id.split('-')[1];
@@ -251,7 +253,7 @@ const mainEventHandlers = {
   dragEnterCard(e) {
     if (dragTarget === 'card') {
       console.log('카드 드래그엔터', e.target);
-      if (e.target.className === 'list-header') e.target.nextElementSibling.firstElementChild.appendChild(cardBox);
+      if (e.target.className === 'list-header') e.target.nextElementSibling.insertBefore(cardBox, e.target.nextElementSibling.firstElementChild);
       // if (e.target.className === 'card-box') e.target.parentNode.insertBefore(cardBox, e.target);
       if (e.target.className === 'card-add-box') e.target.previousElementSibling.appendChild(cardBox);
       if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.insertBefore(cardBox, e.target.parentNode.parentNode);
@@ -266,10 +268,9 @@ const mainEventHandlers = {
       if (e.target.className === 'card-box') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode);
       if (e.target.className === 'list-header') e.target.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode);
       if (e.target.className === 'card-add-box') e.target.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode);
-      if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode.parentNode);
-      if (e.target.className === 'card-shadow') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode);
+      if (e.target.className === 'card-content') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode);
+      if (e.target.className === 'card-shadow') e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(listBox, e.target.parentNode.parentNode.parentNode.parentNode.parentNode);
       if (e.target.className === 'list-add-box') e.target.parentNode.previousElementSibling.appendChild(listBox);
-      if (e.target.className === 'list-add-button') listShadow.appendChild(listContent);
     }
   },
   dropCard(e) {
@@ -277,6 +278,8 @@ const mainEventHandlers = {
 
     if (dragTarget === 'card') {
       cardShadow.appendChild(cardContent);
+      cardShadow.style.height = `100%`;
+
       const listId = +cardBox.parentNode.parentNode.parentNode.id.split('-')[1];
 
       dataMethod.addDragCard(listId, dragCard);
@@ -307,6 +310,8 @@ const mainEventBindings = () => {
     if (target.matches('.add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
     if (target.matches('.card-add-mod-close-btn')) mainEventHandlers.closeAddMod(target);
     if (target.matches('.open-add-mod-btn')) mainEventHandlers.openAddMod(target);
+    if (target.matches('.list-open-add-mod-btn')) mainEventHandlers.openAddMod(target);
+
     if (target.matches('.remove-list-btn')) mainEventHandlers.removeList(target.parentNode.parentNode.parentNode.id);
     if (target.matches('.card-add-btn')) {
       if (!target.parentNode.previousElementSibling.value) return;
@@ -318,6 +323,7 @@ const mainEventBindings = () => {
 
   // 버튼 클릭시 리스트 생성
   document.querySelector('.list-add-btn').onclick = () => {
+    console.log('리스트생성');
     if (!$listNameBox.value) return;
     mainEventHandlers.addList($listNameBox.value.trim());
     $listNameBox.value = '';
