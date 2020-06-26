@@ -75,7 +75,31 @@ const handlers = {
     target.parentElement.classList.remove('search-active')
     target.value = ''
   },
+<<<<<<< HEAD
 
+=======
+  openBoardCreationModal({ target }) {
+    $('.board-creation-modal-background').classList.add('creation-active')
+  },
+  closeBoardCreationModal({ target }) {
+    if (!(target.matches('.board-creation-modal-background') || target.matches('.cancel-modal'))) return;
+    $('.board-creation-modal-background').classList.remove('creation-active')
+  },
+  checkIfblank({ target }) {
+    if (target.value) { $('.button-create-board').classList.add('active') }
+    else {
+      $('.button-create-board').classList.remove('active')
+    }
+  },
+  async createNewBoard() {
+    if (!$('.board-setting').value.trim()) return;
+    const newBoard = new Board(Math.max(...state.boards.map(board => board.id), 0) + 1, `${$('.board-setting').value}`)
+    state.boards.push(newBoard)
+    state.currentBoard = newBoard
+    $('.board-creation-modal-background').classList.remove('creation-active')
+    await axios.post('/boards', newBoard)
+  },
+>>>>>>> fabfb6b25533fed3c0a54d94256f11be80a60a63
   startSettingBoardName({ target }) {
     target.parentElement.classList.add('board-name-active')
     target.nextElementSibling.select();
