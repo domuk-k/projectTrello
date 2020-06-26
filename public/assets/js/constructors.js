@@ -2,7 +2,7 @@ class Board {
   constructor(id, name) {
     this.id = id;
     this.board_name = name;
-    this.descpition = '이것은 샘플 보드';
+    this.descpition = '보드 소개말을 작성해주세요';
     this.background_color = '';
     this.background_image = '';
     this.background_color = 'rgb(0,121,191)';

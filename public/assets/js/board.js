@@ -3,10 +3,11 @@ let state = {
   user: {},
   boards: [],
   defaultBoardId: 1,
+  defaultBoard: {},
   currentBoard: {},
   activities: [],
 };
-
+console.log(state);
 // DOM picks
 const $header = document.querySelector('header');
 
@@ -22,6 +23,7 @@ const template = {
   },
   background() {
     const $bgContainer = document.querySelector('.bg-container');
+    console.log(state);
     let background = state.currentBoard.background_image
       ? `background-image:url(${state.currentBoard.background_image})`
       : `background-color:${state.currentBoard.background_color}`;
@@ -110,12 +112,13 @@ const render = () => {
 
 //1번 유저기준으로 보드배열과 디폴트로 표시할 보드 설정
 const getBoard = async () => {
-  const res = await axios.get(`/users/${1}`);
+  let defaultUser = 1;
+  const res = await axios.get(`/users/${defaultUser}`);
   const _user = await res.data;
   state.user = _user;
   state.boards = _user.boards;
-  state.currentBoard = state.boards[state.defaultBoardId - 1];
-  state.activities = state.currentBoard.activities;
+  state.defaultBoard = _user.boards[state.defaultBoardId - 1];
+  state.currentBoard = state.defaultBoard;
 };
 
 const initBoard = async () => {

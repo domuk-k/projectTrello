@@ -14,10 +14,10 @@ window.onload = async () => {
 const switchBoard = async ({ target }) => {
   if (!target.matches('.board-result-item')) return;
   state.defaultBoardId = target.dataset.boardId;
-  state.currentBoard = state.boards.find(
+  state.defaultBoard = state.boards.find(
     (board) => board.id === +target.dataset.boardId,
   );
-  console.log(state.currentBoard);
+  state.currentBoard = state.defaultBoard;
   state.currentBoard.recent_open = new Date();
   await initBoard();
   await initSideMenu();

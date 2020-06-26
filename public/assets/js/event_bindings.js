@@ -124,10 +124,10 @@ const handlers = {
       Math.max(...state.boards.map((board) => board.id), 0) + 1,
       `${$('.board-setting').value}`,
     );
-    state.boards.push(newBoard);
-    state.currentBoard = newBoard;
-    $('.board-creation-modal-background').classList.remove('creation-active');
+    state.boards = [...state.boards, newBoard];
     await axios.post('/boards', newBoard);
+    // state.currentBoard = newBoard;
+    $('.board-creation-modal-background').classList.remove('creation-active');
   },
   startSettingBoardName({ target }) {
     target.parentElement.classList.add('board-name-active');

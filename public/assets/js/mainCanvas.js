@@ -1,5 +1,5 @@
 import { state } from './board.js';
-import { User, Board, Card, List } from './constructors.js';
+import { Card, List } from './constructors.js';
 import { refreshActivityLog } from './event_bindings.js';
 
 const $listNameBox = document.querySelector('.list-name-box');
@@ -25,8 +25,6 @@ let pos = { x: 0, y: 0 };
 
 // 리스트랜더
 const renderList = () => {
-  console.log(lists);
-
   let html = '';
   lists.forEach((list) => {
     if (list !== 'null') {
@@ -255,7 +253,7 @@ const dataMethod = {
       `/boards/${state.currentBoard.id}/lists/${listId}/cards/all`,
     );
     const response = await axios.post(
-      `/boards/1/lists/${listId}/cards/all`,
+      `/boards/${state.currentBoard.id}/lists/${listId}/cards/all`,
       _cards,
     );
     const listsData = await response.data;
@@ -606,7 +604,6 @@ const mainEventBindings = () => {
 
   // 인풋 입력시 카드생성
   $main.onkeyup = (e) => {
-    console.log('카드추가');
     if (!e.target.matches('.card-name-box')) return;
     const cardName = e.target.value.trim();
     if (e.keyCode !== 13 || cardName === '') return;
