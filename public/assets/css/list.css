@@ -36,7 +36,7 @@
   border-radius: 3px;
   box-sizing: border-box;
   min-height: 50px;
-  max-height: 800px;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   max-height: 100%;
@@ -241,19 +241,19 @@
 
 .card-name-box {
   height: 40px;
-  width: 240px;
-  padding: 8px;
+  width: 244px;
   margin-left: 6px;
   border: rgba(102, 102, 102);
   box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
-  border-radius: 5px;
+  border-radius: 3px;
+  transform: translate3d(3px, 0, 0);
 }
 
 .card-add-mod {
   background-color: rgb(235, 236, 240);
-  width: 250px;
+  width: 262px;
   border-radius: 0 0 5px 5px;
-
+  transform: translate3d(-5px, 0, 0);
   position: absolute;
   top: 0;
   left: 0;
