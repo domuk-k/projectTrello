@@ -17,30 +17,12 @@
           ],
           "recent_open": "2020-06-25T05:06:30.738Z",
           "is_starred": true,
-          "background_image": "https://images.unsplash.com/photo-1567999913778-ea4804c80671?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_image": "https://images.unsplash.com/photo-1512995026164-9ec3146a7e27?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
           "background_color": "",
-          "activities": [
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            }
+          "activities": [       
           ],
-          "lists": []
-        },
-        {
-          "id": 2,
-          "board_name": "배준선의 새로운 트렐로",
-          "descpition": "이것은 샘플 보드",
-          "background_color": "rgb(0, 121, 191)",
-          "background_image": "",
-          "is_starred": false,
-          "recent_open": "2020-06-25T13:19:24.474Z",
-          "collaborators": [
-            202001,
-            202002
-          ],
-          "list": [],
-          "activities": []
+          "lists": [     
+          ]
         }
       ]
     }

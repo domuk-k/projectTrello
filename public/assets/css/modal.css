@@ -1,25 +1,133 @@
-body {
+/* body {
     position: relative;
-}
+} */
 .modal-wrapper{
-    background-color: rgb(233, 165, 165);
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(9, 9, 9, 0.7);
+    display: none;
 }
 .modal-box {
-    background-color: blueviolet;
-    width: 60vw;
+    background-color: #f4f5f7;
+    width: 500PX;
+    max-height: 80vh;
+    margin: 50px auto; 
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    padding: 20px;
+    border-radius: 6px;
+    /* justify-content: space-between; */
 }
 .modal-header {
-    background-color: rgb(185, 14, 14);
+    /* background-color: rgb(185, 14, 14); */
+    display: inline-flex;
+    flex-flow: column;
 }
+
+.modal-card-head {
+    /* background-color: sienna; */
+    height: 30px;
+    width: 200px;
+    cursor: pointer;
+    font-size: 25px;
+}
+.modal-card-name-input {
+    display : none;
+    height: 33px;
+    width: 80%;
+    border: blueviolet 2px solid;
+    font-size: 25px;
+}
+.modal-list-name {
+    display: inline-block;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+
+
 .modal-description {
-    background-color: rgb(61, 36, 36);
+    /* background-color: rgb(61, 36, 36); */
+    margin-top: 50px;
+    
 }
+
+}
+.modal-description-head {
+
+}
+.modal-description-content {
+    display: inline-block;
+    height: 56px;
+    background-color: rgba(9,30,66,.04);
+    width: 70%;
+    margin-top: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    padding: 10px;
+}
+.modal-edit-mod {
+    position: relative;
+    /* background-color: rgb(60, 138, 67); */
+    top: -70px;
+    left: 0;
+    padding: 15px;
+}
+.modal-description-input {
+    height: 100px;
+    width: 78%;
+    border: blueviolet 2px solid;
+}
+.description-edit-mod-btn {
+    margin-top: 10px;
+}
+.descripton-edit-btn {
+    background-color: rgb(60, 138, 67)
+}   
+.description-edit-close-btn {
+    cursor: pointer;
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+
+
 .card-activity {
-    background-color: rgb(179, 88, 88);
+    /* background-color: rgb(179, 88, 88); */
+    margin-top: 15px;
+    background-color: #f4f5f7;
+    max-height: 400px;
+    overflow: scroll;
 }
+
+.card-activity-head{
+
+}
+.activity-box {
+    background-color: #f4f5f7;
+    /* background-color: rgb(126, 38, 38); */
+    
+   
+}
+
+
+
+
+
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: black;
+    font-size: 20px;
+}
+.modal-close-btn:hover{
+    background-color: rgba(9, 9, 9, 0.2);
+}
+
+

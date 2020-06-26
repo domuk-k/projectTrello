@@ -42,6 +42,9 @@
   max-height: 100%;
   position: relative;
 }
+/* .list-content::selection {
+  background-color: rgb(55, 224, 49);
+} */
 .list-header{
   flex: 0 0 auto;
   padding: 10px 8px;

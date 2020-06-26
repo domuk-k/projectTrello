@@ -2,6 +2,7 @@
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
   outline: none;
+  
 }
 
 textarea{
@@ -393,7 +394,8 @@ main{
   overflow-x: scroll;
   scrollbar-width: 200px;
   position: absolute;
-  height: 91.5vh;
+  /* height: 91.5vh; */
+  height: 85vh;
   width: 100vw;
   display: flex;
   /* for moz */

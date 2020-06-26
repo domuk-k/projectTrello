@@ -58,8 +58,7 @@ server.get('/boards/:board_id/lists', (req, res) => {
 // get a list
 server.get('/boards/:board_id/lists/:list_id', (req, res) => {
   const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
-  const listIndex = lists.findIndex(list => list.id === req.body.list_id);
-
+  const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
   res.send(
     db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}]`)
       .value()
@@ -79,9 +78,9 @@ server.get('/boards/:board_id/lists/:list_id/cards', (req, res) => {
 // get a card
 server.get('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
   const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
-  const listIndex = lists.findIndex(list => list.id === req.body.list_id);
-  const cards = db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}]`).value();
-  const cardIndex = cards.findIndex(card => card.id === req.body.card_id);
+  const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
+  const cards = db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}.cards]`).value();
+  const cardIndex = cards.findIndex(card => card.id === +req.params.card_id);
 
   res.send(
     db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards.[${cardIndex}]`).value()
@@ -225,6 +224,31 @@ server.patch('/boards/:board_id/lists/:list_id/cards/:card_id', (req, res) => {
   db.get(`users[0].boards[${req.params.board_id - 1}].lists[${req.params.list_id - 1}].cards[${req.params.card_id - 1}]`)
     .assign(req.body)
     .write()
+  res.send(req.body)
+})
+// update a card name
+server.patch('/boards/:board_id/lists/:list_id/cards/:card_id/card_name', (req, res) => {
+  const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
+  const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
+  const cards = db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}.cards]`).value();
+  const cardIndex = cards.findIndex(card => card.id === +req.params.card_id);
+  
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards[${cardIndex}]`)
+    .assign(req.body)
+    .write()
+    
+  res.send(req.body)
+})
+server.patch('/boards/:board_id/lists/:list_id/cards/:card_id/description', (req, res) => {
+  const lists = db.get(`users[0].boards[${req.params.board_id - 1}].lists`).value();
+  const listIndex = lists.findIndex(list => list.id === +req.params.list_id);
+  const cards = db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}.cards]`).value();
+  const cardIndex = cards.findIndex(card => card.id === +req.params.card_id);
+
+  db.get(`users[0].boards[${req.params.board_id - 1}].lists[${listIndex}].cards[${cardIndex}]`)
+    .assign(req.body)
+    .write()
+    
   res.send(req.body)
 })
 

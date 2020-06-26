@@ -12,7 +12,7 @@ class Board {
       202001,
       202002
     ]
-    this.list = []
+    this.lists = []
     this.activities = []
   }
 }
@@ -31,7 +31,7 @@ class Card {
     this.card_name = cardName;
     this.list_id = list_id;
     this.labels = ['df', 'SD'];
-    this.descpition = '';
+    this.description = 'Add a more detailed description';
     this.members = [];
     this.date_created = new Date().toUTCString();
     this.due_date = '';
