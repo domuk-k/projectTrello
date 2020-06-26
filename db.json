@@ -17,6 +17,13 @@
           ],
           "recent_open": "2020-06-25T05:06:30.738Z",
           "is_starred": true,
+<<<<<<< HEAD
+          "background_image": "https://images.unsplash.com/photo-1512995026164-9ec3146a7e27?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_color": "",
+          "activities": [       
+          ],
+          "lists": [     
+=======
           "background_image": "https://images.unsplash.com/photo-1564974429-3d7f9eb21190?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
           "background_color": "",
           "activities": [
@@ -154,6 +161,7 @@
               "name": "DongWook, Bae",
               "act": "보드의 배경사진을 변경"
             }
+>>>>>>> fabfb6b25533fed3c0a54d94256f11be80a60a63
           ]
         }
       ]

@@ -31,6 +31,9 @@
     position: relative;
     text-decoration: none;
 }
+/* .card-content::selection {
+    transform: rotate(30deg);
+} */
 
 
 .card {

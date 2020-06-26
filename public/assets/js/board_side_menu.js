@@ -10,7 +10,7 @@ const renderSideMenu = {
                                 <span class="log-act">${datum.act}</span>했습니다.
                                 <div class="log-value"> ${datum.value ? `바뀐 이름:${datum.value}` : ""} </div>
                             </li>`
-    })
+    });
     document.querySelector('.side-menu').innerHTML =
       `
       <div class="main-tab-wrapper tab-wrapper-active">

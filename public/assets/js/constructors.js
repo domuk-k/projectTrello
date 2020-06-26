@@ -12,11 +12,15 @@ class Board {
       202001,
       202002
     ]
+<<<<<<< HEAD
+    this.lists = []
+=======
     this.lists = [
       { id: 1, name: 'to do', cards: [] },
       { id: 2, name: 'doing', cards: [] },
       { id: 3, name: 'done', cards: [] }
     ]
+>>>>>>> fabfb6b25533fed3c0a54d94256f11be80a60a63
     this.activities = []
   }
   async randomImage() {
@@ -41,7 +45,7 @@ class Card {
     this.card_name = cardName;
     this.list_id = list_id;
     this.labels = ['df', 'SD'];
-    this.descpition = '';
+    this.description = 'Add a more detailed description';
     this.members = [];
     this.date_created = new Date().toUTCString();
     this.due_date = '';
