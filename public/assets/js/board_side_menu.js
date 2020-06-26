@@ -1,18 +1,21 @@
 // import state
-import { state } from "./board.js"
+import { state } from './board.js';
 //State
 
 const renderSideMenu = {
   async initTab() {
-    let activitiesLogElms = ''
-    state.activities.forEach(datum => {
+    let activitiesLogElms = '';
+    state.activities.forEach((datum) => {
       activitiesLogElms += `<li><span class="log-name">${datum.name}님이 </span>
-                                <span class="log-act">${datum.act}</span>했습니다.
-                                <div class="log-value"> ${datum.value ? `바뀐 이름:${datum.value}` : ""} </div>
-                            </li>`
+                                <span class="log-act">${
+                                  datum.act
+                                }</span>했습니다.
+                                <div class="log-value"> ${
+                                  datum.value ? `바뀐 이름:${datum.value}` : ''
+                                } </div>
+                            </li>`;
     });
-    document.querySelector('.side-menu').innerHTML =
-      `
+    document.querySelector('.side-menu').innerHTML = `
       <div class="main-tab-wrapper tab-wrapper-active">
         <div class="main-tab-header">
           <h3>Menu</h3>
@@ -37,18 +40,17 @@ const renderSideMenu = {
           </ul>
         </div>
       </div>
-      `
+      `;
     this.bgSettingTab();
     this.aboutBoardTab();
   },
 
   bgSettingTab() {
     //요소 만들기
-    const bgTab = document.createElement('div')
-    bgTab.className = 'bg-tab-wrapper'
+    const bgTab = document.createElement('div');
+    bgTab.className = 'bg-tab-wrapper';
 
-    bgTab.innerHTML =
-      `
+    bgTab.innerHTML = `
       <div class="bg-tab-header">
         <div class="btn-bg-previous"></div>
         <span class="bg-tab-title">Photos by <a href="http://www.unsplash.com" target="_blank">Unsplash</a></span>
@@ -56,14 +58,13 @@ const renderSideMenu = {
       <ul class="bg-photos-list">
         ${getLIelems()}
       </ul>
-      `
+      `;
     document.querySelector('.side-menu').appendChild(bgTab);
   },
   aboutBoardTab() {
-    const aboutTab = document.createElement('div')
-    aboutTab.className = 'about-tab-wrapper'
-    aboutTab.innerHTML =
-      `
+    const aboutTab = document.createElement('div');
+    aboutTab.className = 'about-tab-wrapper';
+    aboutTab.innerHTML = `
       <div class="about-tab-header">
         <div class="btn-about-previous"></div>
         <span class="about-tab-title">About This Board</span>
@@ -81,29 +82,29 @@ const renderSideMenu = {
           <button class="cancel-description">Cancel</button>
          </div>
       </div>
-      `
+      `;
     document.querySelector('.side-menu').appendChild(aboutTab);
-  }
-}
+  },
+};
 
 const getLIelems = () => {
   // 노드 목록 만들기
-  let listItemElements = ''
+  let listItemElements = '';
   for (let i = 0; i < 30; i++) {
-    listItemElements +=
-      ` 
+    listItemElements += ` 
       <li>
-      <img class="bg-photos-list-items lazy-img ${i === 29 ? "infinite-trigger" : ""}"
+      <img class="bg-photos-list-items lazy-img ${
+        i === 29 ? 'infinite-trigger' : ''
+      }"
           data-src="" data-source="")>
       </li>
-      `
+      `;
   }
   return listItemElements;
-}
+};
 
 const initSideMenu = async () => {
-  renderSideMenu.initTab()
-}
+  renderSideMenu.initTab();
+};
 
-
-export { initSideMenu, getLIelems, renderSideMenu }
+export { initSideMenu, getLIelems, renderSideMenu };

@@ -9,7 +9,7 @@
       "boards": [
         {
           "id": 1,
-          "board_name": "증말?",
+          "board_name": "증말??",
           "description": "THIST IS DATA FROM DB RESPONCED VIA SERVER orem ipsum dolor sit amet consectetur adipisicing elit. Porro, nesciunt! Eum, consectetur, assumenda quis voluptas quia a ex vero sint necessitatibus iusto quo harum. Voluptas aliquam sapiente voluptatem tempora doloribus?",
           "collaborators": [
             202001,
@@ -17,151 +17,100 @@
           ],
           "recent_open": "2020-06-25T05:06:30.738Z",
           "is_starred": true,
-<<<<<<< HEAD
-          "background_image": "https://images.unsplash.com/photo-1512995026164-9ec3146a7e27?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
-          "background_color": "",
-          "activities": [       
-          ],
-          "lists": [     
-=======
-          "background_image": "https://images.unsplash.com/photo-1564974429-3d7f9eb21190?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
-          "background_color": "",
+          "background_image": "https://images.unsplash.com/photo-1545235531-7e18ee975dc0?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
+          "background_color": "rgb(232,122,123)",
           "activities": [
             {
               "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            },
-            {
-              "name": "DongWook, Bae",
               "act": "보드를 즐겨찾기를 변경"
             },
             {
               "name": "DongWook, Bae",
               "act": "보드를 즐겨찾기를 변경"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 이름을 변경",
-              "value": "1번째??",
-              "recent_value": "1번째"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 이름을 변경",
-              "value": "입니다",
-              "recent_value": "1번째??"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 이름을 변경",
-              "value": "증말?",
-              "recent_value": "입니다"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "리스트를 추가"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "리스트를 추가"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            },
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
             }
           ],
           "lists": [
             {
               "id": 1,
-              "name": "아름다워",
-              "cards": []
-            },
-            {
-              "id": 2,
-              "name": "증말",
+              "name": "진행 할 일",
               "cards": [
                 {
-                  "id": 1,
-                  "card_name": "증말",
-                  "list_id": 2,
+                  "id": 17,
+                  "card_name": "ㅁㄴㅇㄹ",
+                  "list_id": 4,
                   "labels": [
                     "df",
                     "SD"
                   ],
-                  "descpition": "",
+                  "description": "Add a more detailed description",
                   "members": [],
-                  "date_created": "Thu, 25 Jun 2020 13:35:38 GMT",
+                  "date_created": "Fri, 26 Jun 2020 02:49:08 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                },
+                {
+                  "id": 37,
+                  "card_name": "ㄴㅇㅁㄹ",
+                  "list_id": 1,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "description": "Add a more detailed description",
+                  "members": [],
+                  "date_created": "Fri, 26 Jun 2020 03:43:37 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                },
+                {
+                  "id": 38,
+                  "card_name": "ㅇㄴㅁㄹㄴㅁㄹ",
+                  "list_id": 1,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "description": "Add a more detailed description",
+                  "members": [],
+                  "date_created": "Fri, 26 Jun 2020 03:43:39 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                },
+                {
+                  "id": 39,
+                  "card_name": "ㄴㅇㅁㄹㅇㄴㅁㄹ",
+                  "list_id": 1,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "description": "Add a more detailed description",
+                  "members": [],
+                  "date_created": "Fri, 26 Jun 2020 03:43:41 GMT",
+                  "due_date": "",
+                  "sticker": [],
+                  "locY": 0
+                },
+                {
+                  "id": 40,
+                  "card_name": "ㅁㄴㄹㅇ",
+                  "list_id": 1,
+                  "labels": [
+                    "df",
+                    "SD"
+                  ],
+                  "description": "Add a more detailed description",
+                  "members": [],
+                  "date_created": "Fri, 26 Jun 2020 03:43:42 GMT",
                   "due_date": "",
                   "sticker": [],
                   "locY": 0
                 }
               ]
             }
-          ]
-        },
-        {
-          "id": 2,
-          "board_name": "새로운 보드",
-          "descpition": "이것은 샘플 보드",
-          "background_color": "rgb(0, 121, 191)",
-          "background_image": "https://images.unsplash.com/photo-1566935727941-4f63db037eaa?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&fit=crop&ixid=eyJhcHBfaWQiOjE0MzUyOH0",
-          "is_starred": false,
-          "recent_open": "2020-06-25T13:36:13.072Z",
-          "collaborators": [
-            202001,
-            202002
-          ],
-          "lists": [
-            {
-              "id": 1,
-              "name": "to do",
-              "cards": []
-            },
-            {
-              "id": 2,
-              "name": "doing",
-              "cards": []
-            },
-            {
-              "id": 3,
-              "name": "done",
-              "cards": []
-            }
-          ],
-          "activities": [
-            {
-              "name": "DongWook, Bae",
-              "act": "보드의 배경사진을 변경"
-            }
->>>>>>> fabfb6b25533fed3c0a54d94256f11be80a60a63
           ]
         }
       ]

@@ -1,68 +1,74 @@
 .card-box {
-    min-height: 30px;
-    width: 100%;
-    background-color: #ebecf0;    
-    list-style: none;
-    padding: 0px 3px;
+  min-height: 30px;
+  width: 100%;
+  background-color: #ebecf0;
+  list-style: none;
+  padding: 0px 3px;
 }
 .card-shadow {
-    width: 250px;
-    height: 100%;
-    background-color: rgba(115, 175, 194, 0.41);
-    list-style: none;
-    margin: 7px auto;
-    border-radius: 3px;
-    box-shadow: 0 1px 0 rgba(9,30,66,.25);
-    
+  width: 250px;
+  height: 100%;
+  background-color: rgba(115, 175, 194, 0.41);
+  list-style: none;
+  margin: 7px auto;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
 }
 .card-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    border: 0px;
-    border-radius: 3px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0px;
+  border-radius: 3px;
 
-    background-color: #fff;
-    box-shadow: 0 1px 0 rgba(9,30,66,.25);
-    margin-bottom: 8px;
-    max-width: 300px;
-    min-height: 20px;
-    position: relative;
-    text-decoration: none;
+  background-color: #fff;
+  box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+  margin-bottom: 8px;
+  max-width: 300px;
+  min-height: 10px;
+  position: relative;
+  text-decoration: none;
+  padding: 8px;
 }
 /* .card-content::selection {
     transform: rotate(30deg);
 } */
 
-
 .card {
-    margin-top: 7px;
-    text-align: left;
-    width: 100%;
-    height: 100%;
-    border: 0px;
-    border-radius: 3px;
-    color: black;
-    background-color: #fff;
-    cursor: pointer;
-    max-width: 300px;
-    position: relative;
-    cursor: pointer;
-    text-decoration: none;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  border-radius: 3px;
+  color: black;
+  background-color: #fff;
+  max-width: 300px;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  font-size: 16px;
 }
 
 .card-remove-btn {
-    background-color: rgba(255,255,255, 0);
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0);
-    margin: 5px;
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0);
+  margin: 0;
+  border: none;
+  border-radius: 5px;
+  width: 23px;
+  height: 23px;
 }
 .card-remove-btn:hover {
-  
-    background-color: rgba(43, 95, 110, 0.41);
-    color: black;
+  background-color: rgba(175, 175, 175, 0.192);
+  color: black;
 }
 .drag-shadow {
-    height: auto;
+  height: auto;
+}
+
+main [class^='btn']:hover {
+  background-color: rgba(255, 255, 255, 0.144);
 }

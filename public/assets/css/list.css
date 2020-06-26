@@ -1,19 +1,19 @@
 .main-wrapper {
-    height: 100%;
+  display: inline-block;
+  height: 100%;
 }
 .list-wrapper:first-child {
   margin-left: 8px;
 }
-.list-wrapper{
+.list-wrapper {
   display: inline-block;
   height: 100%;
   width: 270px;
-  /* border: 1px rgba(0, 255, 128, 0.363) solid; */
   padding: 0 4px;
   vertical-align: top;
   white-space: nowrap;
 }
-.list-add-wrapper{
+.list-add-wrapper {
   display: inline-block;
   height: 100%;
   width: 270px;
@@ -21,7 +21,7 @@
   padding: 0 4px;
   white-space: nowrap;
 }
-.list{
+.list {
   background-color: rgba(115, 175, 194, 0.41);
   border-radius: 6px;
   box-sizing: border-box;
@@ -30,49 +30,46 @@
   flex-direction: column;
   max-height: 100%;
   position: relative;
-  
 }
-.list-content{
-  background-color: rgb(235,236,240);
+.list-content {
+  background-color: rgb(235, 236, 240);
   border-radius: 3px;
   box-sizing: border-box;
   min-height: 50px;
+  max-height: 800px;
   display: flex;
   flex-direction: column;
   max-height: 100%;
   position: relative;
+  padding: 5px;
 }
-/* .list-content::selection {
+/* .list-content::selection {f
   background-color: rgb(55, 224, 49);
 } */
-.list-header{
+.list-header {
   flex: 0 0 auto;
-  padding: 10px 8px;
+  padding: 4px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   min-height: 20px;
 }
 .list-header-name {
   width: 100%;
-  height: 28px;
   cursor: pointer;
-  line-height: 16px;
   overflow: hidden;
   overflow-wrap: break-word;
-  height: 28px;
   background: transparent;
   border-radius: 3px;
   box-shadow: none;
   font-size: 1.2em;
   font-weight: 600;
-  margin: 6px 0 1px 5px;
   padding: 4px 8px;
-  border: 1px rgba(250, 128, 114, 0.0);
   letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
 }
 .list-header-name-input {
   display: none;
@@ -90,22 +87,32 @@
   margin: 6px 0 1px 5px;
   /* resize: none; */
   padding: 4px 8px;
-  border: blueviolet 2px solid
+  border: dodgerblue 2px solid;
 }
 
 .list-container {
   padding: 0;
   margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .remove-list-btn {
   cursor: pointer;
-  background-color: rgba(250, 128, 114, 0);
-  font-size: 1.5em;
-  color: black;
-
+  background-color: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0);
+  margin: 0;
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .remove-list-btn:hover {
-  background-color: rgba(6, 24, 56, 0.08);
+  background-color: rgba(0, 0, 0, 0.096);
+  background-image: url(https://icons-for-free.com/iconfiles/png/512/x-1321215629555778185.png);
 }
 
 /* 리스트 추가 박스 */
@@ -121,31 +128,33 @@
 }
 .open-add-mod-btn {
   width: 270px;
-  height: 40px;
-  background-color: rgba(0,0,0,.16);
-  color: black;
-  border-radius: 10px;
+  height: 46px;
+  background-color: rgba(161, 161, 161, 0.562);
+  border-radius: 5px;
+  text-align: left;
   cursor: pointer;
-  font-size: 1.2em;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(53, 53, 53);
+  border: none;
+  color: white;
+  padding: 10px;
+  font-weight: 300;
 }
 .open-add-mod-btn:hover {
-  background-color: rgba(0,0,0,.32);
+  background-color: rgba(0, 0, 0, 0.32);
 }
-.add-mod
-
-.card-add-box {
-  padding: 5px;
+.add-mod .card-add-box {
 }
-.list-open-add-mod-btn
-{
-  font-size: 0.9em;
+.list-open-add-mod-btn {
+  font-size: 14px;
   display: inline-block;
   border-radius: 5px;
   cursor: pointer;
   margin-left: 5px;
   padding-bottom: 5px;
   color: black;
-  width: 250px;
+  width: 240px;
   height: 100%;
 }
 .list-open-add-mod-btn:hover {
@@ -160,30 +169,38 @@
   left: 0;
   height: 95px;
   border-radius: 5px;
+  padding: 2px;
 }
 .list-name-box {
   display: inline-block;
   margin: 5px;
-  border: blueviolet 2px solid;
+  border: dodgerblue 3px solid;
+  border-radius: 5px;
   width: 255px;
   height: 36px;
 }
+.add-mod-btn {
+  display: flex;
+  align-items: center;
+}
 .list-add-btn {
-  background-color: rgb(165, 27, 27);
+  background-color: rgb(97, 189, 79);
   cursor: pointer;
+  height: 35px;
   margin-left: 5px;
 }
 .list-add-btn:hover {
-  background-color: rgb(182, 65, 65);
+  background-color: rgb(88, 172, 72);
 }
 .add-mod-close-btn {
+  display: inline-block;
   margin-left: 10px;
-  font-size: 1.5em;
-  width: 30px;
-  height: 15pxpx;
-}
-.add-mod-close-btn: hover {
-  background-color: rgba(9,30,66,0.08);
+  width: 20px;
+  height: 20px;
+  background-image: url(https://icons-for-free.com/iconfiles/png/512/x-1321215629555778185.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* 카드 추가 박스 */
@@ -192,51 +209,61 @@
   font-size: 1.5em;
   line-height: 26px;
   height: 40px;
-  width: 270px;
+  width: 255px;
   min-height: 32px;
   /* background-color: rgba(0,0,0,.08); */
   cursor: pointer;
   border-radius: 3px;
-  margin-right: 8px;
   position: relative;
-  border-radius: 3px;
+
   box-sizing: border-box;
 }
 .card-add-mod-btn {
-
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: 500;
 }
+.list-add-btn,
+.card-add-btn {
+  cursor: pointer;
+  margin: 7px;
+  padding: 8px;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(24, 187, 59);
+}
+.list-add-btn:hover,
 .card-add-btn:hover {
-  background-color: rgba(9,30,66,0.08);
+  background-color: rgb(21, 160, 51);
 }
 
 .card-name-box {
-  width: 248px;
-  height: 66px;
+  height: 40px;
+  width: 240px;
+  padding: 8px;
   margin-left: 6px;
   border: rgba(102, 102, 102);
-  box-shadow: 0 1px 0 rgba(9,30,66,.25);
+  box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
   border-radius: 5px;
 }
 
 .card-add-mod {
-  width: 262px;
-  background-color: #ebecf0;
+  background-color: rgb(235, 236, 240);
+  width: 250px;
+  border-radius: 0 0 5px 5px;
+
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 0 0 5px 5px;
-  /* height: 80px; */
-}
-
-.card-add-btn {
-  background-color: rgb(146, 146, 146);
-  cursor: pointer;
-  margin: 7px;
 }
 
 .card-add-mod-close-btn {
-  width: 24px;
-  height: 25px;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(https://icons-for-free.com/iconfiles/png/512/x-1321215629555778185.png);
 }
-
-.list-shadow

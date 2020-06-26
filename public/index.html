@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+    <script
+      src="https://kit.fontawesome.com/1bb6067f5f.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script type="module" type="text/javascript" src="dist/js/app.js"></script> -->
+    <script type="module" src="assets/js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
-  <script src="https://kit.fontawesome.com/1bb6067f5f.js" crossorigin="anonymous"></script>
-  <!-- <script type="module" type="text/javascript" src="dist/js/app.js"></script> -->
-  <script type="module" src="assets/js/app.js"></script>
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-</head>
+  <body>
+    <header></header>
 
-<body>
-  <header>
-  </header>
-
-  <main>
-    <div class="main-wrapper"></div>
-
-    <div class="list-add-wrapper">
-      <div class="list-add-box">
-        <button class="open-add-mod-btn"><span>+</span>Add another list</button>
-        <div class="add-mod pop-up" style="display: none;">
-          <input class="list-name-box" type=" text" placeholder="enter list title..." autofocus>
-          <div class="add-mod-btn">
-            <button class="list-add-btn">Add List</button>
-            <a class="add-mod-close-btn">x</a>
+    <main>
+      <section class="main-board">
+        <section class="main-wrapper"></section>
+        <section class="list-add-wrapper">
+          <div class="list-add-box">
+            <button class="open-add-mod-btn">
+              <i class="fas fa-plus"></i> Add another list
+            </button>
+            <div class="add-mod pop-up" style="display: none;">
+              <input
+                class="list-name-box"
+                type=" text"
+                placeholder="enter list title..."
+                autofocus
+              />
+              <div class="add-mod-btn">
+                <button class="list-add-btn">Add List</button>
+                <a class="add-mod-close-btn"></a>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-
-  </main>
-  <div class="modal-wrapper" >
-  </div>
-</body>
-
+        </section>
+      </section>
+    </main>
+    <div class="modal-wrapper"></div>
+  </body>
 </html>
