@@ -1,7 +1,5 @@
 import { lazyLoader, inifiniteObserver } from './infinite-lazy.js';
 import { state, template } from './board.js';
-import * as boardSideMenu from './board_side_menu.js';
-import * as mainCanvas from './mainCanvas.js';
 import { Board } from './constructors.js';
 
 let tabMode = 'main';
@@ -96,7 +94,7 @@ const handlers = {
     target.parentElement.classList.remove('search-active');
     target.value = '';
   },
-  searchCards() {},
+  searchCards() { },
   async checkIfblank(e) {
     if (e.target.value) {
       $('.button-create-board').classList.add('active');
@@ -202,8 +200,8 @@ const refreshActivityLog = async (payload) => {
     activitiesLogElms += `<li><span class="log-name">${datum.name}님이 </span>
                               <span class="log-act">${datum.act}</span>했습니다.
                               <div class="log-value"> ${
-                                datum.value ? `바뀐 이름:${datum.value}` : ''
-                              } </div>
+      datum.value ? `바뀐 이름:${datum.value}` : ''
+      } </div>
                           </li>`;
   });
 
